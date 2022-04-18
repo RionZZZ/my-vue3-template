@@ -4,7 +4,6 @@ module.exports = {
     node: true,
     es2021: true,
     browser: true
-    // 'vue/setup-compiler-macros': true
   },
   extends: [
     'plugin:vue/vue3-recommended',
@@ -57,7 +56,7 @@ module.exports = {
     'no-trailing-spaces': 2,
     'no-undef': 2,
     'no-unneeded-ternary': 2,
-    // 'no-unused-vars': [2, { vars: 'all', args: 'after-used' }],
+    'no-unused-vars': [2, { vars: 'all', args: 'after-used' }],
     'no-use-before-define': 2,
     'no-var': 2,
     'arrow-parens': 0,
@@ -99,9 +98,6 @@ module.exports = {
     'valid-typeof': 2,
     'vars-on-top': 2,
     'wrap-iife': [2, 'inside'],
-    yoda: [2, 'never'],
-    // 项目中需要做的特殊规范
-    'no-unused-vars': [0, { vars: 'all', args: 'after-used' }],
-    '@typescript-eslint/no-unused-vars': 0
+    yoda: [2, 'never']
   }
 }
