@@ -98,6 +98,13 @@ module.exports = {
     'valid-typeof': 2,
     'vars-on-top': 2,
     'wrap-iife': [2, 'inside'],
-    yoda: [2, 'never']
+    yoda: [2, 'never'],
+    // vue项目添加规则
+    'vue/multi-word-component-names': [
+      0,
+      {
+        ignore: ['index']
+      }
+    ]
   }
 }

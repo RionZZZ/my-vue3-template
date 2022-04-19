@@ -1,5 +1,5 @@
 <template>
-  <span>{{ad}}</span>
+  <span>{{ ad }}</span>
   <router-view></router-view>
 </template>
 
