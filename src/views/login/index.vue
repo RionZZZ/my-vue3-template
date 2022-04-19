@@ -78,9 +78,10 @@ export default defineComponent({
       })
     }
     const submit = () => {
+      console.log(route.query)
       checkForm().then(() => {
         addRoutes()
-        router.push(route.query.redirect || '/')
+        router.push('/')
       })
     }
     return {
