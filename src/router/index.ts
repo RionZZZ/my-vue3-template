@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeRoutes from './home'
 import LoginRoutes from './login'
-import NProgress from '@/utils/progress'
+import NProgress from '@utils/progress'
 
 const originRoutes: RouteRecordRaw[] = [...HomeRoutes, ...LoginRoutes]
 

@@ -1,4 +1,4 @@
-import { createNameComponent } from '@/utils/router'
+import { createNameComponent } from '@utils/router'
 
 export default [
   {

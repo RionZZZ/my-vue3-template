@@ -1,6 +1,6 @@
 import { defineComponent, h, createVNode, ref, nextTick } from 'vue'
 import reload from '@/components/reload.vue'
-import NProgress from '@/utils/progress'
+import NProgress from '@utils/progress'
 
 export function createNameComponent(component: any) {
   return () => {

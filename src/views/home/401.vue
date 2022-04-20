@@ -9,7 +9,7 @@
         <div class="bullshit__info">
           您没有访问权限，如需权限，请联系上级授权！
         </div>
-        <el-button @click="go" type="primary" round>跳转首页</el-button>
+        <el-button type="primary" round @click="go">跳转首页</el-button>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .wscn-http404-container {
 }
 .wscn-http404 {

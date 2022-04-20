@@ -8,7 +8,11 @@ const pathResolve = (dir: string): any => {
 }
 
 const alias: Record<string, string> = {
-  '@': pathResolve('src')
+  '@': pathResolve('src'),
+  '@utils': pathResolve('src/utils'),
+  '@component': pathResolve('src/components'),
+  '@store': pathResolve('src/store'),
+  '@images': pathResolve('src/assets/images')
 }
 
 export default defineConfig({

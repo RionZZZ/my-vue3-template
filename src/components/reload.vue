@@ -14,7 +14,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .ok-loading {
   width: calc(100% - 30px);
   height: calc(100% - 30px);

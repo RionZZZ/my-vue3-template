@@ -2,10 +2,23 @@
   <div class="container">
     <div class="box">
       <el-form class="form">
-        <el-input size="large" v-model="form.name" placeholder="用户名" type="text" maxlength="50"></el-input>
-        <el-input size="large" ref="password" v-model="form.password" type="password" placeholder="密码" name="password"
-          maxlength="50"></el-input>
-        <el-button type="primary" @click="submit">登录</el-button>
+        <el-input
+          size="large"
+          v-model="form.name"
+          placeholder="用户名"
+          type="text"
+          maxlength="50"
+        ></el-input>
+        <el-input
+          size="large"
+          ref="password"
+          v-model="form.password"
+          type="password"
+          placeholder="密码"
+          name="password"
+          maxlength="50"
+        ></el-input>
+        <el-button size="large" type="primary" @click="submit">登录</el-button>
       </el-form>
     </div>
   </div>
@@ -58,13 +71,12 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .container {
   position: relative;
   width: 100vw;
   height: 100vh;
   background-color: #eef0f3;
-
   .box {
     width: 500px;
     position: absolute;
@@ -77,11 +89,9 @@ export default defineComponent({
     overflow: hidden;
     box-shadow: 0 6px 20px 5px rgba(152, 152, 152, 0.1),
       0 16px 24px 2px rgba(117, 117, 117, 0.14);
-
     .form {
       width: 80%;
       margin: 50px auto 15px;
-
       .el-input {
         margin-bottom: 20px;
       }
