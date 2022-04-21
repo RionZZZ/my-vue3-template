@@ -14,7 +14,7 @@ export const style: Style = {
   light: {
     logo: {
       color: '#5d5d5d',
-      backgroundColor: '#f00'
+      backgroundColor: '#fff'
     }
   },
   dark: {

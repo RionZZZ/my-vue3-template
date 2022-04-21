@@ -13,12 +13,12 @@ export default [
         mate: { title: '首页' }
       },
       {
-        path: '401',
+        path: '/401',
         component: createNameComponent(() => import('@/views/home/401.vue')),
         mate: { title: '401' }
       },
       {
-        path: '404',
+        path: '/404',
         component: createNameComponent(() => import('@/views/home/404.vue')),
         mate: { title: '404' }
       }
