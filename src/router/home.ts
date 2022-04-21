@@ -5,22 +5,23 @@ export default [
   {
     path: '/',
     component: Layout,
+    meta: { title: '', icon: '' },
     redirect: '/home',
     children: [
       {
         path: 'home',
         component: createNameComponent(() => import('@/views/home/index.vue')),
-        mate: { title: '首页' }
+        meta: { title: '首页' }
       },
       {
         path: '/401',
         component: createNameComponent(() => import('@/views/home/401.vue')),
-        mate: { title: '401' }
+        meta: { title: '401' }
       },
       {
         path: '/404',
         component: createNameComponent(() => import('@/views/home/404.vue')),
-        mate: { title: '404' }
+        meta: { title: '404' }
       }
     ]
   },

@@ -1,9 +1,13 @@
 <template>
-  <el-sub-menu v-for="(item, key) in props.menu" :key="key" index="item.path">
-    <el-menu-item
-      v-for="(children, cKey) in item.children"
-      :key="cKey"
-    ></el-menu-item>
+  <el-sub-menu index="1">
+    <template #title>
+      <span>{{ props.menu.meta?.title }}</span>
+    </template>
+    <el-menu-item v-for="(children, cKey) in props.menu.children" :key="cKey">
+      <template #title>
+        <span>{{ children.meta?.title  }}</span>
+      </template>
+    </el-menu-item>
   </el-sub-menu>
 </template>
 
@@ -16,6 +20,7 @@ const props = defineProps({
     required: true
   }
 })
+console.log(props.menu)
 </script>
 
 <style lang="scss" scoped></style>

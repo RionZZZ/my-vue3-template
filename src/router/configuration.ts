@@ -5,12 +5,13 @@ export default [
   {
     path: '/configuration',
     component: Layout,
-    mate: { title: '配置管理', icon: 'MessageBox' },
+    meta: { title: '配置管理', icon: 'MessageBox' },
+    redirect: '/configuration/form',
     children: [
       {
         path: 'form',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '表单可视化', cache: false }
+        meta: { title: '表单可视化', cache: false }
       }
     ]
   }

@@ -5,17 +5,18 @@ export default [
   {
     path: '/dataSet',
     component: Layout,
-    mate: { title: '数据集管理', icon: 'data-analysis' },
+    meta: { title: '数据集管理', icon: 'data-analysis' },
+    redirect: '/dataSet/multi',
     children: [
       {
         path: 'multi',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '共享数据集', cache: true }
+        meta: { title: '共享数据集', cache: true }
       },
       {
         path: 'person',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '个人数据集', cache: true }
+        meta: { title: '个人数据集', cache: true }
       }
     ]
   }

@@ -5,22 +5,23 @@ export default [
   {
     path: '/develop',
     component: Layout,
-    mate: { title: '研发管理', icon: 'TrendCharts' },
+    meta: { title: '研发管理', icon: 'TrendCharts' },
+    redirect: '/develop/relation',
     children: [
       {
         path: 'relation',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '实体表', cache: true }
+        meta: { title: '实体表', cache: true }
       },
       {
         path: 'business',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '业务对象', cache: true }
+        meta: { title: '业务对象', cache: true }
       },
       {
         path: 'data',
         component: createNameComponent(() => import('@/views/login/index.vue')),
-        mate: { title: '数据模块', cache: true }
+        meta: { title: '数据模块', cache: true }
       }
     ]
   }
