@@ -5,7 +5,7 @@ export default [
   {
     path: '/configuration',
     component: Layout,
-    meta: { title: '配置管理', icon: 'MessageBox', menuType: 3 },
+    meta: { title: '配置管理', icon: 'MessageBox', menuType: 2 },
     redirect: '/configuration/form',
     children: [
       {

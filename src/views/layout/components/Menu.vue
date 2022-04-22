@@ -1,7 +1,12 @@
 <template>
   <el-scrollbar>
     <el-menu>
-      <menu-item v-for="(menu, key) in allRoutes" :key="key" :menu="menu" />
+      <menu-item
+        v-for="(menu, key) in allRoutes"
+        :key="key"
+        :menu="menu"
+        :path="menu.path"
+      />
     </el-menu>
   </el-scrollbar>
 </template>

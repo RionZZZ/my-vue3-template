@@ -1,4 +1,8 @@
 :root {
+  --ry-primary-color: #da9b13;
   --ry-logo-color: #5d5d5d;
   --ry-logo-background-color: #fff;
+
+  // element主题色修改
+  --el-color-primary: var(--ry-primary-color);
 }

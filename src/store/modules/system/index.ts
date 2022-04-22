@@ -10,13 +10,13 @@ export default defineStore('system', {
     changeTheme() {
       this.theme = this.theme === 'light' ? 'dark' : 'light'
       const userTheme = style[this.theme]
-      const body = document.getElementsByTagName('body')[0]
+      const root = document.documentElement
       for (let i in userTheme) {
         const item: any = userTheme[i as keyof Color]
         for (let j in item) {
           let cssVarName =
             '--ry-' + i + '-' + j.replace(/([A-Z])/g, '-$1').toLowerCase()
-          body.style.setProperty(cssVarName, item[j])
+          root.style.setProperty(cssVarName, item[j])
         }
       }
     }
