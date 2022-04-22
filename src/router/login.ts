@@ -4,6 +4,6 @@ export default [
   {
     path: '/login',
     component: createNameComponent(() => import('@/views/login/index.vue')),
-    meta: { title: '登录' }
+    meta: { title: '登录', hideMenu: true }
   }
 ]

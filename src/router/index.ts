@@ -32,6 +32,8 @@ export function addRoutes() {
   })
 }
 
+addRoutes()
+
 // const whiteList = ['/login']
 
 router.beforeEach(() => {

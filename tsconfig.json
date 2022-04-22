@@ -14,7 +14,11 @@
     "types": ["vite/client", "element-plus/global"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@component/*": ["src/component/*"],
+      "@store/*": ["src/store/*"],
+      "@images/*": ["src/assets/images/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

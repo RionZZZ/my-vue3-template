@@ -1,14 +1,27 @@
 <template>
-  <el-sub-menu index="1">
-    <template #title>
-      <span>{{ props.menu.meta?.title }}</span>
-    </template>
-    <el-menu-item v-for="(children, cKey) in props.menu.children" :key="cKey">
+  <template v-if="!props.menu.meta?.hideMenu">
+    <el-sub-menu v-if="props.menu.meta?.menuType === 3" index="1">
       <template #title>
-        <span>{{ children.meta?.title  }}</span>
+        <span>{{ props.menu.meta?.title }}</span>
+      </template>
+      <template v-for="(children, cKey) in props.menu.children" :key="cKey">
+        <el-menu-item v-if="!children.meta?.hideMenu">
+          <template #title>
+            <span>{{ children.meta?.title }}</span>
+          </template>
+        </el-menu-item>
+      </template>
+    </el-sub-menu>
+    <el-menu-item v-else index="2">
+      <template #title>
+        <span>{{
+          props.menu.meta?.menuType === 1
+            ? props.menu.children[0].meta?.title
+            : props.menu.meta?.title
+        }}</span>
       </template>
     </el-menu-item>
-  </el-sub-menu>
+  </template>
 </template>
 
 <script lang="ts" setup>
@@ -20,7 +33,6 @@ const props = defineProps({
     required: true
   }
 })
-console.log(props.menu)
 </script>
 
 <style lang="scss" scoped></style>
