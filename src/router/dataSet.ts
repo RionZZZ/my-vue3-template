@@ -3,19 +3,19 @@ import Layout from '@/views/layout/index.vue'
 
 export default [
   {
-    path: '/dataSet',
+    path: '/dataset',
     component: Layout,
     meta: { title: '数据集管理', icon: 'data-analysis', menuType: 3 },
-    redirect: '/dataSet/multi',
+    redirect: '/dataset/multi',
     children: [
       {
         path: 'multi',
-        component: createNameComponent(() => import('@/views/login/index.vue')),
+        component: createNameComponent(() => import('@/views/dataset/multi/index.vue')),
         meta: { title: '共享数据集', cache: true }
       },
       {
         path: 'person',
-        component: createNameComponent(() => import('@/views/login/index.vue')),
+        component: createNameComponent(() => import('@/views/dataset/person/index.vue')),
         meta: { title: '个人数据集', cache: true }
       }
     ]

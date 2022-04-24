@@ -3,14 +3,12 @@
     <div class="box">
       <el-form class="form">
         <el-input
-          size="large"
           v-model="form.name"
           placeholder="用户名"
           type="text"
           maxlength="50"
         ></el-input>
         <el-input
-          size="large"
           ref="password"
           v-model="form.password"
           type="password"

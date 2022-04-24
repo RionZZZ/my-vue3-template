@@ -18,4 +18,8 @@ console.log(import.meta.env)
 .container {
   height: 100vh;
 }
+.el-aside {
+  display: flex;
+  flex-direction: column;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar>
-    <el-menu>
+    <el-menu :default-active="activePath">
       <menu-item
         v-for="(menu, key) in allRoutes"
         :key="key"
@@ -12,11 +12,22 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import MenuItem from './MenuItem.vue'
 
-const allRoutes = useRouter().options.routes
-console.log(allRoutes)
+const route = useRoute()
+const router = useRouter()
+
+const allRoutes = router.options.routes
+
+const activePath = computed(() => {
+  return route.path
+})
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-menu {
+  border: none;
+}
+</style>

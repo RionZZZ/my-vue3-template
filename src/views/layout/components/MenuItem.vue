@@ -1,6 +1,6 @@
 <template>
   <template v-if="!props.menu.meta?.hideMenu">
-    <el-sub-menu v-if="props.menu.meta?.menuType === 3" :index="props.path">
+    <el-sub-menu v-if="props.menu.meta?.menuType === 3" :index="menuPath">
       <template #title>
         <span>{{ props.menu.meta?.title }}</span>
       </template>
@@ -8,20 +8,12 @@
         <menu-item
           v-if="!children.meta?.hideMenu"
           :menu="children"
-          :path="`${props.path}/${children.path}`"
+          :path="`${menuPath}/${children.path}`"
         />
       </template>
     </el-sub-menu>
-    <router-link
-      v-else
-      :to="
-        [1, 2].includes(props.menu.meta?.menuType)
-          ? (props.path === '/' ? props.path : props.path + '/') +
-            props.menu.children[0].path
-          : props.path
-      "
-    >
-      <el-menu-item :index="props.path">
+    <router-link v-else :to="menuPath">
+      <el-menu-item :index="menuPath">
         <template #title>
           <span>{{
             props.menu.meta?.menuType === 1
@@ -35,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType } from 'vue'
+import { computed, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 const props = defineProps({
   menu: {
@@ -46,6 +38,15 @@ const props = defineProps({
     type: String,
     default: ''
   }
+})
+const menuPath = computed(() => {
+  if ([1, 2].includes(props.menu.meta?.menuType as number)) {
+    return (
+      (props.path === '/' ? props.path : props.path + '/') +
+      props.menu.children![0].path
+    )
+  }
+  return props.path
 })
 </script>
 

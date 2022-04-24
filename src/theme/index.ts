@@ -16,7 +16,7 @@ interface Style {
 export const style: Style = {
   light: {
     primary: {
-      color: '#da9b13'
+      color: '#ff9c00'
     },
     logo: {
       color: '#5d5d5d',
