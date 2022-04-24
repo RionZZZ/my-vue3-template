@@ -4,7 +4,8 @@ import { style, Color } from '@/theme/index'
 
 export default defineStore('system', {
   state: (): System => ({
-    theme: 'light'
+    theme: 'light',
+    collapseMenu: false
   }),
   actions: {
     changeTheme() {
@@ -19,6 +20,9 @@ export default defineStore('system', {
           root.style.setProperty(cssVarName, item[j])
         }
       }
+    },
+    changeState(key: String, value: any): void {
+      this[key as keyof System] = value
     }
   }
 })

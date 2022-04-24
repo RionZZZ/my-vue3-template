@@ -5,7 +5,7 @@ export default [
   {
     path: '/develop',
     component: Layout,
-    meta: { title: '研发管理', icon: 'TrendCharts', menuType: 3 },
+    meta: { title: '研发管理', icon: 'Suitcase', menuType: 3 },
     redirect: '/develop/relation',
     children: [
       {

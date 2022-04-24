@@ -2,9 +2,12 @@
   <template v-if="!props.menu.meta?.hideMenu">
     <el-sub-menu v-if="props.menu.meta?.menuType === 3" :index="menuPath">
       <template #title>
+        <el-icon>
+          <component :is="props.menu.meta?.icon"></component>
+        </el-icon>
         <span>{{ props.menu.meta?.title }}</span>
       </template>
-      <template v-for="(children, cKey) in props.menu.children" :key="cKey">
+      <template v-for="children in props.menu.children" :key="children.path">
         <menu-item
           v-if="!children.meta?.hideMenu"
           :menu="children"
@@ -14,6 +17,9 @@
     </el-sub-menu>
     <router-link v-else :to="menuPath">
       <el-menu-item :index="menuPath">
+        <el-icon v-if="props.menu.meta?.icon">
+          <component :is="props.menu.meta.icon"></component>
+        </el-icon>
         <template #title>
           <span>{{
             props.menu.meta?.menuType === 1

@@ -1,6 +1,10 @@
 <template>
   <el-scrollbar>
-    <el-menu :default-active="activePath">
+    <el-menu
+      :default-active="activePath"
+      :collapse="!!collapseMenu"
+      :collapse-transition="false"
+    >
       <menu-item
         v-for="(menu, key) in allRoutes"
         :key="key"
@@ -15,6 +19,11 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import MenuItem from './MenuItem.vue'
+import { storeToRefs } from 'pinia'
+import { SystemStore } from '@/store'
+
+const systemStore = SystemStore()
+const { collapseMenu } = storeToRefs(systemStore)
 
 const route = useRoute()
 const router = useRouter()

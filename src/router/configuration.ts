@@ -1,12 +1,11 @@
 import { createNameComponent } from '@utils/router'
 import Layout from '@/views/layout/index.vue'
-import { Meta } from './type'
 
 export default [
   {
     path: '/configuration',
     component: Layout,
-    meta: { title: '配置管理', icon: 'MessageBox', menuType: 3 } as Meta,
+    meta: { title: '配置管理', icon: 'MessageBox', menuType: 3 },
     redirect: '/configuration/form',
     children: [
       {
@@ -14,7 +13,7 @@ export default [
         component: createNameComponent(
           () => import('@/views/configuration/form/index.vue')
         ),
-        meta: { title: '表单可视化', cache: false } as Meta
+        meta: { title: '表单可视化', cache: false }
       }
     ]
   }
