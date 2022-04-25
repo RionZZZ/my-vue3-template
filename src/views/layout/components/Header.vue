@@ -1,16 +1,28 @@
 <template>
   <div class="content-header">
-    <div>
+    <div class="header-left">
       <el-icon class="collapse-menu" @click="changeCollapseMenu">
         <component :is="collapseMenu ? 'Expand' : 'Fold'"></component>
       </el-icon>
-      {{ collapseMenu }}
+      <el-breadcrumb>
+        <el-breadcrumb-item
+          v-for="item in breadcrumbs"
+          :key="item.path"
+          :to="item.path"
+        >
+          {{ item.meta.title }}
+        </el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
-    <div>这里放名字</div>
+    <div>
+      <span>这里放名字</span>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { SystemStore } from '@/store'
 
@@ -20,6 +32,11 @@ const { changeState } = systemStore
 const changeCollapseMenu = () => {
   changeState('collapseMenu', !collapseMenu.value)
 }
+
+const route = useRoute()
+const breadcrumbs = computed(() => {
+  return route.matched.filter(item => item.meta.title)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -28,8 +45,13 @@ const changeCollapseMenu = () => {
   height: 100%;
   align-items: center;
   justify-content: space-between;
-}
-.collapse-menu {
-  font-size: 24px;
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  .collapse-menu {
+    font-size: 24px;
+    margin-right: 14px;
+  }
 }
 </style>
