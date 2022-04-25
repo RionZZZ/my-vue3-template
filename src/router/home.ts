@@ -13,7 +13,7 @@ export default [
     path: '/',
     component: Layout,
     redirect: '/home',
-    meta: { icon: 'House', menuType: 1 },
+    meta: { icon: 'dashboard', menuType: 1 },
     children: [
       {
         path: 'home',

@@ -5,7 +5,7 @@ export default [
   {
     path: '/dataset',
     component: Layout,
-    meta: { title: '数据集管理', icon: 'DataAnalysis', menuType: 3 },
+    meta: { title: '数据集管理', icon: 'layers', menuType: 3 },
     redirect: '/dataset/multi',
     children: [
       {

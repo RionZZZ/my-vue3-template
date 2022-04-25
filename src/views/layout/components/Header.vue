@@ -1,18 +1,21 @@
 <template>
   <div class="content-header">
     <div class="header-left">
-      <el-icon class="collapse-menu" @click="changeCollapseMenu">
-        <component :is="collapseMenu ? 'Expand' : 'Fold'"></component>
-      </el-icon>
-      <el-breadcrumb>
-        <el-breadcrumb-item
+      <t-icon
+        class="collapse-menu"
+        :name="collapseMenu ? 'menu-fold' : 'menu-unfold'"
+        @click="changeCollapseMenu"
+      >
+      </t-icon>
+      <t-breadcrumb>
+        <t-breadcrumb-item
           v-for="item in breadcrumbs"
           :key="item.path"
           :to="item.path"
         >
           {{ item.meta.title }}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
+        </t-breadcrumb-item>
+      </t-breadcrumb>
     </div>
     <div>
       <span>这里放名字</span>
@@ -45,6 +48,7 @@ const breadcrumbs = computed(() => {
   height: 100%;
   align-items: center;
   justify-content: space-between;
+  padding: 0 24px;
   .header-left {
     display: flex;
     align-items: center;

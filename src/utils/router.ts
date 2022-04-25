@@ -31,7 +31,7 @@ export function createNameComponent(component: any) {
           render: function () {
             return h(
               'div',
-              { class: 'el-main-box' },
+              { class: 't-main-box' },
               this.isReload ? [h(reload)] : [createVNode(comm.default)]
             )
           }

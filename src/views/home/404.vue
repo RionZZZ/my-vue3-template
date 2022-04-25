@@ -12,7 +12,7 @@
         <div class="bullshit__info">
           请检查您输入的网址是否正确，或单击下面的按钮返回主页
         </div>
-        <el-button type="primary" round @click="go">跳转首页</el-button>
+        <t-button type="primary" round @click="go">跳转首页</t-button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div>首页首页首页首页首页首页</div>
-  <el-button @click="go">Login</el-button>
+  <t-button @click="go">Login</t-button>
 </template>
 
 <script lang="ts">

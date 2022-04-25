@@ -9,7 +9,7 @@
         <div class="bullshit__info">
           您没有访问权限，如需权限，请联系上级授权！
         </div>
-        <el-button type="primary" round @click="go">跳转首页</el-button>
+        <t-button type="primary" round @click="go">跳转首页</t-button>
       </div>
     </div>
   </div>

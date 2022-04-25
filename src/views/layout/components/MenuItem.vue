@@ -1,10 +1,10 @@
 <template>
   <template v-if="!props.menu.meta?.hideMenu">
-    <el-sub-menu v-if="props.menu.meta?.menuType === 3" :index="menuPath">
+    <t-submenu v-if="props.menu.meta?.menuType === 3" :value="menuPath">
+      <template #icon>
+        <t-icon :name="props.menu.meta?.icon" />
+      </template>
       <template #title>
-        <el-icon>
-          <component :is="props.menu.meta?.icon"></component>
-        </el-icon>
         <span>{{ props.menu.meta?.title }}</span>
       </template>
       <template v-for="children in props.menu.children" :key="children.path">
@@ -14,20 +14,18 @@
           :path="`${menuPath}/${children.path}`"
         />
       </template>
-    </el-sub-menu>
+    </t-submenu>
     <router-link v-else :to="menuPath">
-      <el-menu-item :index="menuPath">
-        <el-icon v-if="props.menu.meta?.icon">
-          <component :is="props.menu.meta.icon"></component>
-        </el-icon>
-        <template #title>
-          <span>{{
-            props.menu.meta?.menuType === 1
-              ? props.menu.children[0].meta?.title
-              : props.menu.meta?.title
-          }}</span>
+      <t-menu-item :value="menuPath">
+        <template v-if="props.menu.meta?.icon" #icon>
+          <t-icon :name="props.menu.meta.icon" />
         </template>
-      </el-menu-item>
+        {{
+          props.menu.meta?.menuType === 1
+            ? props.menu.children[0].meta?.title
+            : props.menu.meta?.title
+        }}
+      </t-menu-item>
     </router-link>
   </template>
 </template>

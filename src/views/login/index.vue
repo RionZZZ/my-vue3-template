@@ -1,23 +1,23 @@
 <template>
   <div class="container">
     <div class="box">
-      <el-form class="form">
-        <el-input
+      <t-form class="form">
+        <t-input
           v-model="form.name"
           placeholder="用户名"
           type="text"
           maxlength="50"
-        ></el-input>
-        <el-input
+        ></t-input>
+        <t-input
           ref="password"
           v-model="form.password"
           type="password"
           placeholder="密码"
           name="password"
           maxlength="50"
-        ></el-input>
-        <el-button size="large" type="primary" @click="submit">登录</el-button>
-      </el-form>
+        ></t-input>
+        <t-button size="large" type="primary" @click="submit">登录</t-button>
+      </t-form>
     </div>
   </div>
 </template>
@@ -26,7 +26,6 @@
 import { defineComponent, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { addRoutes } from '@/router'
-import { ElMessage } from 'element-plus'
 export default defineComponent({
   setup() {
     const router = useRouter()
@@ -38,17 +37,17 @@ export default defineComponent({
     const checkForm = () => {
       return new Promise(resolve => {
         if (form.name === '') {
-          ElMessage.warning({
-            message: '用户名不能为空',
-            type: 'warning'
-          })
+          // ElMessage.warning({
+          //   message: '用户名不能为空',
+          //   type: 'warning'
+          // })
           return
         }
         if (form.password === '') {
-          ElMessage.warning({
-            message: '密码不能为空',
-            type: 'warning'
-          })
+          // ElMessage.warning({
+          //   message: '密码不能为空',
+          //   type: 'warning'
+          // })
           return
         }
         resolve(true)
@@ -90,7 +89,7 @@ export default defineComponent({
     .form {
       width: 80%;
       margin: 50px auto 15px;
-      .el-input {
+      .t-input {
         margin-bottom: 20px;
       }
     }

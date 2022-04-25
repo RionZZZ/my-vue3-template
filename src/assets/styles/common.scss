@@ -1,5 +1,10 @@
 @import '@/theme/index.scss';
 
+:root {
+  // element主题色修改
+  --td-brand-color: var(--ry-primary-color);
+}
+
 a {
   text-decoration: none;
 }
