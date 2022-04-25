@@ -2,12 +2,7 @@
   <t-menu :default-value="activePath" :collapsed="!!collapseMenu">
     <template #logo>
       <div class="logo">
-        <img
-          class="logo-icon"
-          src="@images/logo.png"
-          alt="logo"
-          @click="changeTheme"
-        />
+        <img class="logo-icon" src="@images/logo.png" alt="logo" />
         <span v-if="!collapseMenu" class="logo-title">{{ title }}</span>
       </div>
     </template>
@@ -31,7 +26,6 @@ const title = import.meta.env.VITE_APP_TITLE
 
 const systemStore = SystemStore()
 const { collapseMenu } = storeToRefs(systemStore)
-const { changeTheme } = systemStore
 
 const route = useRoute()
 const router = useRouter()
@@ -46,10 +40,7 @@ const activePath = computed(() => {
 <style lang="scss" scoped>
 .logo {
   width: 100%;
-  height: var(--ry-header-height);
-  line-height: var(--ry-header-height);
   text-align: center;
-  background-color: var(--ry-logo-background-color);
   .logo-icon {
     width: 36px;
     height: 36px;
