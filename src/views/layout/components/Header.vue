@@ -7,15 +7,7 @@
         @click="changeCollapseMenu"
       >
       </t-icon>
-      <t-breadcrumb>
-        <t-breadcrumb-item
-          v-for="item in breadcrumbs"
-          :key="item.path"
-          :to="item.path"
-        >
-          {{ item.meta.title }}
-        </t-breadcrumb-item>
-      </t-breadcrumb>
+      <t-breadcrumb :options="breadcrumbs" />
     </div>
     <div>
       <span>这里放名字</span>
@@ -38,7 +30,12 @@ const changeCollapseMenu = () => {
 
 const route = useRoute()
 const breadcrumbs = computed(() => {
-  return route.matched.filter(item => item.meta.title)
+  return route.matched.map(item => {
+    return {
+      content: item.meta.title,
+      to: item.path
+    }
+  })
 })
 </script>
 

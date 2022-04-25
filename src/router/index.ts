@@ -32,15 +32,6 @@ export function addRoutes() {
 }
 
 addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
-addRoutes()
 
 // const whiteList = ['/login']
 

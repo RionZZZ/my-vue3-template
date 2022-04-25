@@ -1,25 +1,23 @@
 <template>
-  <t-scroll>
-    <t-menu :default-value="activePath" :collapsed="!!collapseMenu">
-      <template #logo>
-        <div class="logo">
-          <img
-            class="logo-icon"
-            src="@images/logo.png"
-            alt="logo"
-            @click="changeTheme"
-          />
-          <span v-if="!collapseMenu" class="logo-title">{{ title }}</span>
-        </div>
-      </template>
-      <menu-item
-        v-for="(menu, key) in allRoutes"
-        :key="key"
-        :menu="menu"
-        :path="menu.path"
-      />
-    </t-menu>
-  </t-scroll>
+  <t-menu :default-value="activePath" :collapsed="!!collapseMenu">
+    <template #logo>
+      <div class="logo">
+        <img
+          class="logo-icon"
+          src="@images/logo.png"
+          alt="logo"
+          @click="changeTheme"
+        />
+        <span v-if="!collapseMenu" class="logo-title">{{ title }}</span>
+      </div>
+    </template>
+    <menu-item
+      v-for="(menu, key) in allRoutes"
+      :key="key"
+      :menu="menu"
+      :path="menu.path"
+    />
+  </t-menu>
 </template>
 
 <script lang="ts" setup>

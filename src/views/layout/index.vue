@@ -23,8 +23,6 @@ import Header from './components/Header.vue'
 .container {
   height: 100vh;
   .container-aside {
-    display: flex;
-    flex-direction: column;
     width: auto;
   }
 }
