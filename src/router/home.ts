@@ -23,12 +23,12 @@ export default [
       {
         path: '401',
         component: createNameComponent(() => import('@/views/home/401.vue')),
-        meta: { title: '401', hideMenu: true }
+        meta: { title: '401', hideMenu: true, hideTab: true }
       },
       {
         path: '404',
         component: createNameComponent(() => import('@/views/home/404.vue')),
-        meta: { title: '404', hideMenu: true }
+        meta: { title: '404', hideMenu: true, hideTab: true }
       }
     ]
   },
