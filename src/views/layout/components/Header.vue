@@ -30,12 +30,15 @@ const changeCollapseMenu = () => {
 
 const route = useRoute()
 const breadcrumbs = computed(() => {
-  return route.matched.map(item => {
-    return {
-      content: item.meta.title,
-      to: item.path
-    }
-  })
+  return route.matched
+    .filter(item => item.meta.title)
+    .map(item => {
+      console.log(item)
+      return {
+        content: item.meta.title,
+        to: item.path
+      }
+    })
 })
 </script>
 
