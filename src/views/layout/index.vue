@@ -34,9 +34,7 @@ import Tab from './components/Tab.vue'
       flex-direction: column;
     }
     .t-content-box {
-      display: flex;
       flex: 1;
-      box-sizing: border-box;
     }
   }
 }

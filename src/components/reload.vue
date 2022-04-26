@@ -8,8 +8,8 @@
 
 <style lang="scss" scoped>
 .reload {
-  flex: 1;
   display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
 }
