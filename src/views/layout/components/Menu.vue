@@ -1,5 +1,5 @@
 <template>
-  <t-menu :default-value="activePath" :collapsed="!!collapseMenu">
+  <t-menu :value="activePath" :collapsed="!!collapseMenu">
     <template #logo>
       <div class="logo">
         <img class="logo-icon" src="@images/logo.png" alt="logo" />

@@ -5,7 +5,7 @@ export default [
   {
     path: '/configuration',
     component: Layout,
-    meta: { title: '配置管理', icon: 'control-platform', menuType: 3 },
+    meta: { title: '配置管理', icon: 'precise-monitor', menuType: 3 },
     redirect: '/configuration/form',
     children: [
       {
