@@ -29,6 +29,15 @@ import Tab from './components/Tab.vue'
   }
   .container-layout {
     width: calc(100vw - var(--ry-menu-width));
+    .t-layout__content {
+      display: flex;
+      flex-direction: column;
+    }
+    .t-content-box {
+      display: flex;
+      flex: 1;
+      box-sizing: border-box;
+    }
   }
 }
 </style>

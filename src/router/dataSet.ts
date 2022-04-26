@@ -10,12 +10,16 @@ export default [
     children: [
       {
         path: 'multi',
-        component: createNameComponent(() => import('@/views/dataset/multi/index.vue')),
+        component: createNameComponent(
+          () => import('@/views/dataset/multi/index.vue')
+        ),
         meta: { title: '共享数据集', cache: true }
       },
       {
         path: 'person',
-        component: createNameComponent(() => import('@/views/dataset/person/index.vue')),
+        component: createNameComponent(
+          () => import('@/views/dataset/person/index.vue')
+        ),
         meta: { title: '个人数据集', cache: true }
       }
     ]

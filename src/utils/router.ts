@@ -21,7 +21,7 @@ export function createNameComponent(component: any) {
                   NProgress.done()
                   isReload.value = false
                 })
-              }, 260)
+              }, 26000)
             }
             return {
               isReload,
@@ -31,7 +31,7 @@ export function createNameComponent(component: any) {
           render: function () {
             return h(
               'div',
-              { class: 't-main-box' },
+              { class: 't-content-box' },
               this.isReload ? [h(reload)] : [createVNode(comm.default)]
             )
           }
