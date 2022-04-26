@@ -40,8 +40,8 @@ const tabs = reactive(sessionTabs.length ? sessionTabs : [defaultTab])
 watch(tabs, val => sessionStorage.setItem('tabs', JSON.stringify(val)))
 
 const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
-  const { path, meta, name } = routeItem
-  console.log('name---', name)
+  const { path, meta, matched } = routeItem
+  const name: any = matched[matched.length - 1].components.default.name
   if (meta.hideTab) {
     return
   }
@@ -51,7 +51,6 @@ const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
 }
 
 router.afterEach(() => {
-  console.log(route)
   addTab(route)
 })
 

@@ -21,7 +21,7 @@ export function createNameComponent(component: any) {
                   NProgress.done()
                   isReload.value = false
                 })
-              }, 26000)
+              }, 250)
             }
             return {
               isReload,

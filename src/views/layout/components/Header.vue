@@ -1,14 +1,6 @@
 <template>
   <div class="content-header">
-    <div class="header-left">
-      <t-icon
-        class="collapse-menu"
-        :name="collapseMenu ? 'menu-fold' : 'menu-unfold'"
-        @click="changeCollapseMenu"
-      >
-      </t-icon>
-      <t-breadcrumb :options="breadcrumbs" />
-    </div>
+    <t-breadcrumb :options="breadcrumbs" />
     <div>
       <span>这里放名字</span>
     </div>
@@ -18,20 +10,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { SystemStore } from '@/store'
-
-const systemStore = SystemStore()
-const { collapseMenu } = storeToRefs(systemStore)
-const { changeState } = systemStore
-const changeCollapseMenu = () => {
-  const cssName = '--ry-menu-width'
-  document.documentElement.style.setProperty(
-    cssName,
-    collapseMenu.value ? '240px' : '64px'
-  )
-  changeState('collapseMenu', !collapseMenu.value)
-}
 
 const route = useRoute()
 const breadcrumbs = computed(() => {
@@ -53,13 +31,5 @@ const breadcrumbs = computed(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
-  .collapse-menu {
-    font-size: 24px;
-    margin-right: 14px;
-  }
 }
 </style>

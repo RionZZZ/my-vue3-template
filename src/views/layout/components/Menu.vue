@@ -12,20 +12,18 @@
       :menu="menu"
       :path="menu.path"
     />
+    <template #operations>
+      <t-icon class="collapse" name="view-list" @click="changeCollapseMenu" />
+    </template>
   </t-menu>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import MenuItem from './MenuItem.vue'
-import { storeToRefs } from 'pinia'
-import { SystemStore } from '@/store'
 
 const title = import.meta.env.VITE_APP_TITLE
-
-const systemStore = SystemStore()
-const { collapseMenu } = storeToRefs(systemStore)
 
 const route = useRoute()
 const router = useRouter()
@@ -35,6 +33,16 @@ const allRoutes = router.options.routes
 const activePath = computed(() => {
   return route.path
 })
+
+let collapseMenu = ref(false)
+const changeCollapseMenu = () => {
+  const cssName = '--ry-menu-width'
+  document.documentElement.style.setProperty(
+    cssName,
+    collapseMenu.value ? '240px' : '64px'
+  )
+  collapseMenu.value = !collapseMenu.value
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +59,14 @@ const activePath = computed(() => {
   }
   .logo-title {
     padding-left: 10px;
+  }
+}
+.collapse {
+  font-size: 32px;
+  cursor: pointer;
+  padding: 4px;
+  &:hover {
+    background-color: var(--td-gray-color-2);
   }
 }
 </style>
