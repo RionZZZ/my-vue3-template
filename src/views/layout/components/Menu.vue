@@ -38,6 +38,9 @@ const activePath = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.t-default-menu {
+  width: var(--ry-menu-width) !important;
+}
 .logo {
   width: 100%;
   text-align: center;
@@ -47,8 +50,6 @@ const activePath = computed(() => {
     vertical-align: middle;
   }
   .logo-title {
-    font-weight: bold;
-    color: var(--ry-logo-color);
     padding-left: 10px;
   }
 }

@@ -25,6 +25,11 @@ const systemStore = SystemStore()
 const { collapseMenu } = storeToRefs(systemStore)
 const { changeState } = systemStore
 const changeCollapseMenu = () => {
+  const cssName = '--ry-menu-width'
+  document.documentElement.style.setProperty(
+    cssName,
+    collapseMenu.value ? '240px' : '64px'
+  )
   changeState('collapseMenu', !collapseMenu.value)
 }
 
