@@ -9,7 +9,14 @@
       </t-header>
       <t-content>
         <Tab />
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <transition name="fade-transform" mode="out-in">
+            <keep-alive v-if="keepAliveComps.length" :include="keepAliveComps">
+              <component :is="Component" />
+            </keep-alive>
+            <component :is="Component" v-else />
+          </transition>
+        </router-view>
       </t-content>
     </t-layout>
   </t-layout>
@@ -19,6 +26,11 @@
 import Menu from './components/Menu.vue'
 import Header from './components/Header.vue'
 import Tab from './components/Tab.vue'
+import { storeToRefs } from 'pinia'
+import { SystemStore } from '@/store'
+
+const systemStore = SystemStore()
+const { keepAliveComps } = storeToRefs(systemStore)
 </script>
 
 <style lang="scss" scoped>

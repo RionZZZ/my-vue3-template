@@ -18,17 +18,17 @@ export default [
       {
         path: 'home',
         component: createNameComponent(() => import('@/views/home/index.vue')),
-        meta: { title: '首页' }
+        meta: { title: '首页', cache: true }
       },
       {
         path: '401',
         component: createNameComponent(() => import('@/views/home/401.vue')),
-        meta: { title: '401', hideMenu: true, hideTab: true }
+        meta: { title: '401', hideMenu: true, hideTab: true, cache: true }
       },
       {
         path: '404',
         component: createNameComponent(() => import('@/views/home/404.vue')),
-        meta: { title: '404', hideMenu: true, hideTab: true }
+        meta: { title: '404', hideMenu: true, hideTab: true, cache: true }
       }
     ]
   },

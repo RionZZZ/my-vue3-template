@@ -26,9 +26,11 @@
 <script lang="ts" setup>
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter, RouteLocationNormalizedLoaded } from 'vue-router'
+import { SystemStore } from '@/store'
 
 const router = useRouter()
 const route = useRoute()
+const systemStore = SystemStore()
 
 const defaultTab = Object.freeze({
   path: '/home',
@@ -58,6 +60,7 @@ const onTabChange = (path: string) => {
   router.push(path)
 }
 const onTabRemove = ({ value: path, index }: any) => {
+  systemStore.removeKeepAlive(tabs[index].name)
   tabs.splice(index, 1)
   if (path === route.path) {
     router.push(defaultTab.path)

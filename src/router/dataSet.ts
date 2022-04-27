@@ -13,14 +13,14 @@ export default [
         component: createNameComponent(
           () => import('@/views/dataset/multi/index.vue')
         ),
-        meta: { title: '共享数据集', cache: true }
+        meta: { title: '共享数据集', cache: false }
       },
       {
         path: 'person',
         component: createNameComponent(
           () => import('@/views/dataset/person/index.vue')
         ),
-        meta: { title: '个人数据集', cache: true }
+        meta: { title: '个人数据集', cache: false }
       }
     ]
   }

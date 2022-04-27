@@ -6,6 +6,8 @@ import ConfigurationRouters from './configuration'
 import DatasetRouters from './dataset'
 import NProgress from '@utils/progress'
 
+import { SystemStore } from '@/store'
+
 const originRoutes: RouteRecordRaw[] = [...HomeRoutes, ...LoginRoutes]
 
 const asyncRoutes: RouteRecordRaw[] = [
@@ -38,7 +40,13 @@ router.beforeEach(() => {
   NProgress.start()
 })
 
-router.afterEach(() => {
+router.afterEach(to => {
+  const name = to.matched[to.matched.length - 1].components.default.name
+  const cache = to.meta?.cache
+  if (cache && name) {
+    const systemStore = SystemStore()
+    systemStore.pushKeepAlive(name)
+  }
   NProgress.done()
 })
 
