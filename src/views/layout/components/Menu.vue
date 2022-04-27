@@ -23,7 +23,7 @@ import { computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import MenuItem from './MenuItem.vue'
 
-const title = import.meta.env.VITE_APP_TITLE
+const title = import.meta.env.VITE_TITLE
 
 const route = useRoute()
 const router = useRouter()

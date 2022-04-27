@@ -47,10 +47,18 @@ const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
   if (meta.hideTab) {
     return
   }
-  if (!tabs.some((tab: RouteLocationNormalizedLoaded) => tab.path === path)) {
+  const index = tabs.findIndex(
+    (tab: RouteLocationNormalizedLoaded) => tab.path === path
+  )
+  if (index === -1) {
     tabs.push({ path, meta, name })
+  } else {
+    // 如果tabs找得到该子项，那么将此项重新赋值，以防刷新导致name替换影响KeepAlive
+    tabs[index] = { path, meta, name }
   }
 }
+// 页面进来就要刷新tab的name
+addTab(route)
 
 router.afterEach(() => {
   addTab(route)

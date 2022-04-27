@@ -7,7 +7,7 @@ import App from './App.vue'
 import router from './router'
 import pinia from './store'
 
-document.title = import.meta.env.VITE_APP_TITLE
+document.title = import.meta.env.VITE_TITLE
 
 const app = createApp(App).use(router).use(pinia).use(TDesign)
 
