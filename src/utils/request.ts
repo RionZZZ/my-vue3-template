@@ -3,6 +3,7 @@ import { UserStore } from '@/store'
 import { showError } from './util'
 
 const baseURL = import.meta.env.VITE_BASE_API
+console.log(baseURL)
 
 const instance = axios.create({
   timeout: 25000,
@@ -10,12 +11,12 @@ const instance = axios.create({
 })
 
 const userStore = UserStore()
-const whiteList = ['/login']
+const whiteList = ['/userSignIn']
 
 instance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     if (!whiteList.includes(config.url as string) && userStore.token) {
-      config.headers!.Authorization = 'Bearer ' + userStore.token
+      config.headers!.Authorization = `Bearer ${userStore.token}`
     }
     return config
   },
@@ -39,3 +40,31 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+export default class {
+  static get = (url: string, params?: Object) => {
+    return new Promise((resolve, reject) => {
+      instance
+        .get(url, { params })
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  }
+
+  static post = (url: string, params?: Object) => {
+    return new Promise((resolve, reject) => {
+      instance
+        .post(url, params)
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  }
+}

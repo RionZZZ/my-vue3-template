@@ -10,6 +10,7 @@ const pathResolve = (dir: string): any => {
 const alias: Record<string, string> = {
   '@': pathResolve('src'),
   '@utils': pathResolve('src/utils'),
+  '@api': pathResolve('src/service'),
   '@component': pathResolve('src/components'),
   '@images': pathResolve('src/assets/images')
 }

@@ -26,6 +26,7 @@
 import { defineComponent, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { addRoutes } from '@/router'
+import { test } from '@api/login'
 export default defineComponent({
   setup() {
     const router = useRouter()
@@ -58,6 +59,9 @@ export default defineComponent({
       checkForm().then(() => {
         addRoutes()
         router.push('/')
+        test().then(res => {
+          console.log(res)
+        })
       })
     }
     return {
