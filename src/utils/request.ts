@@ -21,6 +21,7 @@ instance.interceptors.request.use(
     return config
   },
   (error: AxiosError) => {
+    console.log('request error')
     console.log(error)
     return Promise.reject(error)
   }
@@ -30,12 +31,17 @@ instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const res = response.data
     if (res.code !== 200) {
+      console.log('res data error')
       showError(res.msg)
+      if (res.code === 4) {
+        // token失效
+      }
       return Promise.reject(res)
     }
     return res
   },
   (error: AxiosError) => {
+    console.log('response error')
     console.log(error)
     return Promise.reject(error)
   }

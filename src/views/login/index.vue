@@ -22,54 +22,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+<script lang="ts" setup>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { addRoutes } from '@/router'
 import { test } from '@api/login'
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    const route = useRoute()
-    const form = reactive({
-      name: 'admin',
-      password: 'admin'
-    })
-    const checkForm = () => {
-      return new Promise(resolve => {
-        if (form.name === '') {
-          // ElMessage.warning({
-          //   message: '用户名不能为空',
-          //   type: 'warning'
-          // })
-          return
-        }
-        if (form.password === '') {
-          // ElMessage.warning({
-          //   message: '密码不能为空',
-          //   type: 'warning'
-          // })
-          return
-        }
-        resolve(true)
-      })
-    }
-    const submit = () => {
-      console.log(route.query)
-      checkForm().then(() => {
-        addRoutes()
-        router.push('/')
-        test().then(res => {
-          console.log(res)
-        })
-      })
-    }
-    return {
-      form,
-      submit
-    }
-  }
+import { UserStore } from '@/store'
+
+const router = useRouter()
+
+const userStore = UserStore()
+const { changeState } = userStore
+
+const form = reactive({
+  name: 'admin',
+  password: 'admin'
 })
+const submit = () => {
+  test().then(async res => {
+    console.log(res)
+    // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
+    await changeState('token', 123123)
+    addRoutes()
+    router.push('/')
+  })
+}
 </script>
 
 <style lang="scss" scoped>

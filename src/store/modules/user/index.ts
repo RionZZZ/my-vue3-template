@@ -9,5 +9,15 @@ export default defineStore('user', {
   }),
   persist: {
     storage: window.localStorage
+  },
+  actions: {
+    loginOut() {
+      localStorage.clear()
+      sessionStorage.clear()
+      location.reload()
+    },
+    changeState(key: String, value: any) {
+      this[key as keyof User] = value
+    }
   }
 })

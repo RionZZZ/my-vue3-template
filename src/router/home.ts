@@ -18,7 +18,7 @@ export default [
       {
         path: 'home',
         component: createNameComponent(() => import('@/views/home/index.vue')),
-        meta: { title: '首页', cache: true }
+        meta: { title: '首页', disableRemove: true, cache: true }
       },
       {
         path: '401',

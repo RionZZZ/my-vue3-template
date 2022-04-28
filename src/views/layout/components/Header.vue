@@ -1,8 +1,8 @@
 <template>
   <div class="content-header">
     <t-breadcrumb :options="breadcrumbs" />
-    <div>
-      <span>这里放名字</span>
+    <div @click="loginOut">
+      <span>退出登录</span>
     </div>
   </div>
 </template>
@@ -10,6 +10,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { UserStore } from '@/store'
 
 const route = useRoute()
 const breadcrumbs = computed(() => {
@@ -22,6 +23,9 @@ const breadcrumbs = computed(() => {
       }
     })
 })
+
+const userStore = UserStore()
+const { loginOut } = userStore
 </script>
 
 <style lang="scss" scoped>
