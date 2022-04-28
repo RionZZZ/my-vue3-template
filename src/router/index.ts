@@ -24,6 +24,7 @@ const router = createRouter({
 
 export function addRoutes() {
   const token = JSON.parse(localStorage.getItem('user') || '{}').token
+  console.log(token)
   if (token) {
     // 通过权限判断添加路由，暂时未用到
     asyncRoutes.forEach(route => {

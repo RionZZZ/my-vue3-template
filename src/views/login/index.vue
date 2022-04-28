@@ -10,6 +10,7 @@
           name="password"
         ></t-input>
         <t-button size="large" type="primary" @click="submit">登录</t-button>
+        <debounce-button size="small" @click="test(123)">test</debounce-button>
       </t-form>
     </div>
   </div>
@@ -28,21 +29,26 @@ const router = useRouter()
 const userStore = UserStore()
 const { changeState } = userStore
 
-const account = ref('liuchenyu1')
-const password = ref('12345678')
+const account = ref('jiangbo06')
+const password = ref('123456')
 
 const submit = () => {
   const params = {
     accountNumber: account.value,
-    pwd: encrypt(password.value)
+    pwd: encrypt(password.value),
+    userType: 3 // 管理员才能登陆
   }
   login(params).then(async (res: any) => {
     // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
-    await changeState('token', res.loginToken)
     changeState('name', res.user.name)
+    await changeState('token', res.loginToken)
     addRoutes()
     router.push('/')
   })
+}
+
+const test = (val: number) => {
+  console.log('test,,', val)
 }
 </script>
 
