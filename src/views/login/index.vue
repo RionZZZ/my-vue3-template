@@ -2,19 +2,12 @@
   <div class="container">
     <div class="box">
       <t-form class="form">
+        <t-input v-model="account" placeholder="用户名" type="text"></t-input>
         <t-input
-          v-model="form.name"
-          placeholder="用户名"
-          type="text"
-          maxlength="50"
-        ></t-input>
-        <t-input
-          ref="password"
-          v-model="form.password"
+          v-model="password"
           type="password"
           placeholder="密码"
           name="password"
-          maxlength="50"
         ></t-input>
         <t-button size="large" type="primary" @click="submit">登录</t-button>
       </t-form>
@@ -23,26 +16,30 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { addRoutes } from '@/router'
-import { test } from '@api/login'
+import { login } from '@api/login'
 import { UserStore } from '@/store'
+import { encrypt } from '@/utils/util'
 
 const router = useRouter()
 
 const userStore = UserStore()
 const { changeState } = userStore
 
-const form = reactive({
-  name: 'admin',
-  password: 'admin'
-})
+const account = ref('liuchenyu1')
+const password = ref('12345678')
+
 const submit = () => {
-  test().then(async res => {
-    console.log(res)
+  const params = {
+    accountNumber: account.value,
+    pwd: encrypt(password.value)
+  }
+  login(params).then(async (res: any) => {
     // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
-    await changeState('token', 123123)
+    await changeState('token', res.loginToken)
+    changeState('name', res.user.name)
     addRoutes()
     router.push('/')
   })

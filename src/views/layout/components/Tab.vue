@@ -59,7 +59,6 @@ const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
 }
 // 页面进来就要刷新tab的name
 addTab(route)
-
 router.afterEach(() => {
   addTab(route)
 })

@@ -30,15 +30,16 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
     const res = response.data
-    if (res.code !== 200) {
+    if (res.code !== 200 && res.code !== 0) {
       console.log('res data error')
       showError(res.msg)
       if (res.code === 4) {
         // token失效
+        userStore.loginOut()
       }
       return Promise.reject(res)
     }
-    return res
+    return res.data
   },
   (error: AxiosError) => {
     console.log('response error')
@@ -61,7 +62,7 @@ export default class {
     })
   }
 
-  static post = (url: string, params?: Object) => {
+  static post = (url: string, params: Object = {}) => {
     return new Promise((resolve, reject) => {
       instance
         .post(url, params)

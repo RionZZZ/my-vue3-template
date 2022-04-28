@@ -34,10 +34,9 @@ export function addRoutes() {
     })
   }
 }
-
 addRoutes()
-const whiteList = ['/login']
 
+const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
   NProgress.start()
   const userStore = UserStore()
