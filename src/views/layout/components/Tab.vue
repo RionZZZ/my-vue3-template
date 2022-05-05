@@ -1,5 +1,6 @@
 <template>
   <t-tabs
+    class="tab-list"
     :value="route.path"
     theme="card"
     @change="onTabChange"
@@ -16,6 +17,7 @@
         <t-icon
           v-if="route.path === tab.path"
           name="refresh"
+          class="refresh"
           @click="onRefreshClick"
         />
       </template>
@@ -79,4 +81,24 @@ const onRefreshClick = () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tab-list {
+  ::v-deep .t-tabs__nav--card {
+    background-color: #fff;
+    .t-tabs__nav-item {
+      height: 32px;
+      border: 1px solid #e5e5e5;
+      margin: 8px 4px;
+      background-color: #e5e5e5;
+      border-radius: 4px;
+      padding: 0 10px;
+      &.t-is-active {
+        background-color: #fff;
+      }
+      .refresh {
+        margin-left: 6px;
+      }
+    }
+  }
+}
+</style>
