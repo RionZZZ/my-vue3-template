@@ -5,13 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-const debounce = (fun: () => void) => {
+const debounce = (fun: () => void, timeout: number = 500) => {
   let timer: number
-  return function () {
+  return () => {
     clearTimeout(timer)
-    timer = setTimeout(() => {
-      fun()
-    }, 500)
+    timer = setTimeout(fun, timeout)
   }
 }
 const emit = defineEmits(['click'])

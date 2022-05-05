@@ -22,17 +22,19 @@ const router = createRouter({
   routes
 })
 
+let hadAdded: Boolean = false
 export function addRoutes() {
   const token = JSON.parse(localStorage.getItem('user') || '{}').token
   console.log(token)
-  if (token) {
-    // 通过权限判断添加路由，暂时未用到
+  if (!hadAdded && token) {
     asyncRoutes.forEach(route => {
+      // 通过权限判断添加路由，暂时未用到
       if (route) {
         routes.push(route)
         router.addRoute(route)
       }
     })
+    hadAdded = true
   }
 }
 addRoutes()
