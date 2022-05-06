@@ -46,11 +46,15 @@ watch(tabs, val => sessionStorage.setItem('tabs', JSON.stringify(val)))
 const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
   const { path, meta, matched } = routeItem
   const name: any = matched[matched.length - 1].components.default.name
+  console.log(name)
+  console.log(path)
+  console.log(meta.name)
   if (meta.hideTab) {
     return
   }
   const index = tabs.findIndex(
-    (tab: RouteLocationNormalizedLoaded) => tab.path === path
+    (tab: RouteLocationNormalizedLoaded) =>
+      tab.path === path || tab.meta.name === meta.name
   )
   if (index === -1) {
     tabs.push({ path, meta, name })
@@ -83,7 +87,7 @@ const onRefreshClick = () => {
 
 <style lang="scss" scoped>
 .tab-list {
-  ::v-deep .t-tabs__nav--card {
+  ::v-deep(.t-tabs__nav--card) {
     background-color: #fff;
     .t-tabs__nav-item {
       height: 32px;

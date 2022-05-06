@@ -23,6 +23,18 @@ export default [
         meta: { title: '业务对象', cache: false }
       },
       {
+        path: 'business/detail/:id',
+        component: createNameComponent(
+          () => import('@/views/develop/business/detail.vue')
+        ),
+        meta: {
+          title: '业务对象详情',
+          name: 'businessDetail',
+          cache: false,
+          hideMenu: true
+        }
+      },
+      {
         path: 'data',
         component: createNameComponent(
           () => import('@/views/develop/data/index.vue')

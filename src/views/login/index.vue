@@ -17,15 +17,21 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { addRoutes } from '@/router'
 import { login } from '@api/login'
 import { UserStore } from '@/store'
 import { encrypt } from '@/utils/util'
 
-const router = useRouter()
+onBeforeMount(() => {
+  const token = JSON.parse(localStorage.getItem('user') || '{}').token
+  if (token) {
+    localStorage.clear()
+  }
+})
 
+const router = useRouter()
 const userStore = UserStore()
 const { changeState } = userStore
 
