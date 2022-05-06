@@ -1,4 +1,9 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  Method
+} from 'axios'
 import { UserStore } from '@/store'
 import { showError } from './util'
 
@@ -48,30 +53,17 @@ instance.interceptors.response.use(
   }
 )
 
-export default class {
-  static get = (url: string, params?: Object) => {
-    return new Promise((resolve, reject) => {
-      instance
-        .get(url, { params })
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  }
-
-  static post = (url: string, params: Object = {}) => {
-    return new Promise((resolve, reject) => {
-      instance
-        .post(url, params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  }
+export default (method: Method, url: string, params: Object = {}) => {
+  return new Promise((resolve, reject) => {
+    const obj: AxiosRequestConfig = { url, method }
+    method === 'get' ? (obj.params = params) : (obj.data = params)
+    instance(obj)
+      .then(res => {
+        resolve(res)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
 }
+

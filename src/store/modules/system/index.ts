@@ -17,7 +17,7 @@ export default defineStore('system', {
         this.keepAliveComps.splice(index, 1)
       }
     },
-    changeState(key: String, value: any) {
+    changeState(key: string, value: any) {
       this[key as keyof System] = value
     }
   }

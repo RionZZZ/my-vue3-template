@@ -15,7 +15,7 @@ export default defineStore('user', {
       sessionStorage.clear()
       location.reload()
     },
-    changeState(key: String, value: any) {
+    changeState(key: string, value: any) {
       this[key as keyof User] = value
     }
   }

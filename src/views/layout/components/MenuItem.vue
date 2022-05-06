@@ -52,4 +52,3 @@ const menuPath = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>

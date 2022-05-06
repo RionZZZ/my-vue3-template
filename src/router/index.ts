@@ -30,6 +30,7 @@ export function addRoutes() {
   if (!hadAdded && token) {
     asyncRoutes.forEach(route => {
       // 通过权限判断添加路由，暂时未用到
+      console.log(route)
       if (route.meta) {
         routes.push(route)
         router.addRoute(route)
@@ -55,7 +56,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(to => {
-  const name = to.matched[to.matched.length - 1].components.default.name
+  const name = to.matched.at(-1)?.components.default.name
   const cache = to.meta?.cache
   if (cache && name) {
     const systemStore = SystemStore()
