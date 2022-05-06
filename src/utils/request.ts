@@ -8,7 +8,6 @@ import { UserStore } from '@/store'
 import { showError } from './util'
 
 const baseURL = import.meta.env.VITE_BASE_API
-console.log(baseURL)
 
 const instance = axios.create({
   timeout: 25000,
@@ -56,7 +55,7 @@ instance.interceptors.response.use(
 export default (method: Method, url: string, params: Object = {}) => {
   return new Promise((resolve, reject) => {
     const obj: AxiosRequestConfig = { url, method }
-    method === 'get' ? (obj.params = params) : (obj.data = params)
+    obj[['post', 'put', 'patch'].includes(method) ? 'data' : 'params'] = params
     instance(obj)
       .then(res => {
         resolve(res)
@@ -66,4 +65,3 @@ export default (method: Method, url: string, params: Object = {}) => {
       })
   })
 }
-
