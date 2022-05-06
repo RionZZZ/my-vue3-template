@@ -66,8 +66,8 @@ onBeforeMount(() => {
 })
 
 const INITIAL_DATA = {
-  account: '',
-  password: ''
+  account: 'jiangbo06',
+  password: '11111111'
 }
 
 const rules = {
@@ -99,7 +99,7 @@ const onSubmit = ({ validateResult }: any) => {
     }
     login(params)
       .then(async (res: any) => {
-        // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
+        // addRoutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
         changeState('name', res.user.name)
         await changeState('token', res.loginToken)
         addRoutes()

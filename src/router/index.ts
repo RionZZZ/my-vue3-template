@@ -25,11 +25,12 @@ const router = createRouter({
 let hadAdded: Boolean = false
 export function addRoutes() {
   const token = JSON.parse(localStorage.getItem('user') || '{}').token
-  console.log(hadAdded)
+  console.log('hadAdded,', hadAdded)
+  console.log('token,', token)
   if (!hadAdded && token) {
     asyncRoutes.forEach(route => {
       // 通过权限判断添加路由，暂时未用到
-      if (route) {
+      if (route.meta) {
         routes.push(route)
         router.addRoute(route)
       }
@@ -45,6 +46,9 @@ router.beforeEach((to, from, next) => {
   const userStore = UserStore()
   if (userStore.token || whiteList.includes(to.path)) {
     next()
+  } else if (to.meta.role) {
+    // 通过权限判断路由是否可访问，暂时未用到
+    next('/401')
   } else {
     next('/login')
   }
