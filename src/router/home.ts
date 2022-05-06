@@ -5,7 +5,7 @@
  * -3 正常菜单 /system -> /system/1 | /system/2 有上下级
  */
 
-import { createNameComponent } from '@utils/router'
+import { createNameComponent } from '@/utils/createComp'
 import Layout from '@/views/layout/index.vue'
 
 export default [

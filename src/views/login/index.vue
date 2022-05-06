@@ -1,23 +1,57 @@
 <template>
-  <div class="container">
-    <div class="box">
-      <t-form class="form">
-        <t-input v-model="account" placeholder="用户名" type="text"></t-input>
-        <t-input
-          v-model="password"
-          type="password"
-          placeholder="密码"
-          name="password"
-        ></t-input>
-        <t-button size="large" type="primary" @click="submit">登录</t-button>
-        <debounce-button size="small" @click="test(123)">test</debounce-button>
+  <div class="login-container">
+    <div class="banner">
+      <img src="@images/login_banner.png" />
+    </div>
+    <div class="content">
+      <span class="form-title">{{ title }}</span>
+      <t-form
+        ref="loginForm"
+        :data="formData"
+        label-width="0"
+        :rules="rules"
+        @submit="onSubmit"
+      >
+        <t-form-item name="account">
+          <t-input
+            v-model="formData.account"
+            clearable
+            placeholder="请输入您的账号"
+          >
+            <template #prefix-icon>
+              <t-icon name="desktop" />
+            </template>
+          </t-input>
+        </t-form-item>
+        <t-form-item name="password">
+          <t-input
+            v-model="formData.password"
+            type="password"
+            clearable
+            placeholder="请输入您的密码"
+          >
+            <template #prefix-icon>
+              <t-icon name="lock-on" />
+            </template>
+          </t-input>
+        </t-form-item>
+        <t-form-item class="submit-button">
+          <t-button
+            type="submit"
+            block
+            :disabled="!formData.account || !formData.password"
+            :loading="submitLoading"
+          >
+            登录
+          </t-button>
+        </t-form-item>
       </t-form>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { addRoutes } from '@/router'
 import { login } from '@api/login'
@@ -31,57 +65,81 @@ onBeforeMount(() => {
   }
 })
 
+const INITIAL_DATA = {
+  account: '',
+  password: ''
+}
+
+const rules = {
+  account: [{ required: true, type: 'error', trigger: 'blur' }],
+  password: [
+    { required: true, type: 'error', trigger: 'blur' },
+    { min: 8, type: 'error', trigger: 'blur', message: '密码最短8位' },
+    { max: 16, type: 'error', trigger: 'change', message: '密码最长16位' }
+  ]
+}
+
+const formData = reactive(INITIAL_DATA)
+const loginForm = ref()
+const submitLoading = ref(false)
+
+const title = import.meta.env.VITE_TITLE
+
 const router = useRouter()
 const userStore = UserStore()
 const { changeState } = userStore
 
-const account = ref('jiangbo06')
-const password = ref('123456')
-
-const submit = () => {
-  const params = {
-    accountNumber: account.value,
-    pwd: encrypt(password.value),
-    userType: 3 // 管理员才能登陆
+const onSubmit = ({ validateResult }: any) => {
+  if (validateResult === true) {
+    submitLoading.value = true
+    const params = {
+      accountNumber: formData.account,
+      pwd: encrypt(formData.password),
+      userType: 3 // 管理员才能登陆
+    }
+    login(params)
+      .then(async (res: any) => {
+        // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
+        changeState('name', res.user.name)
+        await changeState('token', res.loginToken)
+        addRoutes()
+        router.push('/')
+      })
+      .finally(() => {
+        submitLoading.value = false
+      })
   }
-  login(params).then(async (res: any) => {
-    // addroutes函数依赖storage内token取值，action为异步，赋值成功后才能获取
-    changeState('name', res.user.name)
-    await changeState('token', res.loginToken)
-    addRoutes()
-    router.push('/')
-  })
-}
-
-const test = (val: number) => {
-  console.log('test,,', val)
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  position: relative;
-  width: 100vw;
+.login-container {
   height: 100vh;
-  background-color: #eef0f3;
-  .box {
-    width: 500px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: white;
-    border-radius: 8px;
-    transform: translate(-50%, -50%);
-    height: 440px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px 5px rgba(152, 152, 152, 0.1),
-      0 16px 24px 2px rgba(117, 117, 117, 0.14);
-    .form {
-      width: 80%;
-      margin: 50px auto 15px;
-      .t-input {
-        margin-bottom: 20px;
-      }
+  .banner {
+    height: 40%;
+    background: rgba(202, 221, 255, 0.3);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    img {
+      width: 20%;
+      max-width: 300px;
+      min-width: 240px;
+      margin-bottom: -10px;
+    }
+  }
+  .content {
+    width: 25%;
+    margin: 0 auto;
+    .form-title {
+      display: block;
+      font-size: 29px;
+      font-weight: 600;
+      margin: 76px 0 32px;
+      text-align: center;
+    }
+    .submit-button {
+      margin-top: 16px;
     }
   }
 }

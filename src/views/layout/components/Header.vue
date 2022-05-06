@@ -1,9 +1,9 @@
 <template>
   <div class="content-header">
     <t-breadcrumb :options="breadcrumbs" />
-    <div class="user-content" @click="loginOut">
+    <div class="user-content">
       <span class="user-name">{{ name }}</span>
-      <t-icon name="logout" class="logout"></t-icon>
+      <t-icon name="logout" class="logout" @click="loginOut"></t-icon>
     </div>
   </div>
 </template>
