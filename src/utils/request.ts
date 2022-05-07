@@ -52,7 +52,7 @@ instance.interceptors.response.use(
   }
 )
 
-export default (method: Method, url: string, params: Object = {}) => {
+export default (method: Method, url: string, params: object = {}) => {
   return new Promise((resolve, reject) => {
     const obj: AxiosRequestConfig = { url, method }
     obj[['post', 'put', 'patch'].includes(method) ? 'data' : 'params'] = params
