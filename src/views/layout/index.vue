@@ -47,6 +47,8 @@ const { keepAliveComps } = storeToRefs(systemStore)
     }
     .t-content-box {
       flex: 1;
+      margin: 20px;
+      background-color: #fff;
     }
   }
 }

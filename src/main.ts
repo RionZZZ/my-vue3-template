@@ -6,9 +6,13 @@ import './assets/styles/common.scss'
 import App from './App.vue'
 import router from './router'
 import pinia from './store'
+import DebounceButton from '@component/button.vue'
 
 document.title = import.meta.env.VITE_TITLE
 
 const app = createApp(App).use(router).use(pinia).use(TDesign)
+
+// 公共组件引入
+app.component('DebounceButton', DebounceButton)
 
 app.mount('#app')

@@ -1,4 +1,4 @@
-import { createNameComponent } from '@utils/router'
+import { createNameComponent } from '@/utils/createComp'
 import Layout from '@/views/layout/index.vue'
 
 export default [
@@ -21,6 +21,18 @@ export default [
           () => import('@/views/develop/business/index.vue')
         ),
         meta: { title: '业务对象', cache: false }
+      },
+      {
+        path: 'business/detail/:id',
+        component: createNameComponent(
+          () => import('@/views/develop/business/detail.vue')
+        ),
+        meta: {
+          title: '业务对象详情',
+          name: 'businessDetail',
+          cache: false,
+          hideMenu: true
+        }
       },
       {
         path: 'data',

@@ -1,8 +1,9 @@
 <template>
   <div class="content-header">
     <t-breadcrumb :options="breadcrumbs" />
-    <div @click="loginOut">
-      <span>退出登录</span>
+    <div class="user-content">
+      <span class="user-name">{{ name }}</span>
+      <t-icon name="logout" class="logout" @click="loginOut"></t-icon>
     </div>
   </div>
 </template>
@@ -11,6 +12,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { UserStore } from '@/store'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const breadcrumbs = computed(() => {
@@ -26,6 +28,7 @@ const breadcrumbs = computed(() => {
 
 const userStore = UserStore()
 const { loginOut } = userStore
+const { name } = storeToRefs(userStore)
 </script>
 
 <style lang="scss" scoped>
@@ -35,5 +38,20 @@ const { loginOut } = userStore
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
+  .user-content {
+    display: flex;
+    align-items: center;
+    .user-name {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.9);
+    }
+    .logout {
+      box-sizing: content-box;
+      font-size: 24px;
+      padding: 8px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
 }
 </style>

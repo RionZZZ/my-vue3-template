@@ -1,4 +1,4 @@
-import { createNameComponent } from '@utils/router'
+import { createNameComponent } from '@/utils/createComp'
 import Layout from '@/views/layout/index.vue'
 
 export default [

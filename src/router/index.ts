@@ -22,34 +22,41 @@ const router = createRouter({
   routes
 })
 
+let hadAdded: Boolean = false
 export function addRoutes() {
   const token = JSON.parse(localStorage.getItem('user') || '{}').token
-  if (token) {
-    // 通过权限判断添加路由，暂时未用到
+  console.log('hadAdded,', hadAdded)
+  console.log('token,', token)
+  if (!hadAdded && token) {
     asyncRoutes.forEach(route => {
-      if (route) {
+      // 通过权限判断添加路由，暂时未用到
+      console.log(route)
+      if (route.meta) {
         routes.push(route)
         router.addRoute(route)
       }
     })
+    hadAdded = true
   }
 }
-
 addRoutes()
-const whiteList = ['/login']
 
+const whiteList = ['/login']
 router.beforeEach((to, from, next) => {
   NProgress.start()
   const userStore = UserStore()
   if (userStore.token || whiteList.includes(to.path)) {
     next()
+  } else if (to.meta.role) {
+    // 通过权限判断路由是否可访问，暂时未用到
+    next('/401')
   } else {
     next('/login')
   }
 })
 
 router.afterEach(to => {
-  const name = to.matched[to.matched.length - 1].components.default.name
+  const name = to.matched.at(-1)?.components.default.name
   const cache = to.meta?.cache
   if (cache && name) {
     const systemStore = SystemStore()

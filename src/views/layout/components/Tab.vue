@@ -1,5 +1,6 @@
 <template>
   <t-tabs
+    class="tab-list"
     :value="route.path"
     theme="card"
     @change="onTabChange"
@@ -16,6 +17,7 @@
         <t-icon
           v-if="route.path === tab.path"
           name="refresh"
+          class="refresh"
           @click="onRefreshClick"
         />
       </template>
@@ -43,12 +45,13 @@ watch(tabs, val => sessionStorage.setItem('tabs', JSON.stringify(val)))
 
 const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
   const { path, meta, matched } = routeItem
-  const name: any = matched[matched.length - 1].components.default.name
+  const name: any = matched.at(-1)?.components.default.name
   if (meta.hideTab) {
     return
   }
   const index = tabs.findIndex(
-    (tab: RouteLocationNormalizedLoaded) => tab.path === path
+    (tab: RouteLocationNormalizedLoaded) =>
+      tab.path === path || (meta.name && tab.meta.name === meta.name)
   )
   if (index === -1) {
     tabs.push({ path, meta, name })
@@ -59,7 +62,6 @@ const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
 }
 // 页面进来就要刷新tab的name
 addTab(route)
-
 router.afterEach(() => {
   addTab(route)
 })
@@ -75,9 +77,29 @@ const onTabRemove = ({ value: path, index }: any) => {
   }
 }
 const onRefreshClick = () => {
-  const current: any = route.matched[route.matched.length - 1].instances.default
+  const current: any = route.matched.at(-1)?.instances.default
   current.handleReload()
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tab-list {
+  ::v-deep(.t-tabs__nav--card) {
+    background-color: #fff;
+    .t-tabs__nav-item {
+      height: 32px;
+      border: 1px solid #e5e5e5;
+      margin: 8px 4px;
+      background-color: #e5e5e5;
+      border-radius: 4px;
+      padding: 0 10px;
+      &.t-is-active {
+        background-color: #fff;
+      }
+      .refresh {
+        margin-left: 6px;
+      }
+    }
+  }
+}
+</style>
