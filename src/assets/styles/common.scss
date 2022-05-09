@@ -1,3 +1,18 @@
 :root {
   --ry-menu-width: 240px;
 }
+
+.t-message {
+  &.t-is-warning {
+    background-color: var(--td-warning-color-2);
+  }
+  &.t-is-info {
+    background-color: var(--td-info-color-2);
+  }
+  &.t-is-success {
+    background-color: var(--td-success-color-2);
+  }
+  &.t-is-error {
+    background-color: var(--td-error-color-2);
+  }
+}

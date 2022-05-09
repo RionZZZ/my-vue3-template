@@ -18,7 +18,6 @@ import { onMounted, ref } from 'vue'
 import { getBusinessList } from '@api/develop'
 import { getTree } from '@api/common'
 import { DataType } from '../const'
-import { showToast } from '@/utils/util'
 
 const fetchList = () => {
   getBusinessList().then(res => {
@@ -41,7 +40,6 @@ const onTreeClick = ({ node }: any) => {
 onMounted(() => {
   fetchList()
   fetchTree()
-  showToast('分手的邂逅副书记快递费')
 })
 
 const dataType = ref('')

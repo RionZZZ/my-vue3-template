@@ -5,7 +5,7 @@ export const showToast = (
   content: string,
   theme: MessageThemeList = 'success'
 ): void => {
-  MessagePlugin[theme]({ content, duration: 2500, closeBtn: true })
+  MessagePlugin[theme]({ content, duration: 25000, closeBtn: true })
 }
 
 const ACCESS_KEY = '6df9003cc72a0c0cae912f3c9421275f'
