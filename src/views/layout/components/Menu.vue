@@ -48,25 +48,32 @@ const changeCollapseMenu = () => {
 <style lang="scss" scoped>
 .t-default-menu {
   width: var(--ry-menu-width) !important;
-}
-.logo {
-  width: 100%;
-  text-align: center;
-  .logo-icon {
-    width: 36px;
-    height: 36px;
-    vertical-align: middle;
+  ::v-deep(.t-menu__logo) {
+    border: none;
   }
-  .logo-title {
-    padding-left: 10px;
+  .logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+    }
+    .logo-title {
+      font-size: 20px;
+      font-weight: 600;
+      padding-left: 10px;
+    }
   }
-}
-.collapse {
-  font-size: 32px;
-  cursor: pointer;
-  padding: 4px;
-  &:hover {
-    background-color: var(--td-gray-color-2);
+  .collapse {
+    font-size: 32px;
+    cursor: pointer;
+    padding: 4px;
+    &:hover {
+      background-color: var(--td-gray-color-2);
+    }
   }
 }
 </style>

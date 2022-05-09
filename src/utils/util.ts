@@ -1,8 +1,11 @@
 import CryptoJS from 'crypto-js'
-import { MessagePlugin } from 'tdesign-vue-next'
+import { MessagePlugin, MessageThemeList } from 'tdesign-vue-next'
 
-export const showError = (content: string): void => {
-  MessagePlugin.error({ content, duration: 2500 })
+export const showToast = (
+  content: string,
+  theme: MessageThemeList = 'success'
+): void => {
+  MessagePlugin[theme]({ content, duration: 2500, closeBtn: true })
 }
 
 const ACCESS_KEY = '6df9003cc72a0c0cae912f3c9421275f'

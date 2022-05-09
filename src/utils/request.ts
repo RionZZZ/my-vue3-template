@@ -5,7 +5,7 @@ import axios, {
   Method
 } from 'axios'
 import { UserStore } from '@/store'
-import { showError } from './util'
+import { showToast } from './util'
 
 const baseURL = import.meta.env.VITE_BASE_API
 
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
     const res = response.data
     if (res.code !== 200 && res.code !== 0) {
       console.log('res data error')
-      showError(res.msg)
+      showToast(res.msg, 'error')
       if (res.code === 4) {
         // token失效
         userStore.loginOut()

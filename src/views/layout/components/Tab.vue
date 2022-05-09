@@ -45,7 +45,7 @@ watch(tabs, val => sessionStorage.setItem('tabs', JSON.stringify(val)))
 
 const addTab = (routeItem: RouteLocationNormalizedLoaded) => {
   const { path, meta, matched } = routeItem
-  const name: any = matched.at(-1)?.components.default.name
+  const name = matched.at(-1)?.components.default.name
   if (meta.hideTab) {
     return
   }

@@ -18,6 +18,7 @@ import { onMounted, ref } from 'vue'
 import { getBusinessList } from '@api/develop'
 import { getTree } from '@api/common'
 import { DataType } from '../const'
+import { showToast } from '@/utils/util'
 
 const fetchList = () => {
   getBusinessList().then(res => {
@@ -25,7 +26,7 @@ const fetchList = () => {
   })
 }
 
-let tree: any = ref([])
+let tree = ref([])
 const fetchTree = () => {
   getTree({ rootName: '所有数据', treeCode: 'ywbfl' }).then((res: any) => {
     console.log(res)
@@ -40,6 +41,7 @@ const onTreeClick = ({ node }: any) => {
 onMounted(() => {
   fetchList()
   fetchTree()
+  showToast('分手的邂逅副书记快递费')
 })
 
 const dataType = ref('')

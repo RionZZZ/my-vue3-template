@@ -57,6 +57,7 @@ import { addRoutes } from '@/router'
 import { login } from '@api/login'
 import { UserStore } from '@/store'
 import { encrypt } from '@/utils/util'
+import { SubmitContext } from 'tdesign-vue-next'
 
 onBeforeMount(() => {
   const token = JSON.parse(localStorage.getItem('user') || '{}').token
@@ -89,7 +90,7 @@ const router = useRouter()
 const userStore = UserStore()
 const { changeState } = userStore
 
-const onSubmit = ({ validateResult }: any) => {
+const onSubmit = ({ validateResult }: SubmitContext<FormData>) => {
   if (validateResult === true) {
     submitLoading.value = true
     const params = {

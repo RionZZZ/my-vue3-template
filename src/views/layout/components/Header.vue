@@ -3,7 +3,7 @@
     <t-breadcrumb :options="breadcrumbs" />
     <div class="user-content">
       <span class="user-name">{{ name }}</span>
-      <t-icon name="logout" class="logout" @click="loginOut"></t-icon>
+      <t-icon name="logout" class="header-icon" @click="loginOut"></t-icon>
     </div>
   </div>
 </template>
@@ -44,14 +44,17 @@ const { name } = storeToRefs(userStore)
     .user-name {
       font-size: 14px;
       color: rgba(0, 0, 0, 0.9);
+      margin: 0px 16px;
     }
-    .logout {
+    .header-icon {
       box-sizing: content-box;
       font-size: 24px;
       padding: 8px;
       cursor: pointer;
-      margin-left: 10px;
     }
+  }
+  ::v-deep(.t-breadcrumb__item:last-child) {
+    font-weight: 600;
   }
 }
 </style>

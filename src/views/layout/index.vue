@@ -8,7 +8,7 @@
         <Header />
       </t-header>
       <t-content>
-        <Tab />
+        <!-- <Tab /> -->
         <router-view v-slot="{ Component }">
           <transition name="fade-transform" mode="out-in">
             <keep-alive v-if="keepAliveComps.length" :include="keepAliveComps">
@@ -25,7 +25,7 @@
 <script lang="ts" name="Layout" setup>
 import Menu from './components/Menu.vue'
 import Header from './components/Header.vue'
-import Tab from './components/Tab.vue'
+// import Tab from './components/Tab.vue'
 import { storeToRefs } from 'pinia'
 import { SystemStore } from '@/store'
 
