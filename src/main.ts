@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import 'normalize.css'
+import 'default-passive-events'
 import TDesign from 'tdesign-vue-next'
 import 'tdesign-vue-next/es/style/index.css'
 import './assets/styles/common.scss'

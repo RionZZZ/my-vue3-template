@@ -20,7 +20,7 @@
             <t-icon name="search" class="search-btn" @click="onSearchClick" />
           </template>
         </t-input>
-        <t-button theme="primary" variant="text" disabled>
+        <t-button theme="primary" variant="text">
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>
@@ -30,8 +30,20 @@
         :data="relationList"
         hover
         :columns="columns"
+        row-key="id"
         max-height="100%"
-      />
+      >
+        <template #handle="{ row }">
+          <t-button theme="primary" variant="text">编辑</t-button>
+          <t-dropdown :options="options" @click="onDropClick($event, row)">
+            <t-button shape="square" variant="text">
+              <template #icon>
+                <t-icon name="ellipsis" style="color: #0052d9" />
+              </template>
+            </t-button>
+          </t-dropdown>
+        </template>
+      </t-table>
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
@@ -39,9 +51,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { getBusinessList } from '@api/develop'
+import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
-import { BaseTableCol } from 'tdesign-vue-next'
+import { showToast } from '@utils/util'
+import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 
 const treeId = ref('-1')
 const search = ref('')
@@ -51,12 +64,12 @@ const pagination = ref()
 
 const columns: BaseTableCol[] = [
   {
-    width: '100',
+    width: '200',
     colKey: 'code',
     title: 'Code'
   },
   {
-    width: '160',
+    width: '200',
     colKey: 'name',
     title: '表名'
   },
@@ -71,17 +84,33 @@ const columns: BaseTableCol[] = [
     title: '分类'
   },
   {
-    colKey: '',
-    title: '创建人ID'
-  },
-  {
+    width: '140',
     colKey: 'createTime',
     title: '创建时间'
+  },
+  {
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
+  }
+]
+const options: DropdownOption[] = [
+  {
+    content: '编辑字段',
+    value: 'editDetail'
+  },
+  {
+    content: '复制',
+    value: 'copy'
+  },
+  {
+    content: '删除',
+    value: 'remove'
   }
 ]
 const fetchList = () => {
   console.log(pagination.value)
-  getBusinessList({
+  getRelationList({
     groupId: treeId.value,
     name: search.value,
     pageNum: pagination.value.pagination.current,
@@ -117,6 +146,27 @@ const onSearchEnter = () => {
 }
 const onSearchClick = () => {
   console.log('onSearchClick')
+}
+const onDropClick = (e: DropdownOption, data: any) => {
+  switch (e.value) {
+    case 'editDetail':
+      console.log('editDetail')
+      break
+    case 'copy':
+      console.log('copy')
+      break
+    case 'remove':
+      removeRelation({ id: data.id }).then(res => {
+        if (res) {
+          showToast('删除成功!')
+          fetchList()
+        }
+      })
+      break
+
+    default:
+      break
+  }
 }
 </script>
 

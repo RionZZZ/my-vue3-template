@@ -1,8 +1,10 @@
 @import './theme.scss';
+
 :root {
   --ry-menu-width: 240px;
 }
 
+// button
 .t-button--variant-text:hover {
   background-color: var(--td-brand-color-4);
   border-color: var(--td-brand-color-4);
@@ -15,6 +17,15 @@
   --ripple-color: var(--td-brand-color-6);
 }
 
+// dropdown
+.t-dropdown__item {
+  color: var(--td-brand-color);
+  &:hover {
+    background-color: var(--td-brand-color-4);
+  }
+}
+
+// message
 .t-message {
   &.t-is-warning {
     background-color: var(--td-warning-color-2);
@@ -30,6 +41,7 @@
   }
 }
 
+// ruiyun
 .ry-content {
   flex: 1;
   display: flex;
