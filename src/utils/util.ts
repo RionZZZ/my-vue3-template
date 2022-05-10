@@ -36,3 +36,12 @@ export const encrypt = (message: string): string => {
   })
   return encrypted.toString()
 }
+
+// 防抖
+let timer: number
+export const debounce = (callback: () => void, timeout: number = 500) => {
+  return () => {
+    timer && clearTimeout(timer)
+    timer = setTimeout(callback, timeout)
+  }
+}

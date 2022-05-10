@@ -1,7 +1,7 @@
 export namespace DevelopType {
   export interface RelationListParams {
     groupId?: string
-    name?: string
+    keyword?: string
     pageNum: number
     pageSize?: number
   }

@@ -1,23 +1,26 @@
 <template>
   <div class="relation-container">
-    <t-tree
-      class="relation-tree"
-      :data="tree"
-      :keys="{ label: 'name', value: 'id' }"
-      hover
-      activable
-      @click="onTreeClick"
-    />
+    <t-loading :loading="loading" class="relation-tree">
+      <t-tree
+        class="relation-tree-content"
+        :data="tree"
+        :keys="{ label: 'name', value: 'id' }"
+        hover
+        activable
+        :expand-level="1"
+        @click="onTreeClick"
+      />
+    </t-loading>
     <div class="ry-content">
       <div class="table-header">
         <t-input
           v-model="search"
           class="search-input"
           placeholder="输入业务表名称"
-          @enter="onSearchEnter"
+          @enter="onSearch"
         >
           <template #suffixIcon>
-            <t-icon name="search" class="search-btn" @click="onSearchClick" />
+            <t-icon name="search" class="search-btn" @click="onSearch" />
           </template>
         </t-input>
         <t-button theme="primary" variant="text">
@@ -53,9 +56,10 @@
 import { onMounted, ref } from 'vue'
 import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
-import { showToast, showDialog } from '@utils/util'
+import { showToast, showDialog, debounce } from '@utils/util'
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 
+const loading = ref(true)
 const treeId = ref('-1')
 const search = ref('')
 const tree = ref([])
@@ -108,11 +112,11 @@ const options: DropdownOption[] = [
     value: 'remove'
   }
 ]
+
 const fetchList = () => {
-  console.log(pagination.value)
   getRelationList({
     groupId: treeId.value,
-    name: search.value,
+    keyword: search.value,
     pageNum: pagination.value.pagination.current,
     pageSize: pagination.value.pagination.pageSize
   }).then((res: any) => {
@@ -126,6 +130,7 @@ const fetchTree = () => {
     tree.value = res
     treeId.value = res[0].id
     fetchList()
+    loading.value = false
   })
 }
 
@@ -141,12 +146,12 @@ onMounted(() => {
   fetchTree()
 })
 
-const onSearchEnter = () => {
-  console.log('onSearchEnter')
+const onSearch = () => {
+  if (!loading.value) {
+    debounce(fetchList)()
+  }
 }
-const onSearchClick = () => {
-  console.log('onSearchClick')
-}
+
 const onDropClick = (e: DropdownOption, data: any) => {
   switch (e.value) {
     case 'editDetail':
@@ -183,8 +188,10 @@ const onDropClick = (e: DropdownOption, data: any) => {
     padding: 12px;
     border-radius: 3px;
     background-color: #fff;
-    overflow: hidden;
     margin-right: 12px;
+    &-content {
+      overflow: hidden;
+    }
   }
 }
 </style>
