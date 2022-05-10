@@ -53,7 +53,7 @@
 import { onMounted, ref } from 'vue'
 import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
-import { showToast } from '@utils/util'
+import { showToast, showDialog } from '@utils/util'
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 
 const treeId = ref('-1')
@@ -156,12 +156,14 @@ const onDropClick = (e: DropdownOption, data: any) => {
       console.log('copy')
       break
     case 'remove':
-      removeRelation({ id: data.id }).then(res => {
-        if (res) {
-          showToast('删除成功!')
-          fetchList()
-        }
-      })
+      showDialog('删除确认', '你确定删除这行内容吗？', () =>
+        removeRelation({ id: data.id }).then(res => {
+          if (res) {
+            showToast('删除成功!')
+            fetchList()
+          }
+        })
+      )
       break
 
     default:
