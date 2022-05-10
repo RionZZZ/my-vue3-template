@@ -1,10 +1,18 @@
+@import './theme.scss';
 :root {
   --ry-menu-width: 240px;
 }
 
 .t-button--variant-text:hover {
-  background-color: #eaf1fc;
-  border-color: #eaf1fc;
+  background-color: var(--td-brand-color-4);
+  border-color: var(--td-brand-color-4);
+  &.t-is-disabled {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+.t-button:not(.t-is-disabled):not(.t-button--ghost) {
+  --ripple-color: var(--td-brand-color-6);
 }
 
 .t-message {

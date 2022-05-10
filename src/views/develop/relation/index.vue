@@ -20,7 +20,7 @@
             <t-icon name="search" class="search-btn" @click="onSearchClick" />
           </template>
         </t-input>
-        <t-button theme="primary" variant="text">
+        <t-button theme="primary" variant="text" disabled>
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>

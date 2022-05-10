@@ -3,12 +3,12 @@
   --td-brand-color-1: #ecf2fe;
   --td-brand-color-2: #d4e3fc;
   --td-brand-color-3: #bbd3fb;
-  --td-brand-color-4: #96bbf8;
+  --td-brand-color-4: #eaf1fc;
   --td-brand-color-5: #699ef5;
-  --td-brand-color-6: #4787f0;
-  --td-brand-color-7: #266fe8;
-  --td-brand-color-8: #0052d9;
-  --td-brand-color-9: #0034b5;
+  --td-brand-color-6: #cddffa;
+  --td-brand-color-7: #6989f8;
+  --td-brand-color-8: #5479f7;
+  --td-brand-color-9: #2f5fff;
   --td-brand-color-10: #001f97;
   --td-warning-color-1: #fef3e6;
   --td-warning-color-2: #f9e0c7;
@@ -72,7 +72,7 @@
   --td-success-color: var(--td-success-color-5); // 色彩-功能-成功
 
   // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
-  --td-brand-color-hover: var(--td-brand-color-7); // hover态
+  --td-brand-color-hover: var(--td-brand-color-8); // hover态
   --td-brand-color-focus: var(--td-brand-color-2); // focus态，包括鼠标和键盘
   --td-brand-color-active: var(--td-brand-color-9); // 点击态
   --td-brand-color-disabled: var(--td-brand-color-3); // 禁用态

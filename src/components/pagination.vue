@@ -1,8 +1,8 @@
 <template>
   <t-pagination
-    class="table-pagination"
     v-model="pagination.current"
     v-model:pageSize="pagination.pageSize"
+    class="table-pagination"
     :total="pagination.total"
     :show-jumper="pagination.total > pagination.pageSize"
     :show-page-number="pagination.total > pagination.pageSize"
