@@ -44,11 +44,12 @@ const { keepAliveComps } = storeToRefs(systemStore)
     .t-layout__content {
       display: flex;
       flex-direction: column;
+      height: calc(100% - 64px);
     }
     .t-content-box {
       flex: 1;
       margin: 20px;
-      background-color: #fff;
+      height: calc(100% - 40px);
     }
   }
 }

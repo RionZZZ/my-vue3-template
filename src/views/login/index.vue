@@ -6,7 +6,6 @@
     <div class="content">
       <span class="form-title">{{ title }}</span>
       <t-form
-        ref="loginForm"
         :data="formData"
         label-width="0"
         :rules="rules"
@@ -81,7 +80,6 @@ const rules = {
 }
 
 const formData = reactive(INITIAL_DATA)
-const loginForm = ref()
 const submitLoading = ref(false)
 
 const title = import.meta.env.VITE_TITLE

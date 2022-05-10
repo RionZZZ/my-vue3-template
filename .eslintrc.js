@@ -58,7 +58,7 @@ module.exports = {
     'no-undef': 2,
     'no-unneeded-ternary': 2,
     'no-unused-vars': [2, { vars: 'all', args: 'after-used' }],
-    'no-use-before-define': 2,
+    'no-use-before-define': [2, { functions: false, variables: false }],
     'no-var': 2,
     'arrow-parens': 0,
     'arrow-spacing': 2,
