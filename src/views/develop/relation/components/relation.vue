@@ -13,11 +13,10 @@
       :rules="rules"
       class="relation-form"
     >
-      <t-form-item label="分类" name="group">
+      <t-form-item label="分类" name="groupId">
         <t-tree-select
-          v-model="relationForm.group"
+          v-model="relationForm.groupId"
           :data="tree"
-          value-type="object"
           placeholder="请选择分类"
           :tree-props="{
             keys: { label: 'name', value: 'id' },
@@ -44,40 +43,52 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { getTree, transferPinyin } from '@api/common'
 import { getRelationInfo } from '@api/develop'
+import { DevelopStore } from '@/store'
+import { storeToRefs } from 'pinia'
+
+const developStore = DevelopStore()
+const { changeRelation, changeState } = developStore
+const { relation } = storeToRefs(developStore)
 
 const INITIAL_DATA = {
-  group: { value: '', label: '' },
+  groupId: '',
   comment: '',
   code: '',
   name: ''
 }
-let relationForm = reactive(INITIAL_DATA)
+let relationForm = ref({ ...relation.value })
 const showDraw = ref(false)
 const tree = ref([])
 const form = ref()
 
 watch(showDraw, val => {
-  val && form.value.reset()
+  if (val) {
+    relationForm.value = { ...relation.value }
+    form.value.reset()
+  } else {
+    changeState('relation', INITIAL_DATA)
+  }
 })
 
 defineExpose({ showDraw })
 
 const codeValidator = (code: string) =>
   new Promise(resolve => {
-    if (code) {
+    if (code && code !== relation.value.code) {
+      // 验证code是否有重复
       getRelationInfo({ code }).then((res: any) => {
         resolve(!res)
       })
     } else {
-      resolve(false)
+      resolve(true)
     }
   })
 
 const rules = {
-  group: [{ required: true, type: 'error', trigger: 'blur' }],
+  groupId: [{ required: true, type: 'error', trigger: 'blur' }],
   name: [{ required: true, type: 'error', trigger: 'blur' }],
   code: [
     { required: true, type: 'error', trigger: 'blur' },
@@ -100,26 +111,17 @@ onMounted(() => {
 })
 
 const onTextareaBlur = (chinese: string) => {
-  if (!relationForm.code) {
+  if (!relationForm.value.code) {
     transferPinyin({ chinese, type: 0 }).then((res: any) => {
-      relationForm.code = res
+      relationForm.value.code = res
     })
   }
 }
 
 const onConfirm = () => {
   form.value.validate().then((result: any) => {
-    console.log(result)
     if (result === true) {
-      // 验证code是否有重复
-      const relationDefault = {
-        name: relationForm.name,
-        comment: relationForm.comment,
-        code: relationForm.code,
-        groupId: relationForm.group.value,
-        groupName: relationForm.group.label
-      }
-      console.log(relationDefault)
+      changeRelation(relationForm.value)
     }
   })
 }

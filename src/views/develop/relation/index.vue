@@ -37,7 +37,9 @@
         max-height="100%"
       >
         <template #handle="{ row }">
-          <t-button theme="primary" variant="text">编辑</t-button>
+          <t-button theme="primary" variant="text" @click="editRow(row)"
+            >编辑</t-button
+          >
           <t-dropdown :options="options" @click="onDropClick($event, row)">
             <t-button shape="square" variant="text">
               <template #icon>
@@ -60,6 +62,7 @@ import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 import Relation from './components/relation.vue'
+import { DevelopStore } from '@/store'
 
 const loading = ref(true)
 const treeId = ref('-1')
@@ -68,6 +71,9 @@ const tree = ref([])
 const relationList = ref([])
 const pagination = ref()
 const relationForm = ref()
+
+const developStore = DevelopStore()
+const { changeState } = developStore
 
 const columns: BaseTableCol[] = [
   {
@@ -181,6 +187,10 @@ const removeRow = (id: number) => {
       }
     })
   )
+}
+const editRow = (relation: any) => {
+  changeState('relation', { ...relation })
+  relationForm.value.showDraw = true
 }
 const openFirstDraw = () => {
   relationForm.value.showDraw = true
