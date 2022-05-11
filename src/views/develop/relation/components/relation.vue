@@ -77,8 +77,8 @@ defineExpose({ showDraw })
 
 const codeValidator = (code: string) =>
   new Promise(resolve => {
-    if (code && code !== relation.value.code) {
-      // 验证code是否有重复
+    if (code && !relation.value.id) {
+      // 新增时，验证code是否有重复
       getRelationInfo({ code }).then((res: any) => {
         resolve(!res)
       })
@@ -120,6 +120,7 @@ const onTextareaBlur = (chinese: string) => {
 
 const onConfirm = () => {
   form.value.validate().then((result: any) => {
+    console.log(result)
     if (result === true) {
       changeRelation(relationForm.value)
     }

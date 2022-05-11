@@ -162,13 +162,17 @@ const onSearch = () => {
   }
 }
 
+const openFirstDraw = () => {
+  relationForm.value.showDraw = true
+}
+
 const onDropClick = (e: DropdownOption, data: any) => {
   switch (e.value) {
     case 'editDetail':
       console.log('editDetail')
       break
     case 'copy':
-      console.log('copy')
+      copyRow(data)
       break
     case 'remove':
       removeRow(data.id)
@@ -192,7 +196,11 @@ const editRow = (relation: any) => {
   changeState('relation', { ...relation })
   relationForm.value.showDraw = true
 }
-const openFirstDraw = () => {
+const copyRow = (relation: any) => {
+  const copyRelation = { ...relation }
+  delete copyRelation.id
+  delete copyRelation.code
+  changeState('relation', copyRelation)
   relationForm.value.showDraw = true
 }
 </script>
