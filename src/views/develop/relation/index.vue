@@ -23,7 +23,7 @@
             <t-icon name="search" class="search-btn" @click="onSearch" />
           </template>
         </t-input>
-        <t-button theme="primary" variant="text" @click="openFirstDraw">
+        <t-button theme="primary" variant="text" @click="openRelationDraw">
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>
@@ -123,6 +123,15 @@ const options: DropdownOption[] = [
   }
 ]
 
+const fetchTree = () => {
+  getTree({ rootName: '所有数据', treeCode: 'ywbfl' }).then((res: any) => {
+    tree.value = res
+    treeId.value = res[0].id
+    fetchList()
+    loading.value = false
+  })
+}
+
 const fetchList = () => {
   getRelationList({
     groupId: treeId.value,
@@ -135,15 +144,6 @@ const fetchList = () => {
   })
 }
 
-const fetchTree = () => {
-  getTree({ rootName: '所有数据', treeCode: 'ywbfl' }).then((res: any) => {
-    tree.value = res
-    treeId.value = res[0].id
-    fetchList()
-    loading.value = false
-  })
-}
-
 const onTreeClick = ({ node }: any) => {
   if (treeId.value !== node.value) {
     treeId.value = node.value
@@ -152,17 +152,17 @@ const onTreeClick = ({ node }: any) => {
   }
 }
 
-onMounted(() => {
-  fetchTree()
-})
-
 const onSearch = () => {
   if (!loading.value) {
     debounce(fetchList)()
   }
 }
 
-const openFirstDraw = () => {
+onMounted(() => {
+  fetchTree()
+})
+
+const openRelationDraw = () => {
   relationForm.value.showDraw = true
 }
 
