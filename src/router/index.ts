@@ -30,7 +30,6 @@ export function addRoutes() {
   if (!hadAdded && token) {
     asyncRoutes.forEach(route => {
       // 通过权限判断添加路由，暂时未用到
-      console.log(route)
       if (route.meta) {
         routes.push(route)
         router.addRoute(route)

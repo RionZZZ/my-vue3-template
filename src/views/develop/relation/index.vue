@@ -23,7 +23,7 @@
             <t-icon name="search" class="search-btn" @click="onSearch" />
           </template>
         </t-input>
-        <t-button theme="primary" variant="text">
+        <t-button theme="primary" variant="text" @click="openFirstDraw">
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>
@@ -50,6 +50,7 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
+  <relation ref="relationForm" />
 </template>
 
 <script lang="ts" setup>
@@ -58,6 +59,7 @@ import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
+import Relation from './components/relation.vue'
 
 const loading = ref(true)
 const treeId = ref('-1')
@@ -65,6 +67,7 @@ const search = ref('')
 const tree = ref([])
 const relationList = ref([])
 const pagination = ref()
+const relationForm = ref()
 
 const columns: BaseTableCol[] = [
   {
@@ -93,6 +96,7 @@ const columns: BaseTableCol[] = [
     title: '创建时间'
   },
   {
+    width: '140',
     colKey: 'handle',
     title: '操作',
     align: 'center'
@@ -161,19 +165,25 @@ const onDropClick = (e: DropdownOption, data: any) => {
       console.log('copy')
       break
     case 'remove':
-      showDialog('删除确认', '你确定删除这行内容吗？', () =>
-        removeRelation({ id: data.id }).then(res => {
-          if (res) {
-            showToast('删除成功!')
-            fetchList()
-          }
-        })
-      )
+      removeRow(data.id)
       break
-
     default:
       break
   }
+}
+
+const removeRow = (id: number) => {
+  showDialog('删除确认', '你确定删除这行内容吗？', () =>
+    removeRelation({ id }).then(res => {
+      if (res) {
+        showToast('删除成功!')
+        fetchList()
+      }
+    })
+  )
+}
+const openFirstDraw = () => {
+  relationForm.value.showDraw = true
 }
 </script>
 

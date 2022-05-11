@@ -41,6 +41,26 @@
   }
 }
 
+// draw
+.t-drawer__footer {
+  & > div {
+    justify-content: flex-end !important;
+  }
+  .t-button {
+    margin-right: 8px;
+    &:first-child {
+      order: 2;
+    }
+  }
+}
+
+// textarea
+.t-textarea {
+  textarea {
+    resize: none;
+  }
+}
+
 // ruiyun
 .ry-content {
   flex: 1;
