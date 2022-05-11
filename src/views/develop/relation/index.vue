@@ -199,7 +199,6 @@ const editRow = (relation: any) => {
 const copyRow = (relation: any) => {
   const copyRelation = { ...relation }
   delete copyRelation.id
-  delete copyRelation.code
   changeState('relation', copyRelation)
   relationForm.value.showDraw = true
 }
