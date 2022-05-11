@@ -9,4 +9,10 @@ export namespace DevelopType {
   export interface RemoveRelationParams {
     id: number
   }
+
+  export interface RelationInfoParams {
+    code?: string
+    id?: number
+    fill?: boolean
+  }
 }

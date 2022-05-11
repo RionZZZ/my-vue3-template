@@ -5,4 +5,11 @@ export namespace CommonType {
     rootName?: string
     treeId?: number
   }
+
+  type TransferType = 0 | 1
+
+  export interface TransferParams {
+    chinese: string
+    type: TransferType
+  }
 }

@@ -33,6 +33,7 @@
           v-model="relationForm.comment"
           placeholder="请输入描述内容"
           :autosize="{ minRows: 3, maxRows: 5 }"
+          @blur="onTextareaBlur"
         />
       </t-form-item>
       <t-form-item label="Code" name="code">
@@ -44,7 +45,8 @@
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref, watch } from 'vue'
-import { getTree } from '@api/common'
+import { getTree, transferPinyin } from '@api/common'
+import { getRelationInfo } from '@api/develop'
 
 const INITIAL_DATA = {
   group: { value: '', label: '' },
@@ -63,10 +65,28 @@ watch(showDraw, val => {
 
 defineExpose({ showDraw })
 
+const codeValidator = (code: string) =>
+  new Promise(resolve => {
+    if (code) {
+      getRelationInfo({ code }).then((res: any) => {
+        resolve(!res)
+      })
+    } else {
+      resolve(false)
+    }
+  })
+
 const rules = {
   group: [{ required: true, type: 'error', trigger: 'blur' }],
   name: [{ required: true, type: 'error', trigger: 'blur' }],
-  code: [{ required: true, type: 'error', trigger: 'blur' }]
+  code: [
+    { required: true, type: 'error', trigger: 'blur' },
+    {
+      validator: codeValidator,
+      message: 'Code已经存在',
+      trigger: 'blur'
+    }
+  ]
 }
 
 const fetchTree = () => {
@@ -79,9 +99,19 @@ onMounted(() => {
   fetchTree()
 })
 
+const onTextareaBlur = (chinese: string) => {
+  if (!relationForm.code) {
+    transferPinyin({ chinese, type: 0 }).then((res: any) => {
+      relationForm.code = res
+    })
+  }
+}
+
 const onConfirm = () => {
-  form.value.validate().then((validateResult: any) => {
-    if (validateResult === true) {
+  form.value.validate().then((result: any) => {
+    console.log(result)
+    if (result === true) {
+      // 验证code是否有重复
       const relationDefault = {
         name: relationForm.name,
         comment: relationForm.comment,
