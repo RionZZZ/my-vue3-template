@@ -37,7 +37,10 @@
         max-height="100%"
       >
         <template #handle="{ row }">
-          <t-button theme="primary" variant="text" @click="editRow(row)"
+          <t-button
+            theme="primary"
+            variant="text"
+            @click="editRow(row, relationForm)"
             >编辑</t-button
           >
           <t-dropdown :options="options" @click="onDropClick($event, row)">
@@ -52,7 +55,8 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <relation ref="relationForm" />
+  <relation ref="relationForm" @next-click="editRow(null, detailForm)" />
+  <relation-detail ref="detailForm" />
 </template>
 
 <script lang="ts" setup>
@@ -62,6 +66,7 @@ import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 import Relation from './components/relation.vue'
+import RelationDetail from './components/detail.vue'
 import { DevelopStore } from '@/store'
 
 const loading = ref(true)
@@ -71,6 +76,7 @@ const tree = ref([])
 const relationList = ref([])
 const pagination = ref()
 const relationForm = ref()
+const detailForm = ref()
 
 const developStore = DevelopStore()
 const { changeState } = developStore
@@ -169,7 +175,7 @@ const openRelationDraw = () => {
 const onDropClick = (e: DropdownOption, data: any) => {
   switch (e.value) {
     case 'editDetail':
-      console.log('editDetail')
+      editRow(data, detailForm.value)
       break
     case 'copy':
       copyRow(data)
@@ -192,12 +198,13 @@ const removeRow = (id: number) => {
     })
   )
 }
-const editRow = (relation: any) => {
-  changeState('relation', { ...relation })
-  relationForm.value.showDraw = true
+const editRow = (relation: any, draw: any) => {
+  relation && changeState('relation', { ...relation })
+  draw.showDraw = true
 }
 const copyRow = (relation: any) => {
   const copyRelation = { ...relation }
+  copyRelation.copyId = copyRelation.id
   delete copyRelation.id
   changeState('relation', copyRelation)
   relationForm.value.showDraw = true

@@ -52,6 +52,7 @@ import { storeToRefs } from 'pinia'
 const developStore = DevelopStore()
 const { changeRelation, changeState } = developStore
 const { relation } = storeToRefs(developStore)
+const emit = defineEmits(['nextClick'])
 
 const INITIAL_DATA = {
   groupId: '',
@@ -120,9 +121,9 @@ const onTextareaBlur = (chinese: string) => {
 
 const onConfirm = () => {
   form.value.validate().then((result: any) => {
-    console.log(result)
     if (result === true) {
       changeRelation(relationForm.value)
+      emit('nextClick')
     }
   })
 }

@@ -1,10 +1,10 @@
 export interface Relation {
-  id?: string
+  id?: number
+  copyId?: number
   groupId: string
   name: string
   comment: string
   code: string
-  columns?: any[]
 }
 
 export interface Develop {
