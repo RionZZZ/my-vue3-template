@@ -23,7 +23,11 @@
             <t-icon name="search" class="search-btn" @click="onSearch" />
           </template>
         </t-input>
-        <t-button theme="primary" variant="text" @click="openRelationDraw">
+        <t-button
+          theme="primary"
+          variant="text"
+          @click="rowDetail(null, detailForm)"
+        >
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>
@@ -40,7 +44,7 @@
           <t-button
             theme="primary"
             variant="text"
-            @click="editRow(row, relationForm)"
+            @click="rowDetail(row, relationForm)"
             >编辑</t-button
           >
           <t-dropdown
@@ -58,7 +62,7 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <relation ref="relationForm" @next-click="editRow(null, detailForm)" />
+  <relation ref="relationForm" @next-click="rowDetail(null, detailForm)" />
   <relation-detail ref="detailForm" />
 </template>
 
@@ -124,14 +128,10 @@ onMounted(() => {
   fetchTree()
 })
 
-const openRelationDraw = () => {
-  relationForm.value.showDraw = true
-}
-
 const onDropClick = (e: DropdownOption, data: any) => {
   switch (e.value) {
     case 'editDetail':
-      editRow(data, detailForm.value)
+      rowDetail(data, detailForm.value)
       break
     case 'copy':
       copyRow(data)
@@ -154,7 +154,7 @@ const removeRow = (id: number) => {
     })
   )
 }
-const editRow = (relation: any, draw: any) => {
+const rowDetail = (relation: any, draw: any) => {
   relation && changeState('relation', { ...relation })
   draw.showDraw = true
 }
@@ -162,7 +162,7 @@ const copyRow = (relation: any) => {
   const copyRelation = { ...relation }
   copyRelation.copyId = copyRelation.id
   delete copyRelation.id
-  editRow(copyRelation, relationForm.value)
+  rowDetail(copyRelation, relationForm.value)
 }
 </script>
 

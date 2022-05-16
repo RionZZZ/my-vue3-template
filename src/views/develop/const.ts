@@ -114,7 +114,7 @@ export const relationDetailColumns: BaseTableCol[] = [
     ellipsis: true
   },
   {
-    width: '120',
+    width: '100',
     colKey: 'type',
     title: '数据类型'
   },
@@ -124,25 +124,27 @@ export const relationDetailColumns: BaseTableCol[] = [
     title: '必填'
   },
   {
-    width: '80',
+    width: '100',
     colKey: 'length',
     title: '长度'
   },
   {
-    width: '120',
-    colKey: 'ctrl.type',
+    width: '100',
+    colKey: 'ctrlType',
     title: '控件类型'
   },
   {
-    width: '60',
+    width: '70',
+    colKey: 'props',
     title: '控件属性'
   },
   {
-    width: '60',
+    width: '70',
+    colKey: 'rules',
     title: '验证规则'
   },
   {
-    width: '60',
+    width: '70',
     colKey: 'handle',
     title: '操作',
     align: 'center'
