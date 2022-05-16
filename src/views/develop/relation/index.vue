@@ -26,7 +26,7 @@
         <t-button
           theme="primary"
           variant="text"
-          @click="rowDetail(null, detailForm)"
+          @click="rowDetail(null, relationForm)"
         >
           <template #icon> <t-icon name="add" /> </template>
           新增

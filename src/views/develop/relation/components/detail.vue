@@ -3,7 +3,7 @@
     v-model:visible="showDraw"
     :close-btn="true"
     confirm-btn="确认"
-    size="80%"
+    size="90%"
     header="编辑字段"
     destroy-on-close
     @confirm="onConfirm"
@@ -70,8 +70,16 @@
           />
         </template>
       </template>
+      <template #defaultValue="{ row }">
+        <t-input v-model="row.defaultValue" placeholder="defaultValue" />
+      </template>
       <template #ctrlType="{ row }">
-        <t-input v-if="!row.primary && row.ctrl" v-model="row.ctrl.type" />
+        <t-select
+          v-if="!row.primary && row.ctrl"
+          v-model="row.ctrl.type"
+          :options="FormItemType[row.type]"
+          placeholder="ctrl.type"
+        ></t-select>
       </template>
       <template #props="{ row }">
         <t-button
@@ -117,7 +125,7 @@ import { Ref, ref, watch } from 'vue'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { getRelationInfo } from '@api/develop'
-import { DataType, relationDetailColumns } from '../../const'
+import { DataType, relationDetailColumns, FormItemType } from '../../const'
 import { RelationDetail } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'

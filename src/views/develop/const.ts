@@ -9,6 +9,33 @@ export const DataType: OptionData[] = [
   { label: '日期型', value: 'date' }
 ]
 
+export interface OptionType {
+  varchar: OptionData[]
+  clob: OptionData[]
+  number: OptionData[]
+  date: OptionData[]
+  [propName: string]: OptionData[]
+}
+
+export const FormItemType: OptionType = {
+  varchar: [
+    { label: 'input', value: 'input' },
+    { label: 'radio', value: 'radio' },
+    { label: 'select', value: 'select' },
+    { label: 'checkbox', value: 'checkbox' },
+    { label: 'upload', value: 'upload' }
+  ],
+  clob: [{ label: 'textarea', value: 'textarea' }],
+  number: [
+    { label: 'number', value: 'number' },
+    { label: 'step', value: 'step' }
+  ],
+  date: [
+    { label: 'timePicker', value: 'timePicker' },
+    { label: 'datePicker', value: 'datePicker' }
+  ]
+}
+
 // const DataProps: DataPropType[] = [
 //   { props: 'placeholder', type: 'text', default: '' },
 //   { props: 'clearable', type: 'boolean', default: true },
@@ -128,6 +155,11 @@ export const relationDetailColumns: BaseTableCol[] = [
     width: '100',
     colKey: 'length',
     title: '长度'
+  },
+  {
+    width: '100',
+    colKey: 'defaultValue',
+    title: '默认值'
   },
   {
     width: '100',
