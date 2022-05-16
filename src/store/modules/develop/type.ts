@@ -5,6 +5,7 @@ export interface Relation {
   name: string
   comment: string
   code: string
+  [propName: string]: any
 }
 
 export interface Develop {

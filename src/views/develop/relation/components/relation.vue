@@ -50,16 +50,10 @@ import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const developStore = DevelopStore()
-const { changeRelation, changeState } = developStore
+const { changeRelation, resetStateRelation } = developStore
 const { relation } = storeToRefs(developStore)
 const emit = defineEmits(['nextClick'])
 
-const INITIAL_DATA = {
-  groupId: '',
-  comment: '',
-  code: '',
-  name: ''
-}
 let relationForm = ref({ ...relation.value })
 const showDraw = ref(false)
 const tree = ref([])
@@ -70,7 +64,7 @@ watch(showDraw, val => {
     relationForm.value = { ...relation.value }
     form.value.reset()
   } else {
-    changeState('relation', INITIAL_DATA)
+    resetStateRelation()
   }
 })
 

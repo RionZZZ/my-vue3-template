@@ -32,7 +32,7 @@
         class="table-content"
         :data="relationList"
         hover
-        :columns="columns"
+        :columns="relationColumns"
         row-key="id"
         max-height="100%"
       >
@@ -43,7 +43,10 @@
             @click="editRow(row, relationForm)"
             >编辑</t-button
           >
-          <t-dropdown :options="options" @click="onDropClick($event, row)">
+          <t-dropdown
+            :options="relationHandleOptions"
+            @click="onDropClick($event, row)"
+          >
             <t-button shape="square" variant="text">
               <template #icon>
                 <t-icon name="ellipsis" style="color: #0052d9" />
@@ -64,10 +67,11 @@ import { onMounted, ref } from 'vue'
 import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
-import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
+import { DropdownOption } from 'tdesign-vue-next'
 import Relation from './components/relation.vue'
 import RelationDetail from './components/detail.vue'
 import { DevelopStore } from '@/store'
+import { relationColumns, relationHandleOptions } from '../const'
 
 const loading = ref(true)
 const treeId = ref('-1')
@@ -80,54 +84,6 @@ const detailForm = ref()
 
 const developStore = DevelopStore()
 const { changeState } = developStore
-
-const columns: BaseTableCol[] = [
-  {
-    width: '200',
-    colKey: 'code',
-    title: 'Code'
-  },
-  {
-    width: '200',
-    colKey: 'name',
-    title: '表名'
-  },
-  {
-    colKey: 'comment',
-    title: '描述',
-    ellipsis: true
-  },
-  {
-    width: '100',
-    colKey: 'groupName',
-    title: '分类'
-  },
-  {
-    width: '140',
-    colKey: 'createTime',
-    title: '创建时间'
-  },
-  {
-    width: '140',
-    colKey: 'handle',
-    title: '操作',
-    align: 'center'
-  }
-]
-const options: DropdownOption[] = [
-  {
-    content: '编辑字段',
-    value: 'editDetail'
-  },
-  {
-    content: '复制',
-    value: 'copy'
-  },
-  {
-    content: '删除',
-    value: 'remove'
-  }
-]
 
 const fetchTree = () => {
   getTree({ rootName: '所有数据', treeCode: 'ywbfl' }).then((res: any) => {
@@ -206,8 +162,7 @@ const copyRow = (relation: any) => {
   const copyRelation = { ...relation }
   copyRelation.copyId = copyRelation.id
   delete copyRelation.id
-  changeState('relation', copyRelation)
-  relationForm.value.showDraw = true
+  editRow(copyRelation, relationForm.value)
 }
 </script>
 

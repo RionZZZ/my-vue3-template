@@ -11,10 +11,19 @@ export default defineStore('develop', {
     }
   }),
   actions: {
-    changeRelation(relation: any) {
+    changeRelation(relation: Relation) {
       for (const key in relation) {
         this.relation[key as keyof Relation] = relation[key]
       }
+    },
+    resetStateRelation() {
+      const INITIAL_DATA = {
+        name: '',
+        code: '',
+        comment: '',
+        groupId: ''
+      }
+      this.changeState('relation', INITIAL_DATA)
     },
     changeState(key: string, value: any) {
       this[key as keyof Develop] = value
