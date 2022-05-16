@@ -99,8 +99,8 @@ export const relationHandleOptions: DropdownOption[] = [
 
 export const relationDetailColumns: BaseTableCol[] = [
   {
-    width: '140',
-    colKey: 'comment',
+    width: '160',
+    colKey: 'drag',
     title: '注释'
   },
   {
@@ -109,6 +109,7 @@ export const relationDetailColumns: BaseTableCol[] = [
     title: 'Code'
   },
   {
+    width: '150',
     colKey: 'name',
     title: '字段名',
     ellipsis: true

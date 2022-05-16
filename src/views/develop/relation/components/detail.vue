@@ -5,19 +5,32 @@
     confirm-btn="确认"
     size="80%"
     header="编辑字段"
+    destroy-on-close
     @confirm="onConfirm"
   >
     <t-table
-      class="table-content"
+      class="ry-table-content"
       :data="detailList"
       hover
       :columns="relationDetailColumns"
       row-key="id"
       max-height="100%"
       :loading="loading"
+      drag-sort="row-handler"
+      :row-class-name="({ row }: any) => row.primary && 'disable-drag'"
+      :drag-sort-options="{
+        preventOnFilter: true,
+        filter: '.disable-drag'
+      }"
+      @drag-sort="onDragSort"
     >
-      <template #comment="{ row }">
-        <t-input v-model="row.comment" placeholder="comment" />
+      <template #drag="{ row }">
+        <t-icon v-if="!row.primary" name="move" />
+        <t-input
+          v-model="row.comment"
+          class="comment-input"
+          placeholder="comment"
+        />
       </template>
       <template #code="{ row }">
         <t-input v-model="row.code" placeholder="code" />
@@ -92,6 +105,10 @@
         </t-button>
       </template>
     </t-table>
+    <t-button theme="primary" variant="text" @click="addRow">
+      <template #icon> <t-icon name="add" /> </template>
+      添加一行
+    </t-button>
   </t-drawer>
 </template>
 
@@ -102,6 +119,8 @@ import { storeToRefs } from 'pinia'
 import { getRelationInfo } from '@api/develop'
 import { DataType, relationDetailColumns } from '../../const'
 import { RelationDetail } from '../../type'
+import { DragSortContext } from 'tdesign-vue-next'
+import { showToast } from '@utils/util'
 
 const developStore = DevelopStore()
 const { resetStateRelation } = developStore
@@ -150,6 +169,27 @@ const dataTypeChange = (e: any, row: RelationDetail) => {
   }
 }
 
+const onDragSort = ({ targetIndex, currentData }: DragSortContext<any>) => {
+  if (targetIndex === 0) {
+    showToast('不可改变主键ID的位置', 'error')
+    return
+  }
+  detailList.value = currentData
+}
+
+const addRow = () => {
+  detailList.value.push({
+    code: '',
+    name: '',
+    type: 'varchar',
+    length: 0,
+    decimal: 0,
+    required: false,
+    primary: false,
+    comment: ''
+  })
+}
+
 const onRemoveClick = (index: any, row: RelationDetail) => {
   console.log(index)
   console.log(row)
@@ -166,7 +206,7 @@ const onRulesClick = (row: RelationDetail) => {
 const onConfirm = () => {}
 </script>
 <style lang="scss" scoped>
-.table-content {
+.ry-table-content {
   ::v-deep(td) {
     .t-input__wrap,
     .t-select__wrap {
@@ -178,6 +218,10 @@ const onConfirm = () => {}
   }
   .primary {
     color: var(--td-error-color);
+  }
+  .comment-input {
+    display: inline-block;
+    margin-left: 10px;
   }
 }
 </style>

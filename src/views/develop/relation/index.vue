@@ -33,7 +33,7 @@
         </t-button>
       </div>
       <t-table
-        class="table-content"
+        class="ry-table-content"
         :data="relationList"
         hover
         :columns="relationColumns"

@@ -14,7 +14,7 @@ export interface RelationDetail {
   length: number
   decimal: number
   required: boolean
-  primary: boolean
+  primary?: boolean
   comment: string
   default?: string
   ctrl?: any
