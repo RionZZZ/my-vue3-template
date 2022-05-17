@@ -1,7 +1,6 @@
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 import { OptionData } from 'tdesign-vue-next/es/common'
-import { OptionType } from './type'
-// import { DataPropType } from './type'
+import { DataPropType, OptionType, PropsType } from './type'
 
 export const DataType: OptionData[] = [
   { label: '字符串', value: 'varchar' },
@@ -32,44 +31,61 @@ export const FormItemType: OptionType = {
   ]
 }
 
-// const DataProps: DataPropType[] = [
-//   { props: 'placeholder', type: 'text', default: '' },
-//   { props: 'clearable', type: 'boolean', default: true },
-//   { props: 'readonly', type: 'boolean', default: false },
-//   { props: 'disabled', type: 'boolean', default: false }
-// ]
+const disableProps: DataPropType[] = [
+  { props: 'disabled', type: 'boolean', default: false }
+]
 
-// const InputProps: DataPropType[] = [
-//   ...DataProps,
-//   { props: 'prefix-icon', type: 'text', default: '' },
-//   { props: 'suffix-icon', type: 'text', default: '' },
-//   { props: 'append', type: 'text', default: '' }
-// ]
+const dataProps: DataPropType[] = [
+  ...disableProps,
+  { props: 'placeholder', type: 'text', default: '' },
+  { props: 'clearable', type: 'boolean', default: true },
+  { props: 'readonly', type: 'boolean', default: false }
+]
 
-// const textAreaProps: DataPropType[] = [
-//   ...DataProps,
-//   { props: 'show-word-limit', type: 'boolean', default: true },
-//   { props: 'autosize', type: 'text', default: '' }
-// ]
+const inputProps: DataPropType[] = [
+  ...dataProps,
+  { props: 'prefix-icon', type: 'text', default: '' },
+  { props: 'suffix-icon', type: 'text', default: '' },
+  { props: 'append', type: 'text', default: '' }
+]
 
-// const numberProps: DataPropType[] = [
-//   ...DataProps,
-//   { props: 'max', type: 'number', default: '' },
-//   { props: 'min', type: 'number', default: '' },
-//   { props: 'integer', type: 'number', default: '' },
-//   { props: 'decimal', type: 'number', default: '' }
-// ]
+const textAreaProps: DataPropType[] = [
+  ...dataProps,
+  { props: 'show-word-limit', type: 'boolean', default: true },
+  { props: 'autosize', type: 'text', default: '' }
+]
 
-// const selectProps: DataPropType[] = [
-//   ...DataProps,
-//   { props: 'multiple', type: 'boolean', default: false }
-// ]
+const numberProps: DataPropType[] = [
+  ...dataProps,
+  { props: 'max', type: 'number', default: '' },
+  { props: 'min', type: 'number', default: '' },
+  { props: 'integer', type: 'number', default: '' },
+  { props: 'decimal', type: 'number', default: '' }
+]
 
-// const datePickerProps: DataPropType[] = [
-//   ...DataProps,
-//   { props: 'type', type: 'text', default: '' },
-//   { props: 'value-format', type: 'text', default: '' }
-// ]
+const selectProps: DataPropType[] = [
+  ...dataProps,
+  { props: 'multiple', type: 'boolean', default: false }
+]
+
+const datePickerProps: DataPropType[] = [
+  ...dataProps,
+  { props: 'type', type: 'text', default: '' },
+  { props: 'value-format', type: 'text', default: '' }
+]
+
+export const propsItems: PropsType<DataPropType> = {
+  input: inputProps,
+  textarea: textAreaProps,
+  radio: disableProps,
+  select: selectProps,
+  checkbox: disableProps,
+  number: numberProps,
+  step: numberProps,
+  timePicker: datePickerProps,
+  datePicker: datePickerProps,
+  upload: disableProps
+}
 
 export const relationColumns: BaseTableCol[] = [
   {

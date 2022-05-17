@@ -8,33 +8,41 @@
     destroy-on-close
     @confirm="onConfirm"
   >
-    <t-table
-      class="ry-table-content"
-      :data="ruleList"
-      hover
-      row-key="id"
-      max-height="100%"
-    >
-    </t-table>
-    <t-button theme="primary" variant="text" @click="addRow">
-      <template #icon> <t-icon name="add" /> </template>
-      添加一行
-    </t-button>
+    <t-form>
+      <t-form-item
+        v-for="item in propsItems"
+        :key="item.props"
+        :label="item.props"
+      >
+        <input
+          v-if="item.type === 'text'"
+          v-model="config[item.props]"
+          :placeholder="item.props"
+        />
+        <t-switch v-if="item.type === 'boolean'" v-model="config[item.props]" />
+        <t-input
+          v-if="item.type === 'number'"
+          v-model.number="config[item.props]"
+          :placeholder="item.props"
+        />
+      </t-form-item>
+    </t-form>
   </t-drawer>
 </template>
 
 <script lang="ts" setup>
 import { Ref, ref } from 'vue'
+import { DataPropType } from '../../type'
 
 const showDraw = ref(false)
-const ruleList: Ref<any[]> = ref([])
+const propsItems: Ref<DataPropType[]> = ref([])
+const config: Ref<{ [key: string]: any }> = ref({})
 
-defineExpose({ showDraw, ruleList })
+const emit = defineEmits(['onConfirm'])
+defineExpose({ showDraw, propsItems, config })
 
-const addRow = () => {
-  ruleList.value.push({})
+const onConfirm = () => {
+  emit('onConfirm', config.value)
+  showDraw.value = false
 }
-
-const onConfirm = () => {}
 </script>
-<style lang="scss" scoped></style>

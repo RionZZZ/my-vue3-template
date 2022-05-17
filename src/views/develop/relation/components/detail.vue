@@ -81,12 +81,12 @@
           placeholder="ctrl.type"
         ></t-select>
       </template>
-      <template #props="{ row }">
+      <template #props="{ row, rowIndex }">
         <t-button
           theme="primary"
           variant="text"
           :disabled="row.primary"
-          @click="onPropsClick(row)"
+          @click="onPropsClick(row, rowIndex)"
         >
           设置
         </t-button>
@@ -119,6 +119,7 @@
     </t-button>
   </t-drawer>
   <rules ref="rulesTable" @on-confirm="rulesConfirm" />
+  <props ref="propsForm" @on-confirm="propsConfirm" />
 </template>
 
 <script lang="ts" setup>
@@ -126,11 +127,17 @@ import { Ref, ref, watch } from 'vue'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { getRelationInfo } from '@api/develop'
-import { DataType, relationDetailColumns, FormItemType } from '../../const'
+import {
+  DataType,
+  relationDetailColumns,
+  FormItemType,
+  propsItems
+} from '../../const'
 import { RelationDetail, RelationRule } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'
 import Rules from './rules.vue'
+import Props from './props.vue'
 
 const developStore = DevelopStore()
 const { resetStateRelation } = developStore
@@ -140,6 +147,7 @@ const showDraw = ref(false)
 const loading = ref(false)
 const detailList: Ref<RelationDetail[]> = ref([])
 const rulesTable = ref()
+const propsForm = ref()
 const currentRowIndex = ref(-1)
 
 watch(showDraw, val => {
@@ -179,6 +187,7 @@ const dataTypeChange = (e: any, row: RelationDetail) => {
   if (e === 'date') {
     row.length = 0
   }
+  row.ctrl!.type = ''
 }
 
 const onDragSort = ({ targetIndex, currentData }: DragSortContext<any>) => {
@@ -210,8 +219,16 @@ const onRemoveClick = (index: number) => {
   detailList.value.splice(index, 1)
 }
 
-const onPropsClick = (row: RelationDetail) => {
+const onPropsClick = (row: RelationDetail, index: number) => {
   console.log(row)
+  currentRowIndex.value = index
+  propsForm.value.showDraw = true
+  propsForm.value.propsItems = propsItems[row.ctrl?.type || 'input']
+  propsForm.value.config = row.ctrl?.config || {}
+}
+
+const propsConfirm = (config: object) => {
+  detailList.value[currentRowIndex.value].ctrl!.config = config
 }
 
 const onRulesClick = (row: RelationDetail, index: number) => {

@@ -2,6 +2,18 @@ import { OptionData } from 'tdesign-vue-next/es/common'
 
 type PropType = 'boolean' | 'text' | 'number'
 type DataType = 'varchar' | 'clob' | 'number' | 'date'
+type PropsKey =
+  | 'input'
+  | 'textarea'
+  | 'radio'
+  | 'select'
+  | 'checkbox'
+  | 'number'
+  | 'step'
+  | 'timePicker'
+  | 'datePicker'
+  | 'upload'
+  | ''
 
 export interface DataPropType {
   props: string
@@ -27,11 +39,23 @@ export interface OptionType {
   [propName: string]: OptionData[]
 }
 
+export interface PropsType<T> {
+  input: T[]
+  textarea: T[]
+  radio: T[]
+  select: T[]
+  checkbox: T[]
+  number: T[]
+  step: T[]
+  timePicker: T[]
+  datePicker: T[]
+  upload: T[]
+}
+
 interface DetailCtrl {
   config?: object
-  type: string
+  type: PropsKey
   validRule?: RelationRule[]
-  [propName: string]: any
 }
 
 export interface RelationDetail {
