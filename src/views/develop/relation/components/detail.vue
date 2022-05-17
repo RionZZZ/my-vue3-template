@@ -118,6 +118,7 @@
       添加一行
     </t-button>
   </t-drawer>
+  <rules ref="rulesTable" />
 </template>
 
 <script lang="ts" setup>
@@ -129,6 +130,7 @@ import { DataType, relationDetailColumns, FormItemType } from '../../const'
 import { RelationDetail } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'
+import Rules from './rules.vue'
 
 const developStore = DevelopStore()
 const { resetStateRelation } = developStore
@@ -137,6 +139,7 @@ const { relation } = storeToRefs(developStore)
 const showDraw = ref(false)
 const loading = ref(false)
 const detailList: Ref<RelationDetail[]> = ref([])
+const rulesTable = ref()
 
 watch(showDraw, val => {
   if (val) {
@@ -209,6 +212,8 @@ const onPropsClick = (row: RelationDetail) => {
 
 const onRulesClick = (row: RelationDetail) => {
   console.log(row)
+  rulesTable.value.showDraw = true
+  rulesTable.value.ruleList = row.ctrl?.validRule || []
 }
 
 const onConfirm = () => {}

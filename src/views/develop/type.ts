@@ -1,3 +1,5 @@
+import { OptionData } from 'tdesign-vue-next/es/common'
+
 type PropType = 'boolean' | 'text' | 'number'
 type DataType = 'varchar' | 'clob' | 'number' | 'date'
 
@@ -5,6 +7,31 @@ export interface DataPropType {
   props: string
   type: PropType
   default?: any
+}
+
+export interface RelationRule {
+  required?: boolean
+  message?: string
+  trigger?: 'blur' | 'change'
+  pattern?: string
+  len?: number
+  min?: number
+  max?: number
+}
+
+export interface OptionType {
+  varchar: OptionData[]
+  clob: OptionData[]
+  number: OptionData[]
+  date: OptionData[]
+  [propName: string]: OptionData[]
+}
+
+interface DetailCtrl {
+  config?: object
+  type: string
+  validRule?: RelationRule[]
+  [propName: string]: any
 }
 
 export interface RelationDetail {
@@ -17,5 +44,5 @@ export interface RelationDetail {
   primary?: boolean
   comment: string
   default?: string
-  ctrl?: any
+  ctrl?: DetailCtrl
 }

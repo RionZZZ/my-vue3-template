@@ -1,5 +1,6 @@
 import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
 import { OptionData } from 'tdesign-vue-next/es/common'
+import { OptionType } from './type'
 // import { DataPropType } from './type'
 
 export const DataType: OptionData[] = [
@@ -9,30 +10,25 @@ export const DataType: OptionData[] = [
   { label: '日期型', value: 'date' }
 ]
 
-export interface OptionType {
-  varchar: OptionData[]
-  clob: OptionData[]
-  number: OptionData[]
-  date: OptionData[]
-  [propName: string]: OptionData[]
-}
-
 export const FormItemType: OptionType = {
   varchar: [
-    { label: 'input', value: 'input' },
-    { label: 'radio', value: 'radio' },
-    { label: 'select', value: 'select' },
-    { label: 'checkbox', value: 'checkbox' },
-    { label: 'upload', value: 'upload' }
+    { label: '文本', value: 'input' },
+    { label: '多行文本', value: 'textarea' },
+    { label: '单选框', value: 'radio' },
+    { label: '下拉框', value: 'select' },
+    { label: '多选框', value: 'checkbox' }
   ],
-  clob: [{ label: 'textarea', value: 'textarea' }],
+  clob: [
+    { label: '多行文本', value: 'textarea' },
+    { label: '上传', value: 'upload' }
+  ],
   number: [
-    { label: 'number', value: 'number' },
-    { label: 'step', value: 'step' }
+    { label: '数字文本', value: 'number' },
+    { label: '计数器', value: 'step' }
   ],
   date: [
-    { label: 'timePicker', value: 'timePicker' },
-    { label: 'datePicker', value: 'datePicker' }
+    { label: '日期选择框', value: 'timePicker' },
+    { label: '时间选择框', value: 'datePicker' }
   ]
 }
 
@@ -181,5 +177,54 @@ export const relationDetailColumns: BaseTableCol[] = [
     colKey: 'handle',
     title: '操作',
     align: 'center'
+  }
+]
+
+export const triggerRules: DropdownOption[] = [
+  {
+    content: 'change',
+    value: 'change'
+  },
+  {
+    content: 'blur',
+    value: 'blur'
+  }
+]
+
+export const ruleColumns: BaseTableCol[] = [
+  {
+    width: '70',
+    colKey: 'required',
+    title: '必填'
+  },
+  {
+    width: '140',
+    colKey: 'message',
+    title: '提示'
+  },
+  {
+    width: '100',
+    colKey: 'trigger',
+    title: '状态'
+  },
+  {
+    width: '100',
+    colKey: 'pattern',
+    title: '正则'
+  },
+  {
+    width: '100',
+    colKey: 'len',
+    title: '长度'
+  },
+  {
+    width: '100',
+    colKey: 'min',
+    title: '最小长度'
+  },
+  {
+    width: '100',
+    colKey: 'max',
+    title: '最大长度'
   }
 ]
