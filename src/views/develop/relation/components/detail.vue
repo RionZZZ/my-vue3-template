@@ -91,12 +91,12 @@
           设置
         </t-button>
       </template>
-      <template #rules="{ row }">
+      <template #rules="{ row, rowIndex }">
         <t-button
           theme="primary"
           variant="text"
           :disabled="row.primary"
-          @click="onRulesClick(row)"
+          @click="onRulesClick(row, rowIndex)"
         >
           设置
         </t-button>
@@ -107,7 +107,7 @@
           v-else
           theme="primary"
           variant="text"
-          @click="onRemoveClick(rowIndex, row)"
+          @click="onRemoveClick(rowIndex)"
         >
           删除
         </t-button>
@@ -118,7 +118,7 @@
       添加一行
     </t-button>
   </t-drawer>
-  <rules ref="rulesTable" />
+  <rules ref="rulesTable" @on-confirm="rulesConfirm" />
 </template>
 
 <script lang="ts" setup>
@@ -127,7 +127,7 @@ import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { getRelationInfo } from '@api/develop'
 import { DataType, relationDetailColumns, FormItemType } from '../../const'
-import { RelationDetail } from '../../type'
+import { RelationDetail, RelationRule } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'
 import Rules from './rules.vue'
@@ -140,6 +140,7 @@ const showDraw = ref(false)
 const loading = ref(false)
 const detailList: Ref<RelationDetail[]> = ref([])
 const rulesTable = ref()
+const currentRowIndex = ref(-1)
 
 watch(showDraw, val => {
   if (val) {
@@ -181,6 +182,7 @@ const dataTypeChange = (e: any, row: RelationDetail) => {
 }
 
 const onDragSort = ({ targetIndex, currentData }: DragSortContext<any>) => {
+  // 更新TD后，直接获取DragSortContext.target的primary判断
   if (targetIndex === 0) {
     showToast('不可改变主键ID的位置', 'error')
     return
@@ -197,23 +199,29 @@ const addRow = () => {
     decimal: 0,
     required: false,
     primary: false,
-    comment: ''
+    comment: '',
+    ctrl: {
+      type: ''
+    }
   })
 }
 
-const onRemoveClick = (index: any, row: RelationDetail) => {
-  console.log(index)
-  console.log(row)
+const onRemoveClick = (index: number) => {
+  detailList.value.splice(index, 1)
 }
 
 const onPropsClick = (row: RelationDetail) => {
   console.log(row)
 }
 
-const onRulesClick = (row: RelationDetail) => {
-  console.log(row)
+const onRulesClick = (row: RelationDetail, index: number) => {
+  currentRowIndex.value = index
   rulesTable.value.showDraw = true
   rulesTable.value.ruleList = row.ctrl?.validRule || []
+}
+
+const rulesConfirm = (rules: RelationRule[]) => {
+  detailList.value[currentRowIndex.value].ctrl!.validRule = rules
 }
 
 const onConfirm = () => {}

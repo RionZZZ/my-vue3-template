@@ -182,11 +182,11 @@ export const relationDetailColumns: BaseTableCol[] = [
 
 export const triggerRules: DropdownOption[] = [
   {
-    content: 'change',
+    label: 'change事件',
     value: 'change'
   },
   {
-    content: 'blur',
+    label: 'blur事件',
     value: 'blur'
   }
 ]
@@ -226,5 +226,11 @@ export const ruleColumns: BaseTableCol[] = [
     width: '100',
     colKey: 'max',
     title: '最大长度'
+  },
+  {
+    width: '140',
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
   }
 ]

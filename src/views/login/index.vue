@@ -67,7 +67,7 @@ onBeforeMount(() => {
 
 const INITIAL_DATA = {
   account: 'jiangbo06',
-  password: '11111111'
+  password: 'jiangbo000111'
 }
 
 const rules = {

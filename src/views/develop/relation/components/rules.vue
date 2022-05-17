@@ -33,28 +33,22 @@
         <t-input v-model="row.pattern" placeholder="pattern" />
       </template>
       <template #len="{ row }">
-        <t-input-number
-          v-model="row.len"
-          placeholder="len"
-          theme="normal"
-          :decimal-places="0"
-        />
+        <t-input v-model.number="row.len" placeholder="len" />
       </template>
       <template #max="{ row }">
-        <t-input-number
-          v-model="row.max"
-          placeholder="max"
-          theme="normal"
-          :decimal-places="0"
-        />
+        <t-input v-model.number="row.max" placeholder="max" />
       </template>
       <template #min="{ row }">
-        <t-input-number
-          v-model="row.min"
-          placeholder="min"
-          theme="normal"
-          :decimal-places="0"
-        />
+        <t-input v-model.number="row.min" placeholder="min" />
+      </template>
+      <template #handle="{ rowIndex }">
+        <t-button
+          theme="primary"
+          variant="text"
+          @click="onRemoveClick(rowIndex)"
+        >
+          删除
+        </t-button>
       </template>
     </t-table>
     <t-button theme="primary" variant="text" @click="addRow">
@@ -73,17 +67,28 @@ const showDraw = ref(false)
 const ruleList: Ref<RelationRule[]> = ref([])
 
 defineExpose({ showDraw, ruleList })
+const emit = defineEmits(['onConfirm'])
 
 const addRow = () => {
   ruleList.value.push({
     required: false,
     trigger: 'change',
     message: '',
-    pattern: ''
+    pattern: '',
+    len: '',
+    max: '',
+    min: ''
   })
 }
 
-const onConfirm = () => {}
+const onRemoveClick = (index: number) => {
+  ruleList.value.splice(index, 1)
+}
+
+const onConfirm = () => {
+  emit('onConfirm', ruleList.value)
+  showDraw.value = false
+}
 </script>
 <style lang="scss" scoped>
 .ry-table-content {

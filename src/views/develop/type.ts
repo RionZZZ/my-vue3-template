@@ -14,9 +14,9 @@ export interface RelationRule {
   message?: string
   trigger?: 'blur' | 'change'
   pattern?: string
-  len?: number
-  min?: number
-  max?: number
+  len?: number | string
+  min?: number | string
+  max?: number | string
 }
 
 export interface OptionType {
