@@ -8,13 +8,13 @@
     destroy-on-close
     @confirm="onConfirm"
   >
-    <t-form>
+    <t-form label-width="160px">
       <t-form-item
         v-for="item in propsItems"
         :key="item.props"
         :label="item.props"
       >
-        <input
+        <t-input
           v-if="item.type === 'text'"
           v-model="config[item.props]"
           :placeholder="item.props"
@@ -33,6 +33,8 @@
 <script lang="ts" setup>
 import { Ref, ref } from 'vue'
 import { DataPropType } from '../../type'
+
+// TD有bug，等更新。 未定义字段的对象无法绑定modalValue。
 
 const showDraw = ref(false)
 const propsItems: Ref<DataPropType[]> = ref([])

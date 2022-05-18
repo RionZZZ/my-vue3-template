@@ -1,3 +1,5 @@
+import { Relation } from '@/views/develop/type'
+
 export namespace DevelopType {
   export interface RelationListParams {
     groupId?: string
@@ -15,4 +17,6 @@ export namespace DevelopType {
     id?: number
     fill?: boolean
   }
+
+  export interface RelationSaveParams extends Relation {}
 }

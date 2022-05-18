@@ -53,12 +53,16 @@ export interface PropsType<T> {
 }
 
 interface DetailCtrl {
-  config?: object
+  id?: number
+  columnId?: number
+  config?: any
   type: PropsKey
-  validRule?: RelationRule[]
+  validRule?: RelationRule[] | any
 }
 
 export interface RelationDetail {
+  id?: number
+  tableId?: number
   code: string
   name: string
   type: DataType
@@ -69,4 +73,15 @@ export interface RelationDetail {
   comment: string
   default?: string
   ctrl?: DetailCtrl
+}
+
+export interface Relation {
+  id?: number
+  copyId?: number
+  code: string
+  name: string
+  comment: string
+  groupId?: string
+  groupName?: string
+  columns?: RelationDetail[]
 }

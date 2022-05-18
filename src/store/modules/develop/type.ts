@@ -1,12 +1,4 @@
-export interface Relation {
-  id?: number
-  copyId?: number
-  groupId: string
-  name: string
-  comment: string
-  code: string
-  [propName: string]: any
-}
+import { Relation } from '@/views/develop/type'
 
 export interface Develop {
   relation: Relation

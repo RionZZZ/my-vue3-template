@@ -126,14 +126,14 @@
 import { Ref, ref, watch } from 'vue'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
-import { getRelationInfo } from '@api/develop'
+import { getRelationInfo, saveRelation } from '@api/develop'
 import {
   DataType,
   relationDetailColumns,
   FormItemType,
   propsItems
 } from '../../const'
-import { RelationDetail, RelationRule } from '../../type'
+import { Relation, RelationDetail, RelationRule } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'
 import Rules from './rules.vue'
@@ -149,6 +149,7 @@ const detailList: Ref<RelationDetail[]> = ref([])
 const rulesTable = ref()
 const propsForm = ref()
 const currentRowIndex = ref(-1)
+const emit = defineEmits(['successSave'])
 
 watch(showDraw, val => {
   if (val) {
@@ -178,7 +179,16 @@ defineExpose({ showDraw })
 const fetchDetail = (id: number) => {
   loading.value = true
   getRelationInfo({ id, fill: true }).then((res: any) => {
-    detailList.value = res.columns
+    const list = res.columns
+    detailList.value = list.map((item: RelationDetail) => {
+      if (!relation.value.id) {
+        delete item.id
+        delete item.tableId
+      }
+      delete item.ctrl?.id
+      delete item.ctrl?.columnId
+      return item
+    })
     loading.value = false
   })
 }
@@ -220,28 +230,37 @@ const onRemoveClick = (index: number) => {
 }
 
 const onPropsClick = (row: RelationDetail, index: number) => {
-  console.log(row)
   currentRowIndex.value = index
   propsForm.value.showDraw = true
   propsForm.value.propsItems = propsItems[row.ctrl?.type || 'input']
-  propsForm.value.config = row.ctrl?.config || {}
+  propsForm.value.config = JSON.parse(row.ctrl?.config || '{}')
 }
 
 const propsConfirm = (config: object) => {
-  detailList.value[currentRowIndex.value].ctrl!.config = config
+  detailList.value[currentRowIndex.value].ctrl!.config = JSON.stringify(config)
 }
 
 const onRulesClick = (row: RelationDetail, index: number) => {
   currentRowIndex.value = index
   rulesTable.value.showDraw = true
-  rulesTable.value.ruleList = row.ctrl?.validRule || []
+  rulesTable.value.ruleList = JSON.parse(row.ctrl?.validRule || '[]')
 }
 
 const rulesConfirm = (rules: RelationRule[]) => {
-  detailList.value[currentRowIndex.value].ctrl!.validRule = rules
+  detailList.value[currentRowIndex.value].ctrl!.validRule =
+    JSON.stringify(rules)
 }
 
-const onConfirm = () => {}
+const onConfirm = () => {
+  const obj: Relation = Object.assign(relation.value, {
+    columns: detailList.value
+  })
+  console.log(obj)
+  saveRelation(obj).then((res: any) => {
+    console.log(res)
+    emit('successSave')
+  })
+}
 </script>
 <style lang="scss" scoped>
 .ry-table-content {

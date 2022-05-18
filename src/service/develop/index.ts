@@ -15,3 +15,8 @@ export const getRelationInfo = (params: DevelopType.RelationInfoParams) => {
   const url = '/admin/bus/businessTable/getObject'
   return request('get', url, params)
 }
+
+export const saveRelation = (params: DevelopType.RelationSaveParams) => {
+  const url = '/admin/bus/businessTable/save'
+  return request('post', url, params)
+}

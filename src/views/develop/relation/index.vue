@@ -63,11 +63,11 @@
     </div>
   </div>
   <relation ref="relationForm" @next-click="rowDetail(null, detailForm)" />
-  <relation-detail ref="detailForm" />
+  <relation-detail ref="detailForm" @success-save="successSave" />
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
@@ -76,12 +76,13 @@ import Relation from './components/relation.vue'
 import RelationDetail from './components/detail.vue'
 import { DevelopStore } from '@/store'
 import { relationColumns, relationHandleOptions } from '../const'
+import { Relation as RelationType } from '../type'
 
 const loading = ref(true)
 const treeId = ref('-1')
 const search = ref('')
 const tree = ref([])
-const relationList = ref([])
+const relationList: Ref<RelationType[]> = ref([])
 const pagination = ref()
 const relationForm = ref()
 const detailForm = ref()
@@ -128,7 +129,12 @@ onMounted(() => {
   fetchTree()
 })
 
-const onDropClick = (e: DropdownOption, data: any) => {
+const successSave = () => {
+  relationForm.value.showDraw = true
+  detailForm.value.showDraw = true
+}
+
+const onDropClick = (e: DropdownOption, data: RelationType) => {
   switch (e.value) {
     case 'editDetail':
       rowDetail(data, detailForm.value)
@@ -137,7 +143,7 @@ const onDropClick = (e: DropdownOption, data: any) => {
       copyRow(data)
       break
     case 'remove':
-      removeRow(data.id)
+      removeRow(data.id!)
       break
     default:
       break
@@ -154,16 +160,17 @@ const removeRow = (id: number) => {
     })
   )
 }
-const rowDetail = (relation: any, draw: any) => {
+const rowDetail = (relation: RelationType | null, draw: any) => {
   relation && changeState('relation', { ...relation })
   draw.showDraw = true
 }
-const copyRow = (relation: any) => {
+const copyRow = (relation: RelationType) => {
   const copyRelation = { ...relation }
   copyRelation.copyId = copyRelation.id
   delete copyRelation.id
   rowDetail(copyRelation, relationForm.value)
 }
+
 </script>
 
 <style lang="scss" scoped>
