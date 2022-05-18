@@ -184,9 +184,9 @@ const fetchDetail = (id: number) => {
       if (!relation.value.id) {
         delete item.id
         delete item.tableId
+        delete item.ctrl?.id
+        delete item.ctrl?.columnId
       }
-      delete item.ctrl?.id
-      delete item.ctrl?.columnId
       return item
     })
     loading.value = false
