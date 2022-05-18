@@ -12,7 +12,7 @@ export namespace DevelopType {
     id: number
   }
 
-  export interface RelationInfoParams {
+  export interface InfoParams {
     code?: string
     id?: number
     fill?: boolean

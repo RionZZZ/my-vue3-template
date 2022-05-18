@@ -11,7 +11,7 @@ export const removeRelation = (params: DevelopType.RemoveParams) => {
   return request('delete', url)
 }
 
-export const getRelationInfo = (params: DevelopType.RelationInfoParams) => {
+export const getRelationInfo = (params: DevelopType.InfoParams) => {
   const url = '/admin/bus/businessTable/getObject'
   return request('get', url, params)
 }
@@ -34,4 +34,9 @@ export const getDataJSON = (params: DevelopType.dataJSONParams) => {
 export const removeData = (params: DevelopType.RemoveParams) => {
   const url = `/admin/bus/businessObject/${params.id}`
   return request('delete', url)
+}
+
+export const getDataInfo = (params: DevelopType.InfoParams) => {
+  const url = '/admin/bus/businessObject/getObject'
+  return request('get', url, params)
 }

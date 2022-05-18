@@ -118,8 +118,8 @@
       添加一行
     </t-button>
   </t-drawer>
-  <rules ref="rulesTable" @on-confirm="rulesConfirm" />
-  <props ref="propsForm" @on-confirm="propsConfirm" />
+  <Rules ref="rulesTable" @on-confirm="rulesConfirm" />
+  <Props ref="propsForm" @on-confirm="propsConfirm" />
 </template>
 
 <script lang="ts" setup>

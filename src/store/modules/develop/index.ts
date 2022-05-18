@@ -1,15 +1,23 @@
 import { defineStore } from 'pinia'
 import { Develop } from './type'
-import { Relation } from '@/views/develop/type'
+import { Relation, Data } from '@/views/develop/type'
+
+const INITIAL_RELATION = {
+  name: '',
+  code: '',
+  comment: '',
+  groupId: ''
+}
+const INITIAL_DATA = {
+  name: '',
+  code: '',
+  remarks: ''
+}
 
 export default defineStore('develop', {
   state: (): Develop => ({
-    relation: {
-      name: '',
-      code: '',
-      comment: '',
-      groupId: ''
-    }
+    relation: { ...INITIAL_RELATION },
+    data: { ...INITIAL_DATA }
   }),
   actions: {
     changeRelation(relation: Relation) {
@@ -18,20 +26,20 @@ export default defineStore('develop', {
           key as keyof Relation
         ] as never
       }
-      console.log(this.relation)
     },
     resetStateRelation() {
-      const INITIAL_DATA = {
-        name: '',
-        code: '',
-        comment: '',
-        groupId: ''
+      this.changeState('relation', INITIAL_RELATION)
+    },
+    changeData(data: Data) {
+      for (const key in data) {
+        this.data[key as keyof Data] = data[key as keyof Data] as never
       }
-      this.changeState('relation', INITIAL_DATA)
+    },
+    resetStateData() {
+      this.changeState('data', INITIAL_DATA)
     },
     changeState(key: string, value: any) {
       this[key as keyof Develop] = value
-      console.log(this.relation)
     }
   }
 })

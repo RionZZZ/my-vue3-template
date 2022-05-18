@@ -55,7 +55,8 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <json ref="jsonDraw" />
+  <JsonDraw ref="jsonDraw" />
+  <DataForm ref="dataForm" />
 </template>
 
 <script lang="ts" setup>
@@ -66,14 +67,15 @@ import { showToast, showDialog, debounce } from '@utils/util'
 import { DropdownOption } from 'tdesign-vue-next'
 import { DevelopStore } from '@/store'
 import { dataColumns, dataHandleOptions } from '../const'
-import { Data } from '../type'
-import Json from './components/json.vue'
+import { Data as DataType } from '../type'
+import JsonDraw from './components/json.vue'
+import DataForm from './components/data.vue'
 
 const loading = ref(true)
 const treeId = ref('-1')
 const search = ref('')
 const tree = ref([])
-const dataList: Ref<Data[]> = ref([])
+const dataList: Ref<DataType[]> = ref([])
 const pagination = ref()
 const jsonDraw = ref()
 const dataForm = ref()
@@ -120,7 +122,7 @@ onMounted(() => {
   fetchTree()
 })
 
-const onDropClick = (e: DropdownOption, data: Data) => {
+const onDropClick = (e: DropdownOption, data: DataType) => {
   switch (e.value) {
     case 'json':
       jsonDetail(data.code)
@@ -143,7 +145,7 @@ const removeRow = (id: number) => {
     })
   )
 }
-const rowDetail = (data: Data | null) => {
+const rowDetail = (data: DataType | null) => {
   data && changeState('data', { ...data })
   dataForm.value.showDraw = true
 }

@@ -62,8 +62,8 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <relation ref="relationForm" @next-click="rowDetail(null, detailForm)" />
-  <relation-detail ref="detailForm" @success-save="successSave" />
+  <Relation ref="relationForm" @next-click="rowDetail(null, detailForm)" />
+  <RelationDetail ref="detailForm" @success-save="successSave" />
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,6 @@
-import { Relation } from '@/views/develop/type'
+import { Relation, Data } from '@/views/develop/type'
 
 export interface Develop {
   relation: Relation
+  data: Data
 }
