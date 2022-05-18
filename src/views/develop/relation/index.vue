@@ -130,8 +130,8 @@ onMounted(() => {
 })
 
 const successSave = () => {
-  relationForm.value.showDraw = true
-  detailForm.value.showDraw = true
+  relationForm.value.showDraw = false
+  detailForm.value.showDraw = false
 }
 
 const onDropClick = (e: DropdownOption, data: RelationType) => {
