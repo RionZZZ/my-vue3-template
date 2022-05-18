@@ -37,6 +37,9 @@
         />
       </t-form-item>
     </t-form>
+    <t-button theme="primary" variant="text" class="choose-button">
+      <span class="tip">*</span>选择主实体表
+    </t-button>
   </t-drawer>
 </template>
 
@@ -125,5 +128,12 @@ const onConfirm = () => {
 <style lang="scss" scoped>
 .data-form {
   margin-top: 200px;
+}
+.choose-button {
+  float: right;
+  .tip {
+    color: var(--td-error-color);
+    padding: 0 4px;
+  }
 }
 </style>
