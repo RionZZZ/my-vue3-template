@@ -85,3 +85,13 @@ export interface Relation {
   groupName?: string
   columns?: RelationDetail[]
 }
+
+export interface Data {
+  id?: number
+  copyId?: number
+  code: string
+  name: string
+  remarks: string
+  groupId?: string
+  groupName?: string
+}

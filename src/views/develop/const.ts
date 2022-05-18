@@ -250,3 +250,48 @@ export const ruleColumns: BaseTableCol[] = [
     align: 'center'
   }
 ]
+
+export const dataColumns: BaseTableCol[] = [
+  {
+    width: '200',
+    colKey: 'code',
+    title: 'Code'
+  },
+  {
+    width: '200',
+    colKey: 'name',
+    title: '名称'
+  },
+  {
+    colKey: 'remarks',
+    title: '描述',
+    ellipsis: true
+  },
+  {
+    width: '100',
+    colKey: 'groupName',
+    title: '分组'
+  },
+  {
+    width: '140',
+    colKey: 'createTime',
+    title: '创建时间'
+  },
+  {
+    width: '140',
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
+  }
+]
+
+export const dataHandleOptions: DropdownOption[] = [
+  {
+    content: '数据结构',
+    value: 'json'
+  },
+  {
+    content: '删除',
+    value: 'remove'
+  }
+]

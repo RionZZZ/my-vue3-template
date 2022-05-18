@@ -255,8 +255,10 @@ const onConfirm = () => {
   const obj: Relation = Object.assign(relation.value, {
     columns: detailList.value
   })
-  saveRelation(obj).then(() => {
-    emit('successSave')
+  saveRelation(obj).then(res => {
+    if (res) {
+      emit('successSave')
+    }
   })
 }
 </script>

@@ -16,11 +16,18 @@ export default [
         meta: { title: '实体表', cache: false }
       },
       {
+        path: 'data',
+        component: createNameComponent(
+          () => import('@/views/develop/data/index.vue')
+        ),
+        meta: { title: '数据模块', cache: false }
+      },
+      {
         path: 'business',
         component: createNameComponent(
           () => import('@/views/develop/business/index.vue')
         ),
-        meta: { title: '业务对象', cache: false }
+        meta: { title: '业务模块', cache: false }
       },
       {
         path: 'business/detail/:id',
@@ -28,18 +35,11 @@ export default [
           () => import('@/views/develop/business/detail.vue')
         ),
         meta: {
-          title: '业务对象详情',
+          title: '业务模块详情',
           name: 'businessDetail',
           cache: false,
           hideMenu: true
         }
-      },
-      {
-        path: 'data',
-        component: createNameComponent(
-          () => import('@/views/develop/data/index.vue')
-        ),
-        meta: { title: '数据模块', cache: false }
       }
     ]
   }

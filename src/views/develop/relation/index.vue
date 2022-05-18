@@ -1,8 +1,8 @@
 <template>
-  <div class="relation-container">
-    <t-loading :loading="loading" class="relation-tree">
+  <div class="develop-container">
+    <t-loading :loading="loading" class="develop-tree">
       <t-tree
-        class="relation-tree-content"
+        class="develop-tree-content"
         :data="tree"
         :keys="{ label: 'name', value: 'id' }"
         hover
@@ -170,24 +170,8 @@ const copyRow = (relation: RelationType) => {
   delete copyRelation.id
   rowDetail(copyRelation, relationForm.value)
 }
-
 </script>
 
 <style lang="scss" scoped>
-.relation-container {
-  display: flex;
-  height: 100%;
-  .relation-tree {
-    width: 15%;
-    max-width: 240px;
-    height: 100%;
-    padding: 12px;
-    border-radius: 3px;
-    background-color: #fff;
-    margin-right: 12px;
-    &-content {
-      overflow: hidden;
-    }
-  }
-}
+@import '@/assets/styles/develop.scss';
 </style>

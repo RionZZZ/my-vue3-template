@@ -1,14 +1,14 @@
 import { Relation } from '@/views/develop/type'
 
 export namespace DevelopType {
-  export interface RelationListParams {
+  export interface ListParams {
     groupId?: string
     keyword?: string
     pageNum: number
     pageSize?: number
   }
 
-  export interface RemoveRelationParams {
+  export interface RemoveParams {
     id: number
   }
 
@@ -19,4 +19,8 @@ export namespace DevelopType {
   }
 
   export interface RelationSaveParams extends Relation {}
+
+  export interface dataJSONParams {
+    code: string
+  }
 }

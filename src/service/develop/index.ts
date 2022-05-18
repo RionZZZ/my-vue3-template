@@ -1,12 +1,12 @@
 import request from '@utils/request'
 import { DevelopType } from './type'
 
-export const getRelationList = (params: DevelopType.RelationListParams) => {
+export const getRelationList = (params: DevelopType.ListParams) => {
   const url = '/admin/bus/businessTable/list'
   return request('get', url, params)
 }
 
-export const removeRelation = (params: DevelopType.RemoveRelationParams) => {
+export const removeRelation = (params: DevelopType.RemoveParams) => {
   const url = `/admin/bus/businessTable/${params.id}`
   return request('delete', url)
 }
@@ -19,4 +19,19 @@ export const getRelationInfo = (params: DevelopType.RelationInfoParams) => {
 export const saveRelation = (params: DevelopType.RelationSaveParams) => {
   const url = '/admin/bus/businessTable/save'
   return request('post', url, params)
+}
+
+export const getDataList = (params: DevelopType.ListParams) => {
+  const url = '/admin/bus/businessObject/list'
+  return request('get', url, params)
+}
+
+export const getDataJSON = (params: DevelopType.dataJSONParams) => {
+  const url = '/admin/bus/businessObject/getBoStruct'
+  return request('get', url, params)
+}
+
+export const removeData = (params: DevelopType.RemoveParams) => {
+  const url = `/admin/bus/businessObject/${params.id}`
+  return request('delete', url)
 }
