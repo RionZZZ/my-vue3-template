@@ -130,8 +130,6 @@ const chooseRelation = (
 }
 
 const onConfirm = () => {
-  console.log(relation.value[0])
-
   if (relation.value.length) {
     const choose = relation.value[0]
     const temp = {

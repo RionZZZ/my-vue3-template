@@ -90,7 +90,7 @@ interface DataRelation {
   tableComment: ''
   tableKey: ''
   type: ''
-  children?: DataRelationChildren[]
+  children?: DataRelationChild[]
 }
 
 interface RelationFK {
@@ -99,7 +99,7 @@ interface RelationFK {
   value: string
 }
 
-interface DataRelationChildren extends DataRelation {
+export interface DataRelationChild extends DataRelation {
   fks: RelationFK[]
 }
 

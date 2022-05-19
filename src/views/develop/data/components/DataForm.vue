@@ -49,7 +49,8 @@
       <template v-else> <span class="tip">*</span>选择主实体表 </template>
     </t-button>
   </t-drawer>
-  <relation-table ref="RelationTableRef" />
+  <relation-table ref="relationTableRef" />
+  <relation-children ref="relationChildrenRef" />
 </template>
 
 <script lang="ts" setup>
@@ -59,17 +60,19 @@ import { getDataInfo } from '@api/develop'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import RelationTable from './RelationTable.vue'
+import RelationChildren from './RelationChildren.vue'
+import { showToast } from '@utils/util'
 
 const developStore = DevelopStore()
 const { changeData, resetStateData, changeState } = developStore
 const { data } = storeToRefs(developStore)
-const emit = defineEmits(['nextClick'])
 
 const dataForm = ref({ ...data.value })
 const showDraw = ref(false)
 const tree = ref([])
 const form = ref()
-const RelationTableRef = ref()
+const relationTableRef = ref()
+const relationChildrenRef = ref()
 
 watch(showDraw, val => {
   if (val) {
@@ -126,7 +129,6 @@ const fetchDetail = (id: number) => {
 
 const onNameBlur = (chinese: string) => {
   // textarea的blur事件是好的，input有问题，等td更新
-  console.log(chinese)
   if (!dataForm.value.code) {
     transferPinyin({ chinese, type: 0 }).then((res: any) => {
       dataForm.value.code = res
@@ -135,17 +137,21 @@ const onNameBlur = (chinese: string) => {
 }
 
 const onRelationChoose = () => {
-  RelationTableRef.value.showDraw = true
-  RelationTableRef.value.relationCode = [data.value.relation?.tableKey]
+  relationTableRef.value.showDraw = true
+  relationTableRef.value.relationCode = [data.value.relation?.tableKey]
 }
 
 const onConfirm = () => {
-  form.value.validate().then((result: any) => {
-    if (result === true) {
-      changeData(dataForm.value)
-      emit('nextClick')
-    }
-  })
+  if (data.value.relation?.tableKey) {
+    form.value.validate().then((result: any) => {
+      if (result === true) {
+        changeData(dataForm.value)
+        relationChildrenRef.value.showDraw = true
+      }
+    })
+  } else {
+    showToast('请选择主实体表!', 'error')
+  }
 }
 </script>
 

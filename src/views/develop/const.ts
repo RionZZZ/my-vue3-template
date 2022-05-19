@@ -335,3 +335,37 @@ export const dataHandleOptions: DropdownOption[] = [
     value: 'remove'
   }
 ]
+
+export const dataRelationChildColumns: BaseTableCol[] = [
+  {
+    width: '200',
+    colKey: 'tableKey',
+    title: 'Code'
+  },
+  {
+    width: '180',
+    colKey: 'tableName',
+    title: '表名'
+  },
+  {
+    width: '200',
+    colKey: 'tableComment',
+    title: '描述',
+    ellipsis: true
+  },
+  {
+    width: '140',
+    colKey: 'type',
+    title: '关系类型'
+  },
+  {
+    colKey: 'fks',
+    title: '外键'
+  },
+  {
+    width: '140',
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
+  }
+]
