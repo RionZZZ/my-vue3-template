@@ -151,6 +151,8 @@ const propsForm = ref()
 const currentRowIndex = ref(-1)
 const emit = defineEmits(['successSave'])
 
+defineExpose({ showDraw })
+
 watch(showDraw, val => {
   if (val) {
     const id = relation.value.id || relation.value.copyId
@@ -173,8 +175,6 @@ watch(showDraw, val => {
     resetStateRelation()
   }
 })
-
-defineExpose({ showDraw })
 
 const fetchDetail = (id: number) => {
   loading.value = true

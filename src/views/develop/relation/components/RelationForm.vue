@@ -42,7 +42,7 @@
   </t-drawer>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="RelationForm">
 import { onMounted, ref, watch } from 'vue'
 import { getTree, transferPinyin } from '@api/common'
 import { getRelationInfo } from '@api/develop'

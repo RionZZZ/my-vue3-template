@@ -26,7 +26,7 @@
         <t-button
           theme="primary"
           variant="text"
-          @click="rowDetail(null, relationForm)"
+          @click="rowDetail(null, relationFormRef)"
         >
           <template #icon> <t-icon name="add" /> </template>
           新增
@@ -44,7 +44,7 @@
           <t-button
             theme="primary"
             variant="text"
-            @click="rowDetail(row, relationForm)"
+            @click="rowDetail(row, relationFormRef)"
             >编辑</t-button
           >
           <t-dropdown
@@ -62,8 +62,11 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <Relation ref="relationForm" @next-click="rowDetail(null, detailForm)" />
-  <RelationDetail ref="detailForm" @success-save="successSave" />
+  <relation-form
+    ref="relationFormRef"
+    @next-click="rowDetail(null, relationDetailRef)"
+  />
+  <relation-detail ref="relationDetailRef" @success-save="successSave" />
 </template>
 
 <script lang="ts" setup>
@@ -72,8 +75,8 @@ import { getRelationList, removeRelation } from '@api/develop'
 import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { DropdownOption } from 'tdesign-vue-next'
-import Relation from './components/relation.vue'
-import RelationDetail from './components/detail.vue'
+import RelationForm from './components/RelationForm.vue'
+import RelationDetail from './components/RelationDetail.vue'
 import { DevelopStore } from '@/store'
 import { relationColumns, relationHandleOptions } from '../const'
 import { Relation as RelationType } from '../type'
@@ -84,8 +87,8 @@ const search = ref('')
 const tree = ref([])
 const relationList: Ref<RelationType[]> = ref([])
 const pagination = ref()
-const relationForm = ref()
-const detailForm = ref()
+const relationFormRef = ref()
+const relationDetailRef = ref()
 
 const developStore = DevelopStore()
 const { changeState } = developStore
@@ -130,14 +133,14 @@ onMounted(() => {
 })
 
 const successSave = () => {
-  relationForm.value.showDraw = false
-  detailForm.value.showDraw = false
+  relationFormRef.value.showDraw = false
+  relationDetailRef.value.showDraw = false
 }
 
 const onDropClick = (e: DropdownOption, data: RelationType) => {
   switch (e.value) {
     case 'editDetail':
-      rowDetail(data, detailForm.value)
+      rowDetail(data, relationDetailRef.value)
       break
     case 'copy':
       copyRow(data)
@@ -168,7 +171,7 @@ const copyRow = (relation: RelationType) => {
   const copyRelation = { ...relation }
   copyRelation.copyId = copyRelation.id
   delete copyRelation.id
-  rowDetail(copyRelation, relationForm.value)
+  rowDetail(copyRelation, relationFormRef.value)
 }
 </script>
 

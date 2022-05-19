@@ -37,10 +37,16 @@
         />
       </t-form-item>
     </t-form>
-    <t-button theme="primary" variant="text" class="choose-button">
+    <t-button
+      theme="primary"
+      variant="text"
+      class="choose-button"
+      @click="onRelationChoose"
+    >
       <span class="tip">*</span>选择主实体表
     </t-button>
   </t-drawer>
+  <relation-table ref="RelationTableRef" />
 </template>
 
 <script lang="ts" setup>
@@ -49,6 +55,7 @@ import { getTree, transferPinyin } from '@api/common'
 import { getDataInfo } from '@api/develop'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import RelationTable from './RelationTable.vue'
 
 const developStore = DevelopStore()
 const { changeData, resetStateData } = developStore
@@ -59,6 +66,7 @@ let dataForm = ref({ ...data.value })
 const showDraw = ref(false)
 const tree = ref([])
 const form = ref()
+const RelationTableRef = ref()
 
 watch(showDraw, val => {
   if (val) {
@@ -113,6 +121,10 @@ const onNameBlur = (chinese: string) => {
       dataForm.value.code = res
     })
   }
+}
+
+const onRelationChoose = () => {
+  RelationTableRef.value.showDraw = true
 }
 
 const onConfirm = () => {

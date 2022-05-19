@@ -55,21 +55,21 @@
       <table-pagination ref="pagination" @page-change="fetchList" />
     </div>
   </div>
-  <JsonDraw ref="jsonDraw" />
-  <DataForm ref="dataForm" />
+  <json-draw ref="jsonDrawRef"></json-draw>
+  <data-form ref="dataFormRef" />
 </template>
 
 <script lang="ts" setup>
 import { onMounted, Ref, ref } from 'vue'
-import { getDataList, removeData, getDataJSON } from '@api/develop'
+import { getDataList, removeData } from '@api/develop'
 import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { DropdownOption } from 'tdesign-vue-next'
 import { DevelopStore } from '@/store'
 import { dataColumns, dataHandleOptions } from '../const'
 import { Data as DataType } from '../type'
-import JsonDraw from './components/json.vue'
-import DataForm from './components/data.vue'
+import JsonDraw from './components/JsonDraw.vue'
+import DataForm from './components/DataForm.vue'
 
 const loading = ref(true)
 const treeId = ref('-1')
@@ -77,8 +77,8 @@ const search = ref('')
 const tree = ref([])
 const dataList: Ref<DataType[]> = ref([])
 const pagination = ref()
-const jsonDraw = ref()
-const dataForm = ref()
+const jsonDrawRef = ref()
+const dataFormRef = ref()
 
 const developStore = DevelopStore()
 const { changeState } = developStore
@@ -147,15 +147,11 @@ const removeRow = (id: number) => {
 }
 const rowDetail = (data: DataType | null) => {
   data && changeState('data', { ...data })
-  dataForm.value.showDraw = true
+  dataFormRef.value.showDraw = true
 }
 const jsonDetail = (code: string) => {
-  getDataJSON({ code }).then(res => {
-    if (res) {
-      jsonDraw.value.showDraw = true
-      jsonDraw.value.json = res
-    }
-  })
+  jsonDrawRef.value.showDraw = true
+  jsonDrawRef.value.code = code
 }
 </script>
 

@@ -268,7 +268,7 @@ export const dataColumns: BaseTableCol[] = [
     ellipsis: true
   },
   {
-    width: '100',
+    width: '240',
     colKey: 'groupName',
     title: '分组'
   },
