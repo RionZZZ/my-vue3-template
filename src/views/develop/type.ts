@@ -86,6 +86,23 @@ export interface Relation {
   columns?: RelationDetail[]
 }
 
+interface DataRelation {
+  tableComment: ''
+  tableKey: ''
+  type: ''
+  children?: DataRelationChildren[]
+}
+
+interface RelationFK {
+  from: string
+  type: string
+  value: string
+}
+
+interface DataRelationChildren extends DataRelation {
+  fks: RelationFK[]
+}
+
 export interface Data {
   id?: number
   copyId?: number
@@ -94,4 +111,5 @@ export interface Data {
   remarks: string
   groupId?: string
   groupName?: string
+  relation?: DataRelation
 }

@@ -20,7 +20,10 @@ export default defineStore('develop', {
     data: { ...INITIAL_DATA }
   }),
   actions: {
-    changeRelation(relation: Relation) {
+    // 本来入参 relation: Relation
+    // 由于修改的字段可能不上Relation必有的属性，报错，故使用any，再对key做定义
+    // 下面data同
+    changeRelation(relation: any) {
       for (const key in relation) {
         this.relation[key as keyof Relation] = relation[
           key as keyof Relation
@@ -30,7 +33,7 @@ export default defineStore('develop', {
     resetStateRelation() {
       this.changeState('relation', INITIAL_RELATION)
     },
-    changeData(data: Data) {
+    changeData(data: any) {
       for (const key in data) {
         this.data[key as keyof Data] = data[key as keyof Data] as never
       }

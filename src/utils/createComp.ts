@@ -1,5 +1,5 @@
 import { defineComponent, h, createVNode, ref, nextTick } from 'vue'
-import reload from '@/components/reload.vue'
+import Reload from '@/components/reload.vue'
 import NProgress from '@utils/progress'
 
 export function createNameComponent(component: any) {
@@ -32,7 +32,7 @@ export function createNameComponent(component: any) {
             return h(
               'div',
               { class: 't-content-box' },
-              this.isReload ? [h(reload)] : [createVNode(comm.default)]
+              this.isReload ? [h(Reload)] : [createVNode(comm.default)]
             )
           }
         })

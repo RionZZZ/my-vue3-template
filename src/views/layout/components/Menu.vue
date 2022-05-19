@@ -48,7 +48,7 @@ const changeCollapseMenu = () => {
 <style lang="scss" scoped>
 .t-default-menu {
   width: var(--ry-menu-width) !important;
-  ::v-deep(.t-menu__logo) {
+  :deep(.t-menu__logo) {
     border: none;
   }
   .logo {

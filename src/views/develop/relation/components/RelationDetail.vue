@@ -118,8 +118,8 @@
       添加一行
     </t-button>
   </t-drawer>
-  <Rules ref="rulesTable" @on-confirm="rulesConfirm" />
-  <Props ref="propsForm" @on-confirm="propsConfirm" />
+  <detail-rules ref="rulesTable" @on-confirm="rulesConfirm" />
+  <detail-props ref="propsForm" @on-confirm="propsConfirm" />
 </template>
 
 <script lang="ts" setup>
@@ -136,8 +136,8 @@ import {
 import { Relation, RelationDetail, RelationRule } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
 import { showToast } from '@utils/util'
-import Rules from './rules.vue'
-import Props from './props.vue'
+import DetailRules from './DetailRules.vue'
+import DetailProps from './DetailProps.vue'
 
 const developStore = DevelopStore()
 const { resetStateRelation } = developStore
@@ -264,7 +264,7 @@ const onConfirm = () => {
 </script>
 <style lang="scss" scoped>
 .ry-table-content {
-  ::v-deep(td) {
+  :deep(td) {
     .t-input__wrap,
     .t-select__wrap {
       width: 85%;

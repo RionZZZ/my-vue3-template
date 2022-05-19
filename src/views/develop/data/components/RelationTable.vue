@@ -10,6 +10,17 @@
   >
     <div class="ry-content">
       <div class="table-header">
+        <t-tree-select
+          :value="treeId"
+          :data="tree"
+          placeholder="请选择分类"
+          :tree-props="{
+            keys: { label: 'name', value: 'id' },
+            expandOnClickNode: false
+          }"
+          class="group-select"
+          @change="onTreeClick"
+        />
         <t-input
           v-model="search"
           class="search-input"
@@ -25,9 +36,12 @@
         class="ry-table-content"
         :data="relationList"
         hover
-        :columns="relationColumns"
-        row-key="id"
+        :columns="dataRelationColumns"
+        :loading="loading"
+        row-key="code"
         max-height="100%"
+        :selected-row-keys="relationCode"
+        @select-change="chooseRelation"
       >
       </t-table>
       <table-pagination ref="pagination" @page-change="fetchList" />
@@ -39,25 +53,32 @@
 import { watch, Ref, ref } from 'vue'
 import { getRelationList } from '@api/develop'
 import { getTree } from '@api/common'
-import { debounce } from '@utils/util'
-import { relationColumns } from '../../const'
+import { debounce, showToast } from '@utils/util'
+import { DevelopStore } from '@/store'
+import { dataRelationColumns } from '../../const'
 import { Relation as RelationType } from '../../type'
+import { SelectOptions } from 'tdesign-vue-next'
 
-const loading = ref(true)
+const developStore = DevelopStore()
+const { changeData } = developStore
+const loading = ref(false)
 const treeId = ref('-1')
 const search = ref('')
 const tree = ref([])
 const relationList: Ref<RelationType[]> = ref([])
+const relation: Ref<RelationType[]> = ref([])
+const relationCode = ref([''])
 const pagination = ref()
 const showDraw = ref(false)
 
-defineExpose({ showDraw })
+defineExpose({ showDraw, relationCode })
 
 watch(showDraw, val => {
   if (val) {
     fetchTree()
   } else {
     treeId.value = '-1'
+    search.value = ''
     relationList.value = []
   }
 })
@@ -67,39 +88,70 @@ const fetchTree = () => {
     tree.value = res
     treeId.value = res[0].id
     fetchList()
-    loading.value = false
   })
 }
 
 const fetchList = () => {
+  loading.value = true
   getRelationList({
     groupId: treeId.value,
     keyword: search.value,
     pageNum: pagination.value.pagination.current,
     pageSize: pagination.value.pagination.pageSize
   }).then((res: any) => {
+    loading.value = false
     relationList.value = res.list
     pagination.value.pagination.total = res.total
   })
 }
 
-// const onTreeClick = ({ node }: any) => {
-//   if (treeId.value !== node.value) {
-//     treeId.value = node.value
-//     pagination.value.pagination.current = 1
-//     fetchList()
-//   }
-// }
+const onTreeClick = (value: string) => {
+  // td还是有bug，我试了change会调用两次、blur调用也有问题
+  if (treeId.value !== value) {
+    treeId.value = value
+    pagination.value.pagination.current = 1
+    fetchList()
+  }
+}
 
 const onSearch = () => {
   if (!loading.value) {
+    pagination.value.pagination.current = 1
     debounce(fetchList)()
   }
 }
 
-const onConfirm = () => {}
+const chooseRelation = (
+  value: string[],
+  { selectedRowData }: SelectOptions<RelationType>
+) => {
+  relationCode.value = value
+  relation.value = selectedRowData
+}
+
+const onConfirm = () => {
+  console.log(relation.value[0])
+
+  if (relation.value.length) {
+    const choose = relation.value[0]
+    const temp = {
+      tableComment: choose.comment,
+      tableKey: choose.code
+    }
+    changeData({ relation: temp })
+    showDraw.value = false
+  } else {
+    showToast('请选择一个主表!', 'error')
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/develop.scss';
+.table-header {
+  justify-content: flex-start;
+  :deep(.group-select) {
+    width: 240px;
+  }
+}
 </style>

@@ -42,7 +42,7 @@
   </t-drawer>
 </template>
 
-<script lang="ts" setup name="RelationForm">
+<script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import { getTree, transferPinyin } from '@api/common'
 import { getRelationInfo } from '@api/develop'
@@ -54,7 +54,7 @@ const { changeRelation, resetStateRelation } = developStore
 const { relation } = storeToRefs(developStore)
 const emit = defineEmits(['nextClick'])
 
-let relationForm = ref({ ...relation.value })
+const relationForm = ref({ ...relation.value })
 const showDraw = ref(false)
 const tree = ref([])
 const form = ref()
@@ -62,9 +62,9 @@ const form = ref()
 watch(showDraw, val => {
   if (val) {
     relationForm.value = { ...relation.value }
-    form.value.reset()
   } else {
     resetStateRelation()
+    form.value.reset()
   }
 })
 

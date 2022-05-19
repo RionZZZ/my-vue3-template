@@ -58,7 +58,12 @@ module.exports = {
     'no-undef': 2,
     'no-unneeded-ternary': 2,
     'no-unused-vars': [2, { vars: 'all', args: 'after-used' }],
-    'no-use-before-define': [2, { functions: false, variables: false }],
+    'no-use-before-define': [
+      0
+      // interface存在互相引用问题，暂时无法解决，设置不报警
+      // 2,
+      // { functions: false, classes: false, variables: false }
+    ],
     'no-var': 2,
     'arrow-parens': 0,
     'arrow-spacing': 2,

@@ -53,7 +53,7 @@ const { name } = storeToRefs(userStore)
       cursor: pointer;
     }
   }
-  ::v-deep(.t-breadcrumb__item:last-child) {
+  :deep(.t-breadcrumb__item:last-child) {
     font-weight: 600;
   }
 }

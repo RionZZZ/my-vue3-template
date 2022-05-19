@@ -124,6 +124,7 @@ const onTreeClick = ({ node }: any) => {
 
 const onSearch = () => {
   if (!loading.value) {
+    pagination.value.pagination.current = 1
     debounce(fetchList)()
   }
 }

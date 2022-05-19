@@ -1,4 +1,4 @@
-import { BaseTableCol, DropdownOption } from 'tdesign-vue-next'
+import { BaseTableCol, DropdownOption, PrimaryTableCol } from 'tdesign-vue-next'
 import { OptionData } from 'tdesign-vue-next/es/common'
 import { DataPropType, OptionType, PropsType } from './type'
 
@@ -88,6 +88,46 @@ export const propsItems: PropsType<DataPropType> = {
 }
 
 export const relationColumns: BaseTableCol[] = [
+  {
+    width: '200',
+    colKey: 'code',
+    title: 'Code'
+  },
+  {
+    width: '200',
+    colKey: 'name',
+    title: '表名'
+  },
+  {
+    colKey: 'comment',
+    title: '描述',
+    ellipsis: true
+  },
+  {
+    width: '100',
+    colKey: 'groupName',
+    title: '分类'
+  },
+  {
+    width: '140',
+    colKey: 'createTime',
+    title: '创建时间'
+  },
+  {
+    width: '140',
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
+  }
+]
+
+export const dataRelationColumns: PrimaryTableCol[] = [
+  {
+    width: '50',
+    colKey: 'row-select',
+    type: 'single',
+    checkProps: { allowUncheck: true }
+  },
   {
     width: '200',
     colKey: 'code',

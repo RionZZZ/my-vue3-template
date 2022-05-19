@@ -84,7 +84,7 @@ const onRefreshClick = () => {
 
 <style lang="scss" scoped>
 .tab-list {
-  ::v-deep(.t-tabs__nav--card) {
+  :deep(.t-tabs__nav--card) {
     background-color: #fff;
     .t-tabs__nav-item {
       height: 32px;

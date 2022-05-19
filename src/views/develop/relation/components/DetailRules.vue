@@ -92,7 +92,7 @@ const onConfirm = () => {
 </script>
 <style lang="scss" scoped>
 .ry-table-content {
-  ::v-deep(td) {
+  :deep(td) {
     .t-input__wrap,
     .t-select__wrap,
     .t-input-number {
