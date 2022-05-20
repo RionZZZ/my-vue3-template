@@ -49,7 +49,7 @@
       <template v-else> <span class="tip">*</span>选择主实体表 </template>
     </t-button>
   </t-drawer>
-  <relation-table ref="relationTableRef" />
+  <relation-table ref="relationTableRef" @confirm="relationChange" />
   <relation-children ref="relationChildrenRef" />
 </template>
 
@@ -139,6 +139,11 @@ const onNameBlur = (chinese: string) => {
 const onRelationChoose = () => {
   relationTableRef.value.showDraw = true
   relationTableRef.value.relationCode = [data.value.relation?.tableKey]
+}
+
+const relationChange = (relation: object) => {
+  const temp = Object.assign({ ...data.value.relation }, relation)
+  changeData({ relation: temp })
 }
 
 const onConfirm = () => {

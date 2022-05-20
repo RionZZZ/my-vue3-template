@@ -54,13 +54,10 @@ import { watch, Ref, ref } from 'vue'
 import { getRelationList } from '@api/develop'
 import { getTree } from '@api/common'
 import { debounce, showToast } from '@utils/util'
-import { DevelopStore } from '@/store'
 import { DataRelationColumns } from '../../const'
 import { Relation as RelationType } from '../../type'
 import { SelectOptions } from 'tdesign-vue-next'
 
-const developStore = DevelopStore()
-const { changeData } = developStore
 const loading = ref(false)
 const treeId = ref('-1')
 const search = ref('')
@@ -70,6 +67,7 @@ const relation: Ref<RelationType[]> = ref([])
 const relationCode = ref([''])
 const pagination = ref()
 const showDraw = ref(false)
+const emit = defineEmits(['confirm'])
 
 defineExpose({ showDraw, relationCode })
 
@@ -137,7 +135,7 @@ const onConfirm = () => {
       tableKey: choose.code,
       type: 'main'
     }
-    changeData({ relation: temp })
+    emit('confirm', temp)
     showDraw.value = false
   } else {
     showToast('请选择一个主表!', 'error')

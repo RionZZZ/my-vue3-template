@@ -10,7 +10,7 @@
   >
     <div class="ry-content">
       <div class="table-header">
-        <t-button theme="primary" variant="text">
+        <t-button theme="primary" variant="text" @click="onAddClick">
           <template #icon> <t-icon name="add" /> </template>
           新增
         </t-button>
@@ -31,14 +31,17 @@
           ></t-select>
         </template>
         <template #handle="{ row }">
-          <t-button theme="primary" variant="text"> 新增子表 </t-button>
-          <t-button theme="primary" variant="text" @click="removeRow(row)">
+          <t-button theme="primary" variant="text" @click="onAddClick">
+            新增子表
+          </t-button>
+          <t-button theme="primary" variant="text" @click="onRemoveClick(row)">
             删除
           </t-button>
         </template>
       </t-table>
     </div>
   </t-drawer>
+  <relation-table ref="relationTableRef" @confirm="chooseRelation" />
 </template>
 
 <script lang="ts" setup>
@@ -47,11 +50,13 @@ import { DataRelationChildColumns, RelationChildType } from '../../const'
 import { DataRelationChild } from '../../type'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import RelationTable from './RelationTable.vue'
 
 const developStore = DevelopStore()
 const { data } = storeToRefs(developStore)
 const relationList: Ref<DataRelationChild[]> = ref([])
 const showDraw = ref(false)
+const relationTableRef = ref()
 
 defineExpose({ showDraw })
 
@@ -63,7 +68,15 @@ watch(showDraw, val => {
   }
 })
 
-const removeRow = (row: any) => {
+const onAddClick = () => {
+  relationTableRef.value.showDraw = true
+}
+
+const chooseRelation = () => {
+  console.log('chooseRelation')
+}
+
+const onRemoveClick = (row: any) => {
   console.log(row)
 }
 

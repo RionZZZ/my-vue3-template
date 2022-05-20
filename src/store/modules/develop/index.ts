@@ -37,6 +37,7 @@ export default defineStore('develop', {
       for (const key in data) {
         this.data[key as keyof Data] = data[key as keyof Data] as never
       }
+      console.log(this.data)
     },
     resetStateData() {
       this.changeState('data', INITIAL_DATA)

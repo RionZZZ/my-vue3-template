@@ -17,11 +17,11 @@
     </t-submenu>
     <t-menu-item v-else :value="menuPath" :to="menuPath">
       <template v-if="props.menu.meta?.icon" #icon>
-        <t-icon :name="props.menu.meta.icon" />
+        <t-icon :name="props.menu.meta!.icon" />
       </template>
       {{
         props.menu.meta?.menuType === 1
-          ? props.menu.children[0].meta?.title
+          ? props.menu.children![0].meta?.title
           : props.menu.meta?.title
       }}
     </t-menu-item>
