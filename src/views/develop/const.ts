@@ -338,7 +338,7 @@ export const DataHandleOptions: DropdownOption[] = [
 
 export const DataRelationChildColumns: BaseTableCol[] = [
   {
-    width: '200',
+    width: '240',
     colKey: 'tableKey',
     title: 'Code'
   },

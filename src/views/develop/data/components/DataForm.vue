@@ -142,7 +142,9 @@ const onRelationChoose = () => {
 }
 
 const relationChange = (relation: object) => {
-  const temp = Object.assign({ ...data.value.relation }, relation)
+  const temp = Object.assign({ ...data.value.relation }, relation, {
+    type: 'main'
+  })
   changeData({ relation: temp })
 }
 

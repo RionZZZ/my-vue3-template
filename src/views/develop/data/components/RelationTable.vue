@@ -133,7 +133,7 @@ const onConfirm = () => {
     const temp = {
       tableComment: choose.comment,
       tableKey: choose.code,
-      type: 'main'
+      tableName: choose.name
     }
     emit('confirm', temp)
     showDraw.value = false

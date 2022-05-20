@@ -86,8 +86,9 @@ export interface Relation {
   columns?: RelationDetail[]
 }
 
-interface DataRelation {
+export interface DataRelation {
   tableComment: ''
+  tableName: ''
   tableKey: ''
   type: ''
   children?: DataRelationChild[]
@@ -100,7 +101,7 @@ interface RelationFK {
 }
 
 export interface DataRelationChild extends DataRelation {
-  fks: RelationFK[]
+  fks?: RelationFK[]
 }
 
 export interface Data {
