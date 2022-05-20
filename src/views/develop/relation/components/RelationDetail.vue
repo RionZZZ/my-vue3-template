@@ -12,7 +12,7 @@
       class="ry-table-content"
       :data="detailList"
       hover
-      :columns="relationDetailColumns"
+      :columns="RelationDetailColumns"
       row-key="id"
       max-height="100%"
       :loading="loading"
@@ -129,9 +129,9 @@ import { storeToRefs } from 'pinia'
 import { getRelationInfo, saveRelation } from '@api/develop'
 import {
   DataType,
-  relationDetailColumns,
+  RelationDetailColumns,
   FormItemType,
-  propsItems
+  PropsItems
 } from '../../const'
 import { Relation, RelationDetail, RelationRule } from '../../type'
 import { DragSortContext } from 'tdesign-vue-next'
@@ -232,7 +232,7 @@ const onRemoveClick = (index: number) => {
 const onPropsClick = (row: RelationDetail, index: number) => {
   currentRowIndex.value = index
   propsForm.value.showDraw = true
-  propsForm.value.propsItems = propsItems[row.ctrl?.type || 'input']
+  propsForm.value.propsItems = PropsItems[row.ctrl?.type || 'input']
   propsForm.value.config = JSON.parse(row.ctrl?.config || '{}')
 }
 

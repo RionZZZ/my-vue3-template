@@ -36,7 +36,7 @@
         class="ry-table-content"
         :data="relationList"
         hover
-        :columns="relationColumns"
+        :columns="RelationColumns"
         row-key="id"
         max-height="100%"
       >
@@ -48,7 +48,7 @@
             >编辑</t-button
           >
           <t-dropdown
-            :options="relationHandleOptions"
+            :options="RelationHandleOptions"
             @click="onDropClick($event, row)"
           >
             <t-button shape="square" variant="text">
@@ -78,7 +78,7 @@ import { DropdownOption } from 'tdesign-vue-next'
 import RelationForm from './components/RelationForm.vue'
 import RelationDetail from './components/RelationDetail.vue'
 import { DevelopStore } from '@/store'
-import { relationColumns, relationHandleOptions } from '../const'
+import { RelationColumns, RelationHandleOptions } from '../const'
 import { Relation as RelationType } from '../type'
 
 const loading = ref(true)

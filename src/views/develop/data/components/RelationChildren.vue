@@ -19,10 +19,23 @@
         class="ry-table-content"
         :data="relationList"
         hover
-        :columns="dataRelationChildColumns"
+        :columns="DataRelationChildColumns"
         row-key="tableKey"
         max-height="100%"
       >
+        <template #type="{ row }">
+          <t-select
+            v-model="row.type"
+            :options="RelationChildType"
+            placeholder="type"
+          ></t-select>
+        </template>
+        <template #handle="{ row }">
+          <t-button theme="primary" variant="text"> 新增子表 </t-button>
+          <t-button theme="primary" variant="text" @click="removeRow(row)">
+            删除
+          </t-button>
+        </template>
       </t-table>
     </div>
   </t-drawer>
@@ -30,7 +43,7 @@
 
 <script lang="ts" setup>
 import { watch, Ref, ref } from 'vue'
-import { dataRelationChildColumns } from '../../const'
+import { DataRelationChildColumns, RelationChildType } from '../../const'
 import { DataRelationChild } from '../../type'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
@@ -49,6 +62,10 @@ watch(showDraw, val => {
     relationList.value = []
   }
 })
+
+const removeRow = (row: any) => {
+  console.log(row)
+}
 
 const onConfirm = () => {}
 </script>

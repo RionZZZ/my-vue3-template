@@ -74,7 +74,7 @@ const datePickerProps: DataPropType[] = [
   { props: 'value-format', type: 'text', default: '' }
 ]
 
-export const propsItems: PropsType<DataPropType> = {
+export const PropsItems: PropsType<DataPropType> = {
   input: inputProps,
   textarea: textAreaProps,
   radio: disableProps,
@@ -87,7 +87,7 @@ export const propsItems: PropsType<DataPropType> = {
   upload: disableProps
 }
 
-export const relationColumns: BaseTableCol[] = [
+export const RelationColumns: BaseTableCol[] = [
   {
     width: '200',
     colKey: 'code',
@@ -121,7 +121,7 @@ export const relationColumns: BaseTableCol[] = [
   }
 ]
 
-export const dataRelationColumns: PrimaryTableCol[] = [
+export const DataRelationColumns: PrimaryTableCol[] = [
   {
     width: '50',
     colKey: 'row-select',
@@ -161,7 +161,7 @@ export const dataRelationColumns: PrimaryTableCol[] = [
   }
 ]
 
-export const relationHandleOptions: DropdownOption[] = [
+export const RelationHandleOptions: DropdownOption[] = [
   {
     content: '编辑字段',
     value: 'editDetail'
@@ -176,7 +176,7 @@ export const relationHandleOptions: DropdownOption[] = [
   }
 ]
 
-export const relationDetailColumns: BaseTableCol[] = [
+export const RelationDetailColumns: BaseTableCol[] = [
   {
     width: '160',
     colKey: 'drag',
@@ -236,7 +236,7 @@ export const relationDetailColumns: BaseTableCol[] = [
   }
 ]
 
-export const triggerRules: DropdownOption[] = [
+export const TriggerRules: DropdownOption[] = [
   {
     label: 'change事件',
     value: 'change'
@@ -247,7 +247,7 @@ export const triggerRules: DropdownOption[] = [
   }
 ]
 
-export const ruleColumns: BaseTableCol[] = [
+export const RuleColumns: BaseTableCol[] = [
   {
     width: '70',
     colKey: 'required',
@@ -291,7 +291,7 @@ export const ruleColumns: BaseTableCol[] = [
   }
 ]
 
-export const dataColumns: BaseTableCol[] = [
+export const DataColumns: BaseTableCol[] = [
   {
     width: '200',
     colKey: 'code',
@@ -325,7 +325,7 @@ export const dataColumns: BaseTableCol[] = [
   }
 ]
 
-export const dataHandleOptions: DropdownOption[] = [
+export const DataHandleOptions: DropdownOption[] = [
   {
     content: '数据结构',
     value: 'json'
@@ -336,7 +336,7 @@ export const dataHandleOptions: DropdownOption[] = [
   }
 ]
 
-export const dataRelationChildColumns: BaseTableCol[] = [
+export const DataRelationChildColumns: BaseTableCol[] = [
   {
     width: '200',
     colKey: 'tableKey',
@@ -363,9 +363,19 @@ export const dataRelationChildColumns: BaseTableCol[] = [
     title: '外键'
   },
   {
-    width: '140',
+    width: '220',
     colKey: 'handle',
     title: '操作',
     align: 'center'
   }
+]
+
+export const KFType: OptionData[] = [
+  { label: '子表外键 对应 父实例字段', value: 'parentField' },
+  { label: '子表字段 对应 父实例外键', value: 'childField' }
+]
+
+export const RelationChildType: OptionData[] = [
+  { label: '一对一', value: 'oneToOne' },
+  { label: '一对多', value: 'oneToMany' }
 ]

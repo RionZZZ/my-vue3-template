@@ -36,7 +36,7 @@
         class="ry-table-content"
         :data="relationList"
         hover
-        :columns="dataRelationColumns"
+        :columns="DataRelationColumns"
         :loading="loading"
         row-key="code"
         max-height="100%"
@@ -55,7 +55,7 @@ import { getRelationList } from '@api/develop'
 import { getTree } from '@api/common'
 import { debounce, showToast } from '@utils/util'
 import { DevelopStore } from '@/store'
-import { dataRelationColumns } from '../../const'
+import { DataRelationColumns } from '../../const'
 import { Relation as RelationType } from '../../type'
 import { SelectOptions } from 'tdesign-vue-next'
 
@@ -134,7 +134,8 @@ const onConfirm = () => {
     const choose = relation.value[0]
     const temp = {
       tableComment: choose.comment,
-      tableKey: choose.code
+      tableKey: choose.code,
+      type: 'main'
     }
     changeData({ relation: temp })
     showDraw.value = false

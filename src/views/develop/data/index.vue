@@ -32,7 +32,7 @@
         class="ry-table-content"
         :data="dataList"
         hover
-        :columns="dataColumns"
+        :columns="DataColumns"
         row-key="id"
         max-height="100%"
       >
@@ -41,7 +41,7 @@
             >编辑</t-button
           >
           <t-dropdown
-            :options="dataHandleOptions"
+            :options="DataHandleOptions"
             @click="onDropClick($event, row)"
           >
             <t-button shape="square" variant="text">
@@ -66,7 +66,7 @@ import { getTree } from '@api/common'
 import { showToast, showDialog, debounce } from '@utils/util'
 import { DropdownOption } from 'tdesign-vue-next'
 import { DevelopStore } from '@/store'
-import { dataColumns, dataHandleOptions } from '../const'
+import { DataColumns, DataHandleOptions } from '../const'
 import { Data as DataType } from '../type'
 import JsonDraw from './components/JsonDraw.vue'
 import DataForm from './components/DataForm.vue'

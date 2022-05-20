@@ -12,7 +12,7 @@
       class="ry-table-content"
       :data="ruleList"
       hover
-      :columns="ruleColumns"
+      :columns="RuleColumns"
       row-key="id"
       max-height="100%"
     >
@@ -25,7 +25,7 @@
       <template #trigger="{ row }">
         <t-select
           v-model="row.trigger"
-          :options="triggerRules"
+          :options="TriggerRules"
           placeholder="trigger"
         ></t-select>
       </template>
@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { Ref, ref } from 'vue'
-import { ruleColumns, triggerRules } from '../../const'
+import { RuleColumns, TriggerRules } from '../../const'
 import { RelationRule } from '../../type'
 
 const showDraw = ref(false)
