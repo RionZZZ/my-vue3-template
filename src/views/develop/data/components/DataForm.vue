@@ -50,7 +50,7 @@
     </t-button>
   </t-drawer>
   <relation-table ref="relationTableRef" @confirm="relationChange" />
-  <relation-children ref="relationChildrenRef" />
+  <relation-children ref="relationChildrenRef" @success-save="successSave" />
 </template>
 
 <script lang="ts" setup>
@@ -146,6 +146,10 @@ const relationChange = (relation: object) => {
     type: 'main'
   })
   changeData({ relation: temp })
+}
+
+const successSave = () => {
+  showDraw.value = false
 }
 
 const onConfirm = () => {

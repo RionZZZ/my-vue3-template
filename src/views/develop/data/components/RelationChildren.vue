@@ -105,9 +105,10 @@ import {
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import RelationTable from './RelationTable.vue'
-import { getRelationInfo } from '@api/develop'
+import { getRelationInfo, saveData } from '@api/develop'
 
 const developStore = DevelopStore()
+const { changeData } = developStore
 const { data } = storeToRefs(developStore)
 const relationList: Ref<DataRelationChild[]> = ref([])
 const showDraw = ref(false)
@@ -115,6 +116,7 @@ const relationTableRef = ref()
 const currentRowKey = ref('')
 const enhancedTable = ref()
 const fksOptions: Ref<RelationDetail[]> = ref([])
+const emit = defineEmits(['successSave'])
 
 defineExpose({ showDraw })
 
@@ -129,7 +131,7 @@ watch(showDraw, val => {
 const onAddClick = (key: string = '') => {
   currentRowKey.value = key
   relationTableRef.value.showDraw = true
-  relationTableRef.value.code = ['']
+  // 此处其实应该加一个disableCode集合，选过的表不允许再选，记得处理
 }
 
 const chooseRelation = (relation: DataRelation) => {
@@ -141,6 +143,7 @@ const chooseRelation = (relation: DataRelation) => {
   if (currentRowKey.value) {
     enhancedTable.value.appendTo(currentRowKey.value, temp)
   } else {
+    // 新增时，insert方法是有问题的，不满足需求，要注意。 bug
     const key = relationList.value.at(-1)?.tableKey
     enhancedTable.value.insertAfter(key, temp)
   }
@@ -158,7 +161,6 @@ const onFksVisible = (
 ) => {
   if (visible) {
     item[loading] = true
-    console.log(code)
     getRelationInfo({ code, fill: true }).then((res: any) => {
       fksOptions.value = res.columns
       item[loading] = false
@@ -168,7 +170,20 @@ const onFksVisible = (
   }
 }
 
-const onConfirm = () => {}
+const onConfirm = () => {
+  // 拿到处理后的relationList，赋值到store里面
+  const relation = Object.assign(data.value.relation || {}, {
+    children: relationList.value
+  })
+  changeData({ relation })
+
+  saveData(data.value).then(res => {
+    if (res) {
+      emit('successSave')
+      showDraw.value = false
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>

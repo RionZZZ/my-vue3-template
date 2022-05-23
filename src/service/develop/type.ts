@@ -1,4 +1,4 @@
-import { Relation } from '@/views/develop/type'
+import { Relation, Data } from '@/views/develop/type'
 
 export namespace DevelopType {
   export interface ListParams {
@@ -19,6 +19,8 @@ export namespace DevelopType {
   }
 
   export interface RelationSaveParams extends Relation {}
+
+  export interface DataSaveParams extends Data {}
 
   export interface dataJSONParams {
     code: string

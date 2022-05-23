@@ -154,6 +154,7 @@ const jsonDetail = (code: string) => {
   jsonDrawRef.value.showDraw = true
   jsonDrawRef.value.code = code
 }
+
 </script>
 
 <style lang="scss" scoped>

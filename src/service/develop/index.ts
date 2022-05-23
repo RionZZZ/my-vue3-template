@@ -40,3 +40,8 @@ export const getDataInfo = (params: DevelopType.InfoParams) => {
   const url = '/admin/bus/businessObject/getObject'
   return request('get', url, params)
 }
+
+export const saveData = (params: DevelopType.DataSaveParams) => {
+  const url = '/admin/bus/businessObject/save'
+  return request('post', url, params)
+}

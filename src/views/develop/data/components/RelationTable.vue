@@ -78,6 +78,7 @@ watch(showDraw, val => {
     treeId.value = '-1'
     search.value = ''
     relationList.value = []
+    relationCode.value = ['']
   }
 })
 
@@ -140,7 +141,7 @@ const onConfirm = () => {
     emit('confirm', temp)
     showDraw.value = false
   } else {
-    showToast('请选择一个主表!', 'error')
+    showToast('请选择一个表!', 'error')
   }
 }
 </script>
