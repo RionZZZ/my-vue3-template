@@ -99,9 +99,7 @@ const chooseRelation = (relation: DataRelation) => {
   if (currentRowKey.value) {
     enhancedTable.value.appendTo(currentRowKey.value, temp)
   } else {
-    // td有bug，使用t-enhanced-table无法实时更新，先使用赋值方式，后期要改！
-    // relationList.value.push(temp)
-    relationList.value = [...relationList.value, temp]
+    enhancedTable.value.insertAfter('TcPatientCase', temp)
   }
 }
 

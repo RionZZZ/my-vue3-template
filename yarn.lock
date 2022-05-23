@@ -13,9 +13,9 @@
   integrity sha512-vqUSBLP8dQHFPdPi9bc5GK9vRkYHJ49fsZdtoJ8EQ8ibpwk5rPKfvNIwChB0KVXcIjcepEBBd2VHC5r9Gy8ueg==
 
 "@babel/runtime@^7.14.8", "@babel/runtime@^7.16.3":
-  version "7.17.9"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
-  integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
+  version "7.18.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.0.tgz#6d77142a19cb6088f0af662af1ada37a604d34ae"
+  integrity sha512-YMQvx/6nKEaucl0MY56mwIG483xk8SDNdlUwb2Ts6FUpr7fm85DxEmsY18LXBNhcTz6tO6JwZV8w1W06v8UKeg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -429,7 +429,7 @@ ajv@^6.10.0, ajv@^6.12.4:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
-  integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+  integrity sha512-S2Hw0TtNkMJhIabBwIojKL9YHO5T0n5eNqWJ7Lrlel/zDbftQpxpapi8tZs3X1HWa+u+QeydGmzzNU0m09+Rcg==
 
 ansi-regex@^5.0.1:
   version "5.0.1"
@@ -464,7 +464,7 @@ array-union@^2.1.0:
 asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
-  integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
+  integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
 assert-never@^1.2.1:
   version "1.2.1"
@@ -474,7 +474,7 @@ assert-never@^1.2.1:
 ast-types@0.9.6:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.9.6.tgz#102c9e9e9005d3e7e3829bf0c4fa24ee862ee9b9"
-  integrity sha1-ECyenpAF0+fjgpvwxPok7oYu6bk=
+  integrity sha512-qEdtR2UH78yyHX/AUNfXmJTlM48XoFZKBdwi1nzkI1mJL21cmbu0cvjxjpkXJ5NENMq42H+hNs8VLJcqXLerBQ==
 
 axios@^0.26.1:
   version "0.26.1"
@@ -1914,17 +1914,17 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tdesign-icons-vue-next@~0.1.0:
+tdesign-icons-vue-next@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/tdesign-icons-vue-next/-/tdesign-icons-vue-next-0.1.1.tgz#b38dc66841101fce4e87e995bbfa39c102d48609"
   integrity sha512-uGa9XzTb6zKMjQglZscnn/nBSlxJaMCjgDqcdlkA0BBiSsPr5AQmejb7Kcei126jNNd5E36y+roB8f09utN2Vg==
   dependencies:
     "@babel/runtime" "^7.16.3"
 
-tdesign-vue-next@^0.14.1:
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/tdesign-vue-next/-/tdesign-vue-next-0.14.2.tgz#e4eed9e4e4e3748f69ad5bfcec259224c4326bfb"
-  integrity sha512-poWC/HXGFq8f/2surTypnLJqCeTTCSa0SNIIe39dXWF/9mxn37GVLjqpCRiRJ6JmlUmoX+dlZhuv8fJhhWkm+g==
+tdesign-vue-next@0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/tdesign-vue-next/-/tdesign-vue-next-0.15.0.tgz#4883b5208c8aec2705e542662e8ead95bbdfed93"
+  integrity sha512-jJM1gbztclLI3x7EO1m5AYt+wxHPV7Y1YVCaJiBLOO1i0SOHXSmb6HZ5hc1EpxxONT6ka9n6OVmTRhGZr8KNyw==
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@popperjs/core" "^2.9.3"
@@ -1936,7 +1936,7 @@ tdesign-vue-next@^0.14.1:
     jsx-to-string "^1.4.0"
     lodash "^4.17.15"
     sortablejs "^1.15.0"
-    tdesign-icons-vue-next "~0.1.0"
+    tdesign-icons-vue-next "~0.1.1"
     tinycolor2 "^1.4.2"
     validator "^13.5.1"
 

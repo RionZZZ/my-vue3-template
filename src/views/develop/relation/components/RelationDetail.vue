@@ -200,10 +200,9 @@ const dataTypeChange = (e: any, row: RelationDetail) => {
   row.ctrl!.type = ''
 }
 
-const onDragSort = ({ targetIndex, currentData }: DragSortContext<any>) => {
-  // 更新TD后，直接获取DragSortContext.target的primary判断
-  if (targetIndex === 0) {
-    showToast('不可改变主键ID的位置', 'error')
+const onDragSort = ({ target, currentData }: DragSortContext<any>) => {
+  if (target.primary) {
+    showToast('不可改变主键的位置', 'error')
     return
   }
   detailList.value = currentData

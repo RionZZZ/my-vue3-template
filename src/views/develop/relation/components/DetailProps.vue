@@ -34,8 +34,6 @@
 import { Ref, ref } from 'vue'
 import { DataPropType } from '../../type'
 
-// TD有bug，等更新。 未定义字段的对象无法绑定modalValue。
-
 const showDraw = ref(false)
 const propsItems: Ref<DataPropType[]> = ref([])
 const config: Ref<{ [key: string]: any }> = ref({})
