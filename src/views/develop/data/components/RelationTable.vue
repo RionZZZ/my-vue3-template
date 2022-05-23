@@ -104,6 +104,8 @@ const fetchList = () => {
 }
 
 const onTreeClick = (value: string) => {
+  console.log('treeId.', treeId.value)
+  console.log(value)
   // td还是有bug，我试了change会调用两次、blur调用也有问题
   if (treeId.value !== value) {
     treeId.value = value

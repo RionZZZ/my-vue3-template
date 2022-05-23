@@ -94,10 +94,12 @@ export interface DataRelation {
   children?: DataRelationChild[]
 }
 
-interface RelationFK {
+export interface RelationFK {
   from: string
   type: string
   value: string
+  formLoading?: boolean
+  valueLoading?: boolean
 }
 
 export interface DataRelationChild extends DataRelation {

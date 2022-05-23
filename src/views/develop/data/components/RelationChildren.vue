@@ -8,7 +8,6 @@
     destroy-on-close
     @confirm="onConfirm"
   >
-    {{ relationList }}
     <div class="ry-content">
       <div class="table-header">
         <t-button theme="primary" variant="text" @click="onAddClick('')">
@@ -34,6 +33,38 @@
           ></t-select>
         </template>
         <template #fks="{ row }">
+          <div
+            v-for="(item, index) in row.fks"
+            :key="index"
+            class="select-area"
+          >
+            <t-select
+              v-model="item.from"
+              :options="fksOptions"
+              :loading="item.formLoading"
+              :keys="{ label: 'name', value: 'code' }"
+              placeholder="from"
+              @visible-change="
+                onFksVisible($event, row.tableKey, item, 'formLoading')
+              "
+            ></t-select>
+            <t-select
+              v-model="item.type"
+              :options="KFType"
+              placeholder="type"
+            ></t-select>
+
+            <t-select
+              v-model="item.value"
+              :options="fksOptions"
+              :loading="item.valueLoading"
+              :keys="{ label: 'name', value: 'code' }"
+              placeholder="value"
+              @visible-change="
+                onFksVisible($event, row.tableKey, item, 'valueLoading')
+              "
+            ></t-select>
+          </div>
           {{ JSON.stringify(row.fks || null) }}
         </template>
         <template #handle="{ row }">
@@ -60,11 +91,21 @@
 
 <script lang="ts" setup>
 import { watch, Ref, ref } from 'vue'
-import { DataRelationChildColumns, RelationChildType } from '../../const'
-import { DataRelation, DataRelationChild } from '../../type'
+import {
+  DataRelationChildColumns,
+  RelationChildType,
+  KFType
+} from '../../const'
+import {
+  DataRelation,
+  DataRelationChild,
+  RelationDetail,
+  RelationFK
+} from '../../type'
 import { DevelopStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import RelationTable from './RelationTable.vue'
+import { getRelationInfo } from '@api/develop'
 
 const developStore = DevelopStore()
 const { data } = storeToRefs(developStore)
@@ -73,6 +114,7 @@ const showDraw = ref(false)
 const relationTableRef = ref()
 const currentRowKey = ref('')
 const enhancedTable = ref()
+const fksOptions: Ref<RelationDetail[]> = ref([])
 
 defineExpose({ showDraw })
 
@@ -94,17 +136,36 @@ const chooseRelation = (relation: DataRelation) => {
   const temp = Object.assign(relation, {
     type: 'oneToOne',
     children: [],
-    fks: []
+    fks: [{ from: '', type: 'parentField', value: '' }]
   })
   if (currentRowKey.value) {
     enhancedTable.value.appendTo(currentRowKey.value, temp)
   } else {
-    enhancedTable.value.insertAfter('TcPatientCase', temp)
+    const key = relationList.value.at(-1)?.tableKey
+    enhancedTable.value.insertAfter(key, temp)
   }
 }
 
 const onRemoveClick = (key: string) => {
   enhancedTable.value.remove(key)
+}
+
+const onFksVisible = (
+  visible: boolean,
+  code: string,
+  item: RelationFK,
+  loading: 'formLoading' | 'valueLoading'
+) => {
+  if (visible) {
+    item[loading] = true
+    console.log(code)
+    getRelationInfo({ code, fill: true }).then((res: any) => {
+      fksOptions.value = res.columns
+      item[loading] = false
+    })
+  } else {
+    item[loading] = false
+  }
 }
 
 const onConfirm = () => {}
@@ -114,5 +175,17 @@ const onConfirm = () => {}
 @import '@/assets/styles/develop.scss';
 .table-header {
   justify-content: flex-end;
+}
+.select-area {
+  display: flex;
+  .t-select__wrap {
+    flex: 1;
+    &:nth-child(2) {
+      flex: 2;
+    }
+  }
+  .t-select__wrap + .t-select__wrap {
+    margin-left: 10px;
+  }
 }
 </style>
