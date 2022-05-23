@@ -63,6 +63,8 @@ watch(showDraw, val => {
   if (val) {
     relationForm.value = { ...relation.value }
   } else {
+    // td有bug，reset方法等更新
+    console.log(form.value)
     resetStateRelation()
     form.value.reset()
   }
