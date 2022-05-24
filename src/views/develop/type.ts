@@ -116,3 +116,13 @@ export interface Data {
   groupName?: string
   relation?: DataRelation
 }
+
+export interface BusinessNode {
+  code: string
+  createTime: string
+  id: number
+  name: string
+  pid: number
+  remarks: string
+  type: string
+}

@@ -45,3 +45,8 @@ export const saveData = (params: DevelopType.DataSaveParams) => {
   const url = '/admin/bus/businessObject/save'
   return request('post', url, params)
 }
+
+export const getBusinessTree = () => {
+  const url = '/admin/form/formDef/treeList'
+  return request('get', url)
+}

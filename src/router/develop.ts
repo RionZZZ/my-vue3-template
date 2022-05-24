@@ -28,18 +28,6 @@ export default [
           () => import('@/views/develop/business/index.vue')
         ),
         meta: { title: '业务模块', cache: false }
-      },
-      {
-        path: 'business/detail/:id',
-        component: createNameComponent(
-          () => import('@/views/develop/business/detail.vue')
-        ),
-        meta: {
-          title: '业务模块详情',
-          name: 'businessDetail',
-          cache: false,
-          hideMenu: true
-        }
       }
     ]
   }

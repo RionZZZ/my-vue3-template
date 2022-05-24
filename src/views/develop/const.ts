@@ -379,3 +379,40 @@ export const RelationChildType: OptionData[] = [
   { label: '一对一', value: 'oneToOne' },
   { label: '一对多', value: 'oneToMany' }
 ]
+
+export const BusinessColumns: BaseTableCol[] = [
+  {
+    width: '80',
+    colKey: 'index',
+    title: '序号'
+  },
+  {
+    width: '180',
+    colKey: 'name',
+    title: '模块名称'
+  },
+  {
+    width: '200',
+    colKey: 'code',
+    title: 'Code'
+  },
+  {
+    width: '140',
+    colKey: 'type',
+    title: '类型'
+  },
+  {
+    colKey: 'remarks',
+    title: '描述'
+  },
+  {
+    colKey: 'createTime',
+    title: '创建时间'
+  },
+  {
+    width: '220',
+    colKey: 'handle',
+    title: '操作',
+    align: 'center'
+  }
+]
