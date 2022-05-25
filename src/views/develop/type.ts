@@ -119,10 +119,11 @@ export interface Data {
 
 export interface BusinessNode {
   code: string
-  createTime: string
-  id: number
+  createTime?: string
+  id?: number
   name: string
   pid: number
   remarks: string
   type: string
+  children?: BusinessNode[]
 }
