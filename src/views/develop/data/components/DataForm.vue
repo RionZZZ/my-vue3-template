@@ -172,6 +172,7 @@ const onConfirm = () => {
 }
 .choose-button {
   float: right;
+  margin-top: 4px;
   .tip {
     color: var(--td-error-color);
     padding: 0 4px;

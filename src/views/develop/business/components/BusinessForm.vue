@@ -26,9 +26,6 @@
           }"
         />
       </t-form-item>
-      <t-form-item label="关联数据模块" name="boCode">
-        <t-input v-model="businessForm.code" placeholder="请输入code" />
-      </t-form-item>
       <t-form-item label="描述" name="remarks">
         <t-textarea
           v-model="businessForm.remarks"
@@ -36,6 +33,12 @@
           :autosize="{ minRows: 3, maxRows: 5 }"
         />
       </t-form-item>
+      <t-button theme="primary" variant="text" class="choose-button">
+        <template v-if="businessForm.boCode">
+          {{ businessForm.boCode }}
+        </template>
+        <template v-else> <span class="tip">*</span>选择关联数据模块 </template>
+      </t-button>
     </t-form>
   </t-dialog>
 </template>
@@ -125,3 +128,13 @@ const onConfirm = () => {
   })
 }
 </script>
+<style lang="scss" scoped>
+.choose-button {
+  float: right;
+  margin-top: 4px;
+  .tip {
+    color: var(--td-error-color);
+    padding: 0 4px;
+  }
+}
+</style>
