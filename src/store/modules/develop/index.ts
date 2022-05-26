@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { Develop } from './type'
-import { Relation, Data } from '@/views/develop/type'
+import { Relation, Data, BusinessForm } from '@/views/develop/type'
 
 const INITIAL_RELATION = {
   name: '',
@@ -13,11 +13,24 @@ const INITIAL_DATA = {
   code: '',
   remarks: ''
 }
+const INITIAL_BUSINESS_FROM = {
+  boCode: '',
+  boName: '',
+  code: '',
+  name: '',
+  remarks: '',
+  groupId: '',
+  groupName: ''
+}
 
 export default defineStore('develop', {
   state: (): Develop => ({
     relation: { ...INITIAL_RELATION },
-    data: { ...INITIAL_DATA }
+    data: { ...INITIAL_DATA },
+    business: {
+      form: { ...INITIAL_BUSINESS_FROM },
+      module: { ...INITIAL_BUSINESS_FROM }
+    }
   }),
   actions: {
     // 本来入参 relation: Relation
@@ -37,10 +50,22 @@ export default defineStore('develop', {
       for (const key in data) {
         this.data[key as keyof Data] = data[key as keyof Data] as never
       }
-      console.log(this.data)
     },
     resetStateData() {
       this.changeState('data', INITIAL_DATA)
+    },
+    changeBusinessForm(businessForm: any) {
+      for (const key in businessForm) {
+        this.business.form[key as keyof BusinessForm] = businessForm[
+          key as keyof BusinessForm
+        ] as never
+      }
+    },
+    resetStateBusiness() {
+      this.changeState('business', {
+        form: INITIAL_BUSINESS_FROM,
+        module: INITIAL_BUSINESS_FROM
+      })
     },
     changeState(key: string, value: any) {
       this[key as keyof Develop] = value

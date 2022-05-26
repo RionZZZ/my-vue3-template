@@ -1,6 +1,7 @@
-import { Relation, Data } from '@/views/develop/type'
+import { Relation, Data, BusinessForm } from '@/views/develop/type'
 
 export interface Develop {
   relation: Relation
   data: Data
+  business: { form: BusinessForm; module: BusinessForm }
 }

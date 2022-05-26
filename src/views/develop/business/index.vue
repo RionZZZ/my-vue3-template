@@ -1,29 +1,18 @@
 <template>
-  <t-tabs
-    v-model="currentTab"
-    class="business-tabs"
-    :list="tabs"
-    @change="onTabChange"
-  ></t-tabs>
   <div class="ry-content">
+    <t-tabs
+      v-model="currentTab"
+      class="business-tabs"
+      :list="tabs"
+      @change="onTabChange"
+    ></t-tabs>
     <div class="table-header">
-      <t-input
-        v-model="search"
-        class="search-input"
-        placeholder="输入对象名称"
-        @enter="onSearch"
-      >
-        <template #suffixIcon>
-          <t-icon name="search" class="search-btn" @click="onSearch" />
-        </template>
-      </t-input>
       <div>
-        {{ currentTab }}
         <t-button theme="primary" variant="text">
           <template #icon> <t-icon name="add" /> </template>
           新增模块
         </t-button>
-        <t-button theme="primary" variant="text">
+        <t-button theme="primary" variant="text" @click="onFormClick()">
           <template #icon> <t-icon name="add" /> </template>
           新增表单
         </t-button>
@@ -38,13 +27,15 @@
       row-key="id"
       max-height="100%"
     >
-      <template #handle="{}">
-        <t-button theme="primary" variant="text">编辑</t-button>
+      <template #handle="{ row }">
+        <t-button theme="primary" variant="text" @click="onFormClick(row.id)"
+          >编辑</t-button
+        >
         <t-button theme="primary" variant="text">删除</t-button>
       </template>
     </t-enhanced-table>
-    <table-pagination ref="pagination" @page-change="fetchList" />
   </div>
+  <business-form ref="businessFormRef" />
 </template>
 
 <script lang="ts" setup>
@@ -53,17 +44,17 @@ import { getBusinessTree } from '@api/develop'
 import { TabValue, TdTabPanelProps } from 'tdesign-vue-next'
 import { BusinessColumns } from '../const'
 import { BusinessNode } from '../type'
-import { debounce } from '@utils/util'
+import { DevelopStore } from '@/store'
+import BusinessForm from './components/BusinessForm.vue'
 
 const tabs: Ref<TdTabPanelProps[]> = ref([])
 const currentTab: Ref<TabValue> = ref('')
-const search = ref('')
 const businessNodes: Ref<BusinessNode[]> = ref([])
 const businessList: Ref<BusinessNode[]> = ref([])
+const businessFormRef = ref()
 
-const onSearch = () => {
-  debounce(fetchList)()
-}
+const developStore = DevelopStore()
+const { changeBusinessForm } = developStore
 
 const fetchList = () => {
   getBusinessTree().then((res: any) => {
@@ -91,10 +82,21 @@ const getBusinessTable = (id: TabValue) => {
   businessList.value =
     businessNodes.value.filter(item => item.id === id)[0].children || []
 }
+
+const onFormClick = (id?: number | undefined) => {
+  businessFormRef.value.showDialog = true
+  changeBusinessForm({ id })
+}
 </script>
 
 <style lang="scss" scoped>
-.business-tabs {
-  padding: 0 20px;
+.ry-content {
+  height: 100%;
+  .business-tabs {
+    margin-bottom: 20px;
+  }
+  .table-header {
+    justify-content: flex-end;
+  }
 }
 </style>

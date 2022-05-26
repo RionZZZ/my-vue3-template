@@ -397,10 +397,12 @@ export const BusinessColumns: BaseTableCol[] = [
     title: '类型'
   },
   {
+    width: '200',
     colKey: 'remarks',
     title: '描述'
   },
   {
+    width: '180',
     colKey: 'createTime',
     title: '创建时间'
   },

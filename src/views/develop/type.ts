@@ -124,6 +124,17 @@ export interface BusinessNode {
   name: string
   pid: number
   remarks: string
-  type: string
+  type: 'ywmk' | 'bd'
   children?: BusinessNode[]
+}
+
+export interface BusinessForm {
+  id?: number
+  boCode: string
+  boName: string
+  code: string
+  name: string
+  remarks: string
+  groupId: string
+  groupName: string
 }

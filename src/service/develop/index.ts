@@ -50,3 +50,8 @@ export const getBusinessTree = () => {
   const url = '/admin/form/formDef/treeList'
   return request('get', url)
 }
+
+export const getBusinessFormInfo = (params: DevelopType.InfoParams) => {
+  const url = '/admin/form/formDef/getObject'
+  return request('get', url, params)
+}
