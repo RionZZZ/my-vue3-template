@@ -1921,10 +1921,10 @@ tdesign-icons-vue-next@~0.1.1:
   dependencies:
     "@babel/runtime" "^7.16.3"
 
-tdesign-vue-next@0.15.1:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/tdesign-vue-next/-/tdesign-vue-next-0.15.1.tgz#765739e298f2f82be230709bcebbc4d13a23f3e5"
-  integrity sha512-Brb/RLQnvbYjlc/xZe6WQkXT4XWklgmAgdo6ci1042kKySh1GDBzFMx3GAQ5Y1FrmdP/r/Js0tylFovEzcssUQ==
+tdesign-vue-next@0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/tdesign-vue-next/-/tdesign-vue-next-0.15.2.tgz#76b569cb19a587a5a6428dbfffe4f3522e06d9d1"
+  integrity sha512-R1s6QIuUa5eQZLHVcHdn3wsQ2NyckFb1Hu4YllLrNEizDkmrM8GRzpehwAPhlzByTw9PqBW37i1P+FhT5ybIrQ==
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@popperjs/core" "^2.9.3"

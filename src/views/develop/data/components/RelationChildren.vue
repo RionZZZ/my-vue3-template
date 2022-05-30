@@ -144,6 +144,7 @@ const chooseRelation = (relation: DataRelation) => {
     enhancedTable.value.appendTo(currentRowKey.value, temp)
   } else {
     // 新增时，insert方法是有问题的，不满足需求，要注意。 bug
+    // td已更新，改用appendTo，第一个参数不是必填，新框架还没上传
     const key = relationList.value.at(-1)?.tableKey
     enhancedTable.value.insertAfter(key, temp)
   }
@@ -173,7 +174,7 @@ const onFksVisible = (
 const onConfirm = () => {
   // 拿到处理后的relationList，赋值到store里面
   const relation = Object.assign(data.value.relation || {}, {
-    children: relationList.value
+    children: enhancedTable.value.getTreeNode()
   })
   changeData({ relation })
 
